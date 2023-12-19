@@ -8,20 +8,22 @@ export async function GET(request) {
      const user =  await request.nextUrl.searchParams.get("user");
      const token = cookies().get("outrightcode");
      let verif = false
+     let access = [];
      if(token){
       verif = await jwtVerify(token.value,new TextEncoder().encode(process.env.NEXT_PUBLIC_JWT_TOKEN));
     
       console.log(verif.payload.q_res[0].mobile_number)
+       access = await query({ query: `SELECT * FROM ROLES WHERE mobile_number=(?)`, values: [verif.payload.q_res[0].mobile_number] }); 
     }
-    const access = await query({ query: `SELECT * FROM ROLES WHERE mobile_number=(?)`, values: [verif.payload.q_res[0].mobile_number] }); 
+    
     
     
     
 
     let q_res;
     if(access.length){
-     q_res = await query({ query: `SELECT *, REPLACE(package_id, 'packageId-', '') AS package_id FROM Packages`, values: [] });
-     
+        q_res = await query({ query: `SELECT *, REPLACE(package_id, 'packageId-', '') AS package_id FROM Packages`, values: [] });
+        
     }
 if(!access.length){
     q_res = await query({ query: `SELECT *, REPLACE(package_id, 'packageId-', '') AS package_id FROM Packages WHERE Status="PUBLISHED"`, values: [] });

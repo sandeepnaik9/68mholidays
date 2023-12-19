@@ -5,6 +5,8 @@ import OtpInput from '../comonents/OtpField';
 import { useRouter } from 'next/navigation';
 import { setAuth, setMobileNumber, setRole, setusername } from '../../store/slices/authSlice'
 import { useAppDispatch } from '../../store/stores'
+import {RecaptchaVerifier, signInWithPhoneNumber} from "firebase/auth"
+import {auth} from '../firebase'
 
 
 const Login = ({params}) => {
@@ -18,17 +20,35 @@ const Login = ({params}) => {
   const otpFields = useRef([]);
   const router = useRouter();
   const dispatch = useAppDispatch();
+
+  const [confirmationResult,setConfirmationResult] = useState()
+
+useEffect(()=>{
+  window.recaptchVerifier = new RecaptchaVerifier(auth, "recaptcha-container",{
+    'size':'normal',
+    'callback':(response)=>{
+
+    },
+    'expired-callback':()=>{
+
+    }
+  })
+},[auth])
   
   const sendOtp = useCallback(async ()=>{
     if(phoneNumberRef?.length==10){
-      const response = await fetch("/api/auth/sendOtp",{method:"POST",body:JSON.stringify({"phoneNo":parseInt(phoneNumberRef),"exisitingUser":data["exisitingUser"],"username":username?username:data["data"]["name"]}),headers:{'Content-Type':'application/json'}})
-      const res = await response.json();
-        if(res.Status==="Sent Successfully"){
-          console.log("Otp Sent Successfully")
-          console.log(res)
-          setOtpSent(true)
+      const formattedPhoneNumber = `+${countryCodeRef}${phoneNumberRef}`
+      const confirmation = await signInWithPhoneNumber(auth,formattedPhoneNumber,window.recaptchVerifier)
+      setConfirmationResult(confirmation)
+      setOtpSent(true)
+      // const response = await fetch("/api/auth/sendOtp",{method:"POST",body:JSON.stringify({"phoneNo":parseInt(phoneNumberRef),"exisitingUser":data["exisitingUser"],"username":username?username:data["data"]["name"]}),headers:{'Content-Type':'application/json'}})
+      // const res = await response.json();
+      //   if(res.Status==="Sent Successfully"){
+      //     console.log("Otp Sent Successfully")
+      //     console.log(res)
+      //     setOtpSent(true)
 
-        }
+      //   }
       
       
 
@@ -97,8 +117,10 @@ const Login = ({params}) => {
 
 
   const verifyOtp = async ()=>{
-    const response = await fetch("api/auth/verifyOtp",{method:"POST",body:JSON.stringify({"phoneNo":parseInt(phoneNumberRef),"Otp":otp}),headers:{'Content-Type':'application/json','withCredenetials':true}})
     
+    confirmationResult.confirm(otp.join("").trim()).then(async(e)=>
+      {
+        const response = await fetch("api/auth/verifyOtp",{method:"POST",body:JSON.stringify({"phoneNo":parseInt(phoneNumberRef)}),headers:{'Content-Type':'application/json','withCredenetials':true}})
     if(response.ok){
       const res = await response.json()
       localStorage.setItem("outrightcode",res.token)
@@ -116,13 +138,17 @@ const Login = ({params}) => {
         console.log(e["message"])
       )
     }
-    
+      
+} 
+    )
+        
 }
 
   return (
     <>
       <div className='d-flex flex-column justify-content-center align-items-center  h-100'>
           <div className='d-flex flex-column row-gap-3 col-3 justify-content-center cardLogin align-items-center'>
+            {!otpSent&&(<div id="recaptcha-container"></div>)}
                 <div>
                     Enter your mobile number to keep track of your fav pakages
                 </div>

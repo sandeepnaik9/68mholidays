@@ -5,8 +5,11 @@ import client from "twilio"
 import axios from "axios"
 import crypto, { randomUUID } from 'crypto'
 import bcrypt from "bcryptjs"
+import {createClient} from '@vercel/postgres'
 export async function POST (request){
     const response = NextResponse;
+    const db= await sql`SELECT * FROM Packages`
+    console.log(db)
     const {phoneNo} = await request.json();
     const q_res = await query({query:`SELECT * FROM User Where mobile_number=${phoneNo};`});
     if(q_res.length){
