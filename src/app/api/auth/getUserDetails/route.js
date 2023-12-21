@@ -11,6 +11,7 @@ export async function POST (request){
     
     const {phoneNo} = await request.json();
     const q_res = await query({query:`SELECT * FROM User Where mobile_number=${phoneNo};`});
+    console.log( await query({query:`SELECT * FROM User Where mobile_number=${phoneNo};`}))
     console.log(q_res)
     // if(q_res.length){
     //     const otp = crypto.randomInt(100000, 999999);
