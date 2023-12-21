@@ -602,7 +602,7 @@ const Home = () => {
                                     <img width={"100%"} height={"100%"} style={{position:"absolute",top:0,zIndex:2}} src="/assets/jkhl-thb.png" alt="" />
                                     <div className='p-3 cardCoP'>
                                     <div className='cardCo flex-column'>   
-                                        <div> <b className='me-1'>15</b> tours  |  <b className='me-1'>39</b> Departures </div>
+                                        <div className='text-nowrap'> <b className='me-1'>15</b> tours  |  <b className='me-1'>39</b> Departures </div>
                                         <div>
                                         <b className='me-1'> 46,666 </b> guests travelled
                                         </div>
