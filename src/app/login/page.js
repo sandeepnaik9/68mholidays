@@ -24,31 +24,31 @@ const Login = ({params}) => {
   const [confirmationResult,setConfirmationResult] = useState()
 
 useEffect(()=>{
-  window.recaptchVerifier = new RecaptchaVerifier(auth, "recaptcha-container",{
-    'size':'normal',
-    'callback':(response)=>{
+  // window.recaptchVerifier = new RecaptchaVerifier(auth, "recaptcha-container",{
+  //   'size':'normal',
+  //   'callback':(response)=>{
 
-    },
-    'expired-callback':()=>{
+  //   },
+  //   'expired-callback':()=>{
 
-    }
-  })
+  //   }
+  // })
 },[auth])
   
   const sendOtp = useCallback(async ()=>{
     if(phoneNumberRef?.length==10){
-      const formattedPhoneNumber = `+${countryCodeRef}${phoneNumberRef}`
-      const confirmation = await signInWithPhoneNumber(auth,formattedPhoneNumber,window.recaptchVerifier)
-      setConfirmationResult(confirmation)
-      setOtpSent(true)
-      // const response = await fetch("/api/auth/sendOtp",{method:"POST",body:JSON.stringify({"phoneNo":parseInt(phoneNumberRef),"exisitingUser":data["exisitingUser"],"username":username?username:data["data"]["name"]}),headers:{'Content-Type':'application/json'}})
-      // const res = await response.json();
-      //   if(res.Status==="Sent Successfully"){
-      //     console.log("Otp Sent Successfully")
-      //     console.log(res)
-      //     setOtpSent(true)
+      // const formattedPhoneNumber = `+${countryCodeRef}${phoneNumberRef}`
+      // const confirmation = await signInWithPhoneNumber(auth,formattedPhoneNumber,window.recaptchVerifier)
+      // setConfirmationResult(confirmation)
+      // setOtpSent(true)
+      const response = await fetch("/api/auth/sendOtp",{method:"POST",body:JSON.stringify({"phoneNo":parseInt(phoneNumberRef),"exisitingUser":data["exisitingUser"],"username":username?username:data["data"]["name"]}),headers:{'Content-Type':'application/json'}})
+      const res = await response.json();
+        if(res.Status==="Sent Successfully"){
+          console.log("Otp Sent Successfully")
+          console.log(res)
+          setOtpSent(true)
 
-      //   }
+        }
       
       
 
