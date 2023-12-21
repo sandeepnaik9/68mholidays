@@ -221,9 +221,10 @@ const Package = ({ params }) => {
 
             setTitle(res.data[0]?.package_name || "Enter Title")
             setFeaturedImage(res?.data[0]?.BannerImage || "/assets/banner.jpeg")
-            setDestinations(res?.data[0]?.destinations || [])
+            setDestinations(JSON.parse(res?.data[0]?.destinations) || [])
             const updatedTourIncludes = tourIncludes?.map(item => {
-                const matchingItem = res?.data[0]?.TourIncludes?.find(otherItem => otherItem.label === item.label);
+                console.log(res?.data[0]?.TourIncludes,"TourIncludes",typeof res?.data[0]?.TourIncludes) 
+                const matchingItem = JSON.parse(res?.data[0]?.TourIncludes)?.find(otherItem => otherItem.label === item.label);
                 if (matchingItem) {
                     return { ...item, provided: matchingItem.provided };
                 }
@@ -233,7 +234,7 @@ const Package = ({ params }) => {
             setTourIncludes(updatedTourIncludes);
 
             setDays(res?.data[0]?.N_Days || 0)
-            setPricing(res?.data[0]?.pricingTable || [])
+            setPricing(JSON.parse(res?.data[0]?.pricingTable) || [])
             setItineary(res?.data[0]?.itinerarydetails || [])
             setStatus(res?.data[0].Status || "Added")
             if (!res.data[0]?.package_name) {

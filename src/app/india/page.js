@@ -743,7 +743,7 @@ const Pakcages = () => {
 
                                                                 </div>
                                                                 <div className='d-flex column-gap-4'>
-                                                                    {el?.TourIncludes?.map(e => (
+                                                                    {JSON.parse(el?.TourIncludes)?.map(e => (
                                                                         e.provided &&
                                                                         <div key={el.label}>
                                                                             <div className={`rounded-circle d-flex justify-content-center align-items-center ${!e.provided && "provided"}`} style={{ background: "linear-gradient(180deg,#A6A6A6 0%,rgba(166,166,166,0) 100%)", width: "40px", height: "40px" }}>
@@ -806,7 +806,7 @@ const Pakcages = () => {
                                                                         Starts From
                                                                     </div>
                                                                     <h4 style={{ fontWeight: "700", fontSize: "20px" }}>
-                                                                         {formatter.format(el?.pricingTable?.find(d => d.roomType.toLowerCase() == "twin sharing")?.price)}
+                                                                         {formatter.format(JSON.parse(el?.pricingTable)?.find(d => d.roomType.toLowerCase() == "twin sharing")?.price)}
                                                                     </h4>
                                                                 </div>
                                                                 <div style={{ fontWeight: "300", fontSize: "10px" }}>
