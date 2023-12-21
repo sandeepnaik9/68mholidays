@@ -1468,3 +1468,128 @@ body {
 .tguest.active{
   max-height: 1000px;
 }
+
+.cardTop{
+  width: 33.33%;
+  height: 100%;
+  background-color: green;
+}
+
+.item{
+  height:200px;
+  display: flex;
+  color: white  ;
+  background:black;
+  border-radius: 20px;
+  padding: 20px;
+  margin:2px;
+  min-height: 300px;
+  width: 100%;
+}
+.alice-carousel__prev-btn-wrapper{
+  text-align: start;
+}
+.alice-carousel__next-btn-wrapper{
+  display: flex;
+  justify-content: end;
+}
+.alice-carousel__prev-btn-wrapper,.alice-carousel__next-btn-wrapper{
+  
+  background:red;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+
+}
+
+.alice-carousel__prev-btn{
+  position: absolute;
+  color:white!important;
+  left: -40px;
+  top: 40%;
+}
+
+.alice-carousel__next-btn{
+  position: absolute;
+  color:white!important;
+  right: -40px;
+  top: 40%;
+  display: flex!important;
+  justify-content: end;
+}
+
+.alice-carousel__next-btn p {
+  color: white;
+  
+}
+
+.alice-carousel__prev-btn p {
+  color: white;
+}
+
+.cardC{ 
+  display: flex;
+  justify-content: center;
+  font-weight: 400;
+  color: white;
+}
+
+
+.cardH{
+  height: 100%;
+  min-height: 200px;
+  max-height: 200px;
+  padding: 5px;
+}
+
+
+.cardT{
+  padding-top: 10px;
+  color: white;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+}
+
+.cardTop{
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+
+.cardTop::after{
+  content: "";
+  position: absolute;
+  top:0;
+  background: linear-gradient(180deg, rgba(7,6,31,0.7077424719887955) 0%, rgba(255,255,255,0) 100%);
+  left: 0;
+  z-index: 2;
+  height: 50px;
+  width: 100%;
+  
+}
+
+.cardCo{
+  border-radius: 20px;
+  height: 50px;
+  width: 100%;
+  background: rgba(255,255,255,0.75);
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  padding:10px
+}
+
+
+.cardCoP{
+  padding: 20px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  z-index: 3;
+}

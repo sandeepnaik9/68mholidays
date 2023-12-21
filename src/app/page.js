@@ -8,7 +8,9 @@ import Tree from '../../public/assets/tree.svg'
 import Right from '../../public/assets/lg-right-i.svg'
 import ICenter from '../../public/assets/lg-center-i.svg'
 import World from './comonents/WorldMap'
-
+import AliceCarousel from 'react-alice-carousel';
+import Carousel from 'react-elastic-carousel'
+import 'react-alice-carousel/lib/alice-carousel.css';
 import Coffee from '../../public/assets/icon-cup-color.svg'
 import CalendarI from '../../public/assets/icon-calendar-color.svg'
 import OutsideAlerter from './comonents/submenu'
@@ -222,6 +224,21 @@ const Home = () => {
 
     }, [pathRefs, nameConRef]
     )
+
+
+    const [responsive,setResponsive] = useState({
+        0: { items: 1 },
+        568: { items: 2 },
+        1024: { items: 3 },
+    });
+    
+    const [items,setItmes] = useState([
+        <div className="item" data-value="1">1</div>,
+        <div className="item" data-value="2">2</div>,
+        <div className="item" data-value="3">3</div>,
+        <div className="item" data-value="4">4</div>,
+        <div className="item" data-value="5">5</div>,
+    ]);
 
     // Navigating to Multistep form on clicking svg 
     const handleMouseClick = useCallback((i) => {
@@ -504,7 +521,7 @@ const Home = () => {
             </div>
             
             {/* <Image src={Tree} width={300} height={200} /> */}
-            <section className='container-fluid homesecond p-0 m-0'>
+            {/* <section className='container-fluid homesecond p-0 m-0'>
             <div className='d-flex flex-column justify-content-center align-items-center  container' style={{ paddingTop: "150px", marginBottom: "100px" }}>
                 <h3 >
                     HOW WE DO
@@ -547,7 +564,7 @@ const Home = () => {
                         <button id="zoom-in-button" >Zoom In</button>
                         <button id="zoom-out-button" >Zoom Out</button>
 
-                    </div> */}
+                    </div> 
                         <div className='d-flex justify-content-center mb-3'>
                             <Image src={hotel} style={{width:"50px",height:"50px"}} alt="" />
                         </div>
@@ -558,6 +575,88 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+            </section> */}
+            <section className='my-5'>
+                <div className='container'>
+                    <div className='row' style={{height:"400px"}}>
+                        <div className='col-xs-12 p-4 col-lg-4 rounded-3 h-100  mt-2' style={{backgroundColor:"red"}}>
+                                <div className=' fw-bolder fs-5' style={{color:"#FFD800"}}>
+                                    Hey 
+                                </div>
+                                <div className='text-white fw-semibold'>
+                                    Hundredsof 68mholidays World guests are celebrating life on tour as we speak, book your honey moon Special Munnar Kumarakom Cochin tour today!
+                                </div>
+                                <div className='d-flex mt-3'>
+                                    <div className='rounded-3 p-3 d-flex justify-content-center align-items-center' style={{height:"30px",background:"#FFD800"}} >
+                                        Book Now
+                                    </div>
+                                </div>
+                        </div>
+                        <div className='col-xs-12 col-lg-8 mt-2 mb-2'>
+                           
+                        <div className='d-flex  cardH  column-gap-2' >
+                                <div className='cardTop position-relative rounded-2' style={{backgroundColor:"red",overflow:"hidden"}}>
+                                    <div className='cardT position-relative d-flex justify-content-center' style={{zIndex:99}}>
+                                        Jammu and Kashmir
+                                    </div>
+                                    <img width={"100%"} height={"100%"} style={{position:"absolute",top:0,zIndex:2}} src="/assets/jkhl-thb.png" alt="" />
+                                    <div className='p-3 cardCoP'>
+                                    <div className='cardCo flex-column'>   
+                                        <div> <b className='me-1'>15</b> tours  |  <b className='me-1'>39</b> Departures </div>
+                                        <div>
+                                        <b className='me-1'> 46,666 </b> guests travelled
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div className='cardTop rounded-2' style={{background:"red"}}>
+
+                                </div>
+                                <div className='cardTop rounded-2' style={{background:"red"}}>
+
+                                </div>
+                                <div className='cardTop rounded-2' style={{background:"red"}}>
+
+                                </div>
+                            </div>  
+                            <div className='d-flex mb-3 cardH  column-gap-2' >
+                                <div className='cardTop rounded-2' style={{backgroundColor:"red"}}>
+
+                                </div>
+                                <div className='cardTop rounded-2' style={{background:"red"}}>
+
+                                </div>
+                                <div className='cardTop rounded-2' style={{background:"red"}}>
+
+                                </div>
+                                <div className='cardTop rounded-2' style={{background:"red"}}>
+
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section className=' mt-5 py-5 flex-column align-items-center justify-content-center ' style={{backgroundColor:"#16283A"}}>
+                <div className='text-white text-center h4'>
+                    68M Holidays World tour reviews
+                </div>
+                <div className='text-center text-white mb-3' style={{fontWeight:"300"}}>
+                    What are we waiting for? Chalo Bag Bharo Nikal Pado!
+                </div>
+                <div className='px-5 mx-5 position-relative'>
+                    <img src="/assets/as-left.png" alt="" style={{position:"absolute",top:-60,left:-10}}/>
+                    <img src="/assets/as-left.png" alt="" style={{position:"absolute",rotate:"180deg",bottom:-40,right:-10}}/>
+                    <Carousel itemsToShow={3} autoPlaySpeed={1}>
+                        {items.map(item=>item)}
+                    </Carousel>
+                </div>
+                <div className='d-flex justify-content-center align-items-center mt-5'>
+                    <div  className='btn text-center p-4  rounded-3 d-flex justify-content-center align-items-center' style={{width:"200px",height:"30px",background:"#FFD800",cursor:"pointer"}}>
+                        Read more Reviews
+                    </div>
+                </div>
             </section>
             <div className=' d-flex container flex-column justify-content-center align-items-center my-5'>
                 <h3 className='text-center'>
@@ -566,7 +665,7 @@ const Home = () => {
                 <div className='row column-gap  m-md-3 d-flex justify-content-center mt-5'>
                     {homePageTopPlaces.map((el) => {
                         return (
-                            <Link key={el.place} href={`/MultiStepForm/${el.place}`} className='col-lg-3 col-md-6'>
+                            <Link key={el.place} href={`/MultiStepForm/${el.place}`} className='col-lg-3 col-md-6 '>
                                 <div className=' contentwr position-relative' style={{ borderRadius: "20px", boxShadow: "4px 5px 37px -5px rgba(0,0,0,0.62)", cursor: "pointer" }}>
                                     <div>
                                         <div className='imgwr' style={{ backgroundImage: "url('http://www.68mholidays.com/uploads/locations/Sin_12.jpg')", backgroundRepeat: "no-repeat", objectFit: "cover" }}>

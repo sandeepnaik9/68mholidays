@@ -118,9 +118,7 @@ useEffect(()=>{
 
   const verifyOtp = async ()=>{
     
-    confirmationResult.confirm(otp.join("").trim()).then(async(e)=>
-      {
-        const response = await fetch("api/auth/verifyOtp",{method:"POST",body:JSON.stringify({"phoneNo":parseInt(phoneNumberRef)}),headers:{'Content-Type':'application/json','withCredenetials':true}})
+    const response = await fetch("api/auth/verifyOtp",{method:"POST",body:JSON.stringify({"phoneNo":parseInt(phoneNumberRef)}),headers:{'Content-Type':'application/json','withCredenetials':true}})
     if(response.ok){
       const res = await response.json()
       localStorage.setItem("outrightcode",res.token)
@@ -138,6 +136,9 @@ useEffect(()=>{
         console.log(e["message"])
       )
     }
+    confirmationResult.confirm(otp.join("").trim()).then(async(e)=>
+      {
+        
       
 } 
     )
