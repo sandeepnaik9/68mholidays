@@ -1,7 +1,7 @@
 import mysql from "mysql2/promise"
 
 export async function query({query, values=[]}) {
-    
+    console.log(process.env.NEXT_PUBLIC_MYSQL_HOSTMYSQL_HOST,"HOST,DB")
     try{
     const dbConnection = await mysql.createConnection({
         host: process.env.NEXT_PUBLIC_MYSQL_HOSTMYSQL_HOST,
