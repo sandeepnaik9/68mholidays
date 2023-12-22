@@ -4,7 +4,7 @@ export async function query({query, values=[]}) {
     console.log(process.env.NEXT_PUBLIC_MYSQL_HOSTMYSQL_HOST,"HOST,DB")
     try{
     const dbConnection = await mysql.createConnection({
-        host: process.env.NEXT_PUBLIC_MYSQL_HOSTMYSQL_HOST||"142.93.222.244:3306",
+        host: process.env.NEXT_PUBLIC_MYSQL_HOSTMYSQL_HOST||"142.93.222.244",
         database: process.env.NEXT_PUBLIC_MYSQL_DATABASE||"tumxrxnsjk",
         user:process.env.NEXT_PUBLIC_MYSQL_USER||"tumxrxnsjk",
         password:process.env.NEXT_PUBLIC_MYSQL_PASSWORD || "ANmf2jPfXn"
