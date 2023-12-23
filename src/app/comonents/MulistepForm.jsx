@@ -256,7 +256,7 @@ function MultiStepForm() {
   const first = () => (<><div className='text-center mt-5 fw-bolder' style={{ fontSize: "18px" }}>
     Which month are you traveling?
   </div>
-    <div className='d-flex flex-wrap mt-5 text-center' style={{ columnGap: "8px", rowGap: "8px" }}>
+    <div className='d-flex flex-wrap mt-5 text-center justify-content-md-center' style={{ columnGap: "8px", rowGap: "8px" }}>
 
       {datesdata.map((el) => (
 
@@ -317,7 +317,7 @@ function MultiStepForm() {
     <>
 
       <div className='text-center mt-5 fw-bolder' style={{ fontSize: "18px" }}>What's the duration of your holiday?</div>
-      <div className='container d-flex justify-content-center align-items-center flex-center '>
+      <div className='container d-flex flex-md-wrap justify-content-center align-items-center flex-center '>
         {daysRange.map(el => (<div className=' d-flex flex-column m-2 justify-content-center align-items-center' style={{ width: "1000px", height: "250px" }}>
           <div className={`d-flex w-100 h-100 flex-column  justify-content-center align-items-between daysRangeCard ${el.selected ? "selected" : ""}`} onClick={() => selectDaysRange(el.range)}>
             <div className='d-flex justify-content-center'>
