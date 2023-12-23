@@ -852,7 +852,7 @@ const Pakcages = () => {
             <OutsideAlerter setModal={setModal}> 
 
                 <div className='rounded-3 d-flex flex-column justify-content-between  shadow-3' style={{width:"500px",height:"600px",background:"white"}}>
-                    {type==="qQuote"&&(<div>
+                    {type==="qQuote"&&(<div className='d-flex h-100 flex-column justify-content-between align-content-between align-items-between'>
                     <div className='w-100  p-5 text-black'>
                             <div>
                             <h5>
@@ -965,7 +965,7 @@ const Pakcages = () => {
                                         </div>
                                         <div>
                                             <div className='fw-bolder'>
-                                                {formatter.format(pricingtTable[0])}
+                                                {/* {formatter.format(pricingtTable[0])} */}
                                             </div>
                                         </div>
                                     </div>
