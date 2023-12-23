@@ -281,7 +281,7 @@ body {
 }
 
 
-.menuicon {
+.menuicons {
   cursor: pointer;
   display: none;
 }
@@ -331,8 +331,8 @@ body {
     color: white;
   }
 
-  .menuicon {
-    display: block;
+  .menuicons {
+    display: flex;
   }
 
   .submenu {

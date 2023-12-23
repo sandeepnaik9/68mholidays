@@ -17,9 +17,17 @@ import OutsideAlerter from './comonents/submenu'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+
 import Snowfall from 'react-snowfall'
 const Home = () => {
     const router = useRouter()
+
+    const breakPoints = [
+        { width: 1, itemsToShow: 1 },
+        { width: 550, itemsToShow: 1, itemsToScroll: 2 },
+        { width: 768, itemsToShow: 2 },
+        { width: 1200, itemsToShow: 3 }
+      ];
     // const navigate = useNavigate();
     const [subSearch,setSearchSub] = useState(false)
     const [subCalendar,setCalendar] = useState(false)
@@ -467,7 +475,7 @@ const Home = () => {
                                             </div>
                                         </div>
                                     </div>
-                                                <div className='row column-gap row-gap-1 container mt-3'>
+                                                <div className='row column-gap row-gap-1 container mt-3 w-100'>
                                                         
                                                         {filterYear.map(el=>
                                                             (<>
@@ -493,7 +501,7 @@ const Home = () => {
                                         </div>
                                         <div>
                                             <div className='d-flex my-2 align-items-center column-gap-2'>
-                                            <Image src={CalendarI} />
+                                            <img src={CalendarI} />
                                                 Long Weekend
                                             </div>
                                             <div className='d-flex align-items-center justify-content-center border col-6 px-3 py-2'> 
@@ -578,8 +586,8 @@ const Home = () => {
             </section> */}
             <section className='my-5'>
                 <div className='container'>
-                    <div className='row' style={{height:"400px"}}>
-                        <div className='col-xs-12 p-4 col-lg-4 rounded-3 h-100  mt-2' style={{backgroundColor:"red"}}>
+                    <div className='row'>
+                        <div className='col-xs-12 p-4 col-lg-4 rounded-3   mt-2' style={{backgroundColor:"red"}}>
                                 <div className=' fw-bolder fs-5' style={{color:"#FFD800"}}>
                                     Hey 
                                 </div>
@@ -592,7 +600,7 @@ const Home = () => {
                                     </div>
                                 </div>
                         </div>
-                        <div className='col-xs-12 col-lg-8 mt-2 mb-2'>
+                        <div className='col-xs-12 col-lg-8 mt-2  d-flex flex-column justify-content-center'>
                            
                         <div className='d-flex  cardH  column-gap-2' >
                                 <div className='cardTop position-relative rounded-2' style={{backgroundColor:"red",overflow:"hidden"}}>
@@ -619,7 +627,7 @@ const Home = () => {
 
                                 </div>
                             </div>  
-                            <div className='d-flex mb-3 cardH  column-gap-2' >
+                            <div className='d-flex cardH  column-gap-2' >
                                 <div className='cardTop rounded-2' style={{backgroundColor:"red"}}>
 
                                 </div>
@@ -648,7 +656,7 @@ const Home = () => {
                 <div className='px-5 mx-5 position-relative'>
                     <img src="/assets/as-left.png" alt="" style={{position:"absolute",top:-60,left:-10}}/>
                     <img src="/assets/as-left.png" alt="" style={{position:"absolute",rotate:"180deg",bottom:-40,right:-10}}/>
-                    <Carousel itemsToShow={3} autoPlaySpeed={1}>
+                    <Carousel breakPoints={breakPoints} autoPlaySpeed={1}>
                         {items.map(item=>item)}
                     </Carousel>
                 </div>

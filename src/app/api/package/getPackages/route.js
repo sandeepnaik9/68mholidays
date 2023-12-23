@@ -3,6 +3,9 @@ import { query } from "../../../../lib/db";
 import { NextResponse } from "next/server"
 import {jwtVerify} from 'jose'
 
+
+export async function POST(request) {}
+
 export async function GET(request) {
     const response = NextResponse;
      const user =  await request.nextUrl.searchParams.get("user");
@@ -32,3 +35,6 @@ if(!access.length){
 
 return new Response(JSON.stringify(q_res),{status:200})
 }
+
+
+export const dynamic = "force-static";

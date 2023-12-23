@@ -1,139 +1,39 @@
+"use client"
 import '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/react-fontawesome';
+
 import { Calendar } from 'primereact/calendar';
-import { useNavigate, useParams } from 'react-router-dom';
+import { airportData } from '../../../constants/airportData';
+import { months } from '../../../constants/airportData';
+import ModalFields from '../../comonents/modalFields';
+
 //theme
+
+// import couple from './public/assets/travel_with_partner.png'
+// import family from './public/assets/travel_with_family.png'
+// import friends from './public/assets/travel_with_friends.png'
+// import solo from './public/assets/travel_with_myself.png'
+
+// import tT5 from './public/assets/3-5.jpg'
+// import sT8 from './public/assets/6-8.jpg'
+// import nT11 from './public/assets/9-11.jpg'
+// import tT15 from './public/assets/12-15.jpg'
+
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+;
+import OutsideAlerter from '../../comonents/submenu';
 function MultiStepForm() {
 
-    
 
-  const [airportData, setairportData] = useState([
-    { AirportCode: "BLR", AirportName: "Bengaluru" },
-    { AirportCode: "TRV", AirportName: "Trivandrum" },
-    { AirportCode: "DEL", AirportName: "Delhi" },
-    { AirportCode: "CCU", AirportName: "Kolkata" },
-    { AirportCode: "BOM", AirportName: "Mumbai" },
-    { AirportCode: "MAA", AirportName: "Chennai" },
-    { AirportCode: "HYD", AirportName: "Hyderabad" },
-    { AirportCode: "JAI", AirportName: "Jaipur" },
-    { AirportCode: "PNQ", AirportName: "Pune" },
-    { AirportCode: "BBI", AirportName: "Bhubaneshwar" },
-    { AirportCode: "PAT", AirportName: "Patna" },
-    { AirportCode: "LKO", AirportName: "Lucknow" },
-    { AirportCode: "IXU", AirportName: "Aurangabad" },
-    { AirportCode: "CCJ", AirportName: "Kozhikode" },
-    { AirportCode: "NAG", AirportName: "Nagpur" },
-    { AirportCode: "COK", AirportName: "Kochi" },
-    { AirportCode: "ATQ", AirportName: "Amritsar" },
-    { AirportCode: "CJB", AirportName: "Coimbatore" },
-    { AirportCode: "TRZ", AirportName: "Trichy" },
-    { AirportCode: "IDR", AirportName: "Indore" },
-    { AirportCode: "VNS", AirportName: "Varanasi" },
-    { AirportCode: "IXM", AirportName: "Madurai" },
-    { AirportCode: "GAU", AirportName: "Guwahati" },
-    { AirportCode: "IXE", AirportName: "Mangalore" },
-    { AirportCode: "BDQ", AirportName: "Vadodara" },
-    { AirportCode: "VTZ", AirportName: "Visakhapatnam" },
-    { AirportCode: "AMD", AirportName: "Ahmedabad" },
-    { AirportCode: "RPR", AirportName: "Raipur" },
-    { AirportCode: "IXC", AirportName: "Chandigarh" },
-    { AirportCode: "UDR", AirportName: "Udaipur" },
-    { AirportCode: "GOI", AirportName: "Goa" },
-    { AirportCode: "IXR", AirportName: "Ranchi" },
-    { AirportCode: "JDH", AirportName: "Jodhpur" },
-    { AirportCode: "BKB", AirportName: "Bikaner" },
-    { AirportCode: "KQH", AirportName: "Kishangarh" },
-    { AirportCode: "CNN", AirportName: "Kannur" },
-    { AirportCode: "TEZ", AirportName: "Tezpur" },
-    { AirportCode: "IXB", AirportName: "Siliguri" },
-    { AirportCode: "IMF", AirportName: "Imphal" },
-    { AirportCode: "AJL", AirportName: "Aizwal" },
-    { AirportCode: "MYQ", AirportName: "Mysore" },
-    { AirportCode: "JRH", AirportName: "Jorhat" },
-    { AirportCode: "DIB", AirportName: "Dibrugarh" },
-    { AirportCode: "IXA", AirportName: "Agartala" },
-    { AirportCode: "SHL", AirportName: "Shillong" },
-    { AirportCode: "AGR", AirportName: "Agra" },
-    { AirportCode: "DED", AirportName: "Dehradun" },
-    { AirportCode: "KUU", AirportName: "Kullu" },
-    { AirportCode: "IXZ", AirportName: "Port Blair" },
-    { AirportCode: "ISK", AirportName: "Nashik" },
-    { AirportCode: "IXL", AirportName: "Leh" },
-    { AirportCode: "SXR", AirportName: "Srinagar" },
-    { AirportCode: "BHJ", AirportName: "Bhuj" },
-    { AirportCode: "IXJ", AirportName: "Jammu" },
-    { AirportCode: "KNU", AirportName: "Fatehpur" },
-    { AirportCode: "CDP", AirportName: "Kadapa" },
-    { AirportCode: "STV", AirportName: "Surat" },
-    { AirportCode: "VGA", AirportName: "Vijayawada" },
-    { AirportCode: "IXY", AirportName: "Kandla" },
-    { AirportCode: "JGA", AirportName: "Jamnagar" },
-    { AirportCode: "PBD", AirportName: "Porbandar" },
-    { AirportCode: "RAJ", AirportName: "Rajkot" },
-    { AirportCode: "BKR", AirportName: "Bokaro" },
-    { AirportCode: "JLR", AirportName: "Jabalpur" },
-    { AirportCode: "IXW", AirportName: "Jamshedpur" },
-    { AirportCode: "BEP", AirportName: "Bellary" },
-    { AirportCode: "IXG", AirportName: "Belgaum" },
-    { AirportCode: "GBI", AirportName: "Kalaburagi" },
-    { AirportCode: "HBX", AirportName: "Hubli" },
-    { AirportCode: "TNI", AirportName: "Satna" },
-    { AirportCode: "YTL", AirportName: "Yavatmal" },
-    { AirportCode: "NDC", AirportName: "Nanded" },
-    { AirportCode: "KLH", AirportName: "Kolhapur" },
-    { AirportCode: "SSL", AirportName: "Solapur" },
-    { AirportCode: "JLG", AirportName: "Jalgaon" },
-    { AirportCode: "AKD", AirportName: "Akola" },
-    { AirportCode: "DMU", AirportName: "Dimapur" },
-    { AirportCode: "JRG", AirportName: "Jharsuguda" },
-    { AirportCode: "PYB", AirportName: "Jeypore" },
-    { AirportCode: "PGH", AirportName: "Pantnagar" },
-    { AirportCode: "LUH", AirportName: "Ludhiana" },
-    { AirportCode: "KTU", AirportName: "Kota" },
-    { AirportCode: "KNU", AirportName: "Kanpur" },
-    { AirportCode: "GOP", AirportName: "Gorakhpur" },
-    { AirportCode: "NNS", AirportName: "Pithoragarh" },
-    { AirportCode: "RJA", AirportName: "Rajahmundry" },
-    { AirportCode: "IXT", AirportName: "Pasighat" },
-    { AirportCode: "PAB", AirportName: "Bilaspur" },
-    { AirportCode: "DIU", AirportName: "Diu" },
-    { AirportCode: "HSS", AirportName: "Hisar" },
-    { AirportCode: "AIP", AirportName: "Jalandhar" },
-    { AirportCode: "SAG", AirportName: "Shirdi" },
-    { AirportCode: "AJL", AirportName: "Yavatmal" },
-    { AirportCode: "KQH", AirportName: "Ajmer" },
-    { AirportCode: "SSL", AirportName: "Solapur" },
-    { AirportCode: "PYB", AirportName: "Jeypore" },
-    { AirportCode: "BUP", AirportName: "Bathinda" },
-    { AirportCode: "IXP", AirportName: "Pathankot" },
-    { AirportCode: "PYG", AirportName: "Gangtok" },
-    { AirportCode: "RGH", AirportName: "Balurghat" },
-    { AirportCode: "NNS", AirportName: "Pithoragarh" },
-    { AirportCode: "HDX", AirportName: "Ghaziabad" },
-    { AirportCode: "SXV", AirportName: "Salem" },
-    { AirportCode: "RDP", AirportName: "Durgapur" },
-  ]);
-  const naviagte = useNavigate();
+  
+  // const [airportData, setairportData] = useState();
+  // const naviagte = useNavigate();
   const [filterairports, setFilter] = useState([]);
 
-  const [months,setMonths] = useState([
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ]);
+  // const [months,setMonths] = useState();
 
   const [datesdata, setDatesData] = useState([{
     "month": "November",
@@ -202,25 +102,63 @@ function MultiStepForm() {
 
   ]);
 
-  
+  const [daysRange, setDaysRange] = useState([
+    { "range": "3-5", "imgSrc": "/assets/3-5.jpg", "selected": false },
+    { "range": "6-8", "imgSrc": '/assets/6-8.jpg', "selected": false },
+    { "range": "9-11", "imgSrc": '/assets/9-11.jpg', "selected": false },
+    { "range": "12-15", "imgSrc": '/assets/12-15.jpg', "selected": false },
 
-  const [step,setStep] = useState(1);
+  ])
+
+  const [paxTypes, setPaxTypes] = useState([
+    {"type":"Couple","rooms":1,"adults":2,"children":0,"imgSrc":"/assets/travel_with_partner.png"},
+    {"type":"Family","rooms":1,"adults":2,"children":0,"imgSrc":"/assets/travel_with_family.png"},
+    {"type":"Friends","rooms":1,"adults":2,"children":0,"imgSrc":"/assets/travel_with_friends.png"},
+    {"type":"Solo","rooms":1,"adults":2,"children":0,"imgSrc":"/assets/travel_with_myself.png"},    
+  ])
+
+  const [roomCount,setRoomCount] = useState(1);
+
+  const [roomsInf, setRoomsInf] = useState([{
+    "room": 1,
+    "Adults": 2,
+    "children": [
+      {
+        "child": 1,
+        "childAge": "17"
+      },
+      {
+        "child":2,
+        "childAge":"<1 Year"
+      }
+    ]
+  }
+  ]
+  )
+
+
+
+
+
+  const [step, setStep] = useState(1);
 
   const [date, setDate] = useState()
-  const {place} = useParams();
+  const [place, setPlace] = useState();
   const [ismSelected, setMSelected] = useState(false);
   const [isDateSelected, setDateSelected] = useState(false);
   const [airportSelected, setairportSelected] = useState(false);
+  const [modal,setModal] = useState(false);
 
   const serchref = useRef();
 
 
-  const [selected, setSelected] = useState([{ "place": "", "Month": "", "year": "", "inNumber": "", "date": "" }]);
+  const [selected, setSelected] = useState([{ "place": "", "Month": "", "year": "", "inNumber": "", "date": "", "daysRange": "" }]);
+
 
 
   const changeDate = (value) => {
     setDate(value);
-    
+    console.log(value)
     const da = value.split("\/");
 
     var date_d;
@@ -230,21 +168,21 @@ function MultiStepForm() {
     date_m = da[1];
     date_y = da[2];
 
-    setStep(3);
+
     if (da[0].length == 1) {
       date_d = "0" + da[0]
     }
-    console.log(date_m,"date")
-    const date_mn = months[date_m-1]
-    
-    
+    console.log(date_m, "date")
+    const date_mn = months[date_m - 1]
+
+
     const updatedSelection = datesdata.map(el => {
-        if (el.month == date_mn) {
-          return { ...el, selected: !el.selected }
-        }
-        return  { ...el, selected: false}
-      })
-      setDatesData(updatedSelection)
+      if (el.month == date_mn) {
+        return { ...el, selected: !el.selected }
+      }
+      return { ...el, selected: false }
+    })
+    setDatesData(updatedSelection)
     setSelected([{ ...selected[0], "Month": date_mn, "year": date_y, "inNumber": date_m, "date": date_d }])
     console.log([{ ...selected[0], "Month": date_mn, "year": date_y, "inNumber": date_m, "date": date_d }])
     setDateSelected(!isDateSelected)
@@ -260,6 +198,19 @@ function MultiStepForm() {
 
   }
 
+  const selectDaysRange = (selectedDa) => {
+    setSelected([{ ...selected[0], "daysRange": selectedDa }])
+    const updatedSelection = daysRange.map(el => {
+      if (selectedDa == el.range) {
+        return { ...el, selected: !el.selected }
+      }
+      return { ...el, selected: false }
+
+    })
+    document.querySelector(".p5").classList.add("completed")
+    setModal(true);
+    setDaysRange(updatedSelection);
+  }
 
   const selectDate = useCallback((month, number, year) => {
     document.querySelector(".p2").classList.add("completed")
@@ -267,22 +218,25 @@ function MultiStepForm() {
       if (el.month == month) {
         return { ...el, selected: !el.selected }
       }
-      return {...el,selected: false}
+      return { ...el, selected: false }
     })
     setDatesData(updatedSelection)
-    console.log([{ ...selected[0], "place": `${place}`, "Month": month, "year": year, "inNumber": number }])
+    console.log([{ ...selected[0], "place": `${params.place}`, "Month": month, "year": year, "inNumber": number }])
 
-    
+
     setMSelected(true);
-    setSelected([{ ...selected[0], "place": `${place}`, "Month": month, "year": year, "inNumber": number, }])
+    setSelected([{ ...selected[0], "place": `${params.place}`, "Month": month, "year": year, "inNumber": number, "Acode": "", "Aname": "", "date": "", "daysRange": "" }])
     setStep(2);
 
-  }, [place])
+  }, [])
 
 
-  const selectAirport = (code,name)=>{
-    setSelected([{ ...selected[0],"Aname":name,"Acode":code}])
-    console.log([{ ...selected[0],"Aname":name,"Acode":code}])
+  const selectAirport = (code, name) => {
+    setSelected([{ ...selected[0], "Aname": name, "Acode": code }])
+    console.log([{ ...selected[0], "Aname": name, "Acode": code }])
+    document.querySelector(".p4").classList.add("completed")
+
+    setStep(4)
   }
 
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -300,83 +254,167 @@ function MultiStepForm() {
 
 
   const first = () => (<><div className='text-center mt-5 fw-bolder' style={{ fontSize: "18px" }}>
-   Which month are you traveling?
-    </div>
-    <div className='d-flex flex-wrap mt-5 text-center' style={{ columnGap: "8px", rowGap: "8px" }}> 
+    Which month are you traveling?
+  </div>
+    <div className='d-flex flex-wrap mt-5 text-center' style={{ columnGap: "8px", rowGap: "8px" }}>
 
-    {datesdata.map((el) => (
+      {datesdata.map((el) => (
 
-      <div onClick={() => { selectDate(el.month, el.inNumber, el.year) }} className={el.selected ? 'cardd d-flex flex-column justify-content-center align-content-center completed' : 'cardd d-flex flex-column justify-content-center align-content-center'}>
-        <div className='text-center cardtext' style={{ fontSize: "18px" }}>
-          {el.month}
+        <div key={el.inNumber + el.month} onClick={() => { selectDate(el.month, el.inNumber, el.year) }} className={`cardd d-flex flex-column justify-content-center align-content-center ${el.selected ? "completed" : ""}`}>
+          <div className='text-center cardtext' style={{ fontSize: "18px" }}>
+            {el.month}
+          </div>
+          <div className='text-center cardsubtext'>
+            {el.temp}
+          </div>
         </div>
-        <div className='text-center cardsubtext'>
-          {el.temp}
-        </div>
-      </div>
 
 
-    ),
-    )}
-  </div></>
-  
-);
-  
+      ),
+      )}
+    </div></>
+
+  );
 
 
-  const second = ()=>
-     (<><div className='text-center mt-5 fw-bolder' style={{ fontSize: "18px" }}>
+
+  const second = () =>
+  (<><div className='text-center mt-5 fw-bolder' style={{ fontSize: "18px" }}>
     When is your departure date?
-  </div> <div className='d-flex justify-content-center mt-5'><Calendar viewDate={new Date(`${selected[0].year}-${selected[0].inNumber}`)} value={date} onChange={(e) => changeDate(e.value.toLocaleDateString())} inline showWeek /></div></>) 
-  
+  </div> <div className='d-flex justify-content-center mt-5'><Calendar viewDate={new Date(`${selected[0].year}-${selected[0].inNumber}`)} value={date} onChange={(e) => changeDate(e.value.toLocaleDateString())} inline showWeek /></div></>)
 
 
 
-  const third = ()=>
-    (<>
 
-      <div className='text-center mt-5 fw-bolder' style={{ fontSize: "18px" }}>
-        Where are your travelling from?
-      </div>
-      <div className='position-sticky' style={{ top: 80, backgroundColor: "rgb(247, 248, 251)" }}>
-        <div className='d-flex  mt-3 p-2 align-items-center bg-white searchbar'>
-          <div>
-            <i className="fa-solid fa-magnifying-glass ms-3" style={{ fontSize: "20px", color: "#888888" }}></i>
-          </div>
-          <div className='w-100'>
-            <input ref={serchref} onChange={(e) => searchChange(e)} className='form-control p-0 ps-2' placeholder='Search airports' type="text" />
-          </div>
+  const third = () =>
+  (<>
+
+    <div className='text-center mt-5 fw-bolder' style={{ fontSize: "18px" }}>
+      Where are your travelling from?
+    </div>
+    <div className='position-sticky' style={{ top: 80, backgroundColor: "rgb(247, 248, 251)" }}>
+      <div className='d-flex  mt-3 p-2 align-items-center bg-white searchbar'>
+        <div>
+          <i className="fa-solid fa-magnifying-glass ms-3" style={{ fontSize: "20px", color: "#888888" }}></i>
+        </div>
+        <div className='w-100'>
+          <input ref={serchref} onChange={(e) => searchChange(e)} className='form-control p-0 ps-2' placeholder='Search airports' type="text" />
         </div>
       </div>
-      <div className='ps-5 mt-4 ' style={{ fontSize: "22px", fontWeight: "600" }}>
-        {filterairports.length? filterairports.map(el => (
-        <div style={{ cursor: "pointer" }} onClick={()=>selectAirport(el.AirportCode,el.AirportName)} className='mt-2 d-flex justify-content-between align-items-center airporthover'>
+    </div>
+    <div className='ps-5 mt-4 ' style={{ fontSize: "22px", fontWeight: "600" }}>
+      {filterairports.length ? filterairports.map(el => (
+        <div key={el.AirportCode+el.AirportName} style={{ cursor: "pointer" }} onClick={() => selectAirport(el.AirportCode, el.AirportName)} className='mt-2 d-flex justify-content-between align-items-center airporthover'>
           <div>{el.AirportName}, {el.AirportCode}</div><div className='selAirText' style={{ fontWeight: "700", fontSize: "16px" }}>Select Airport <i className="fa-solid fa-angle-right"></i></div></div>)) : airportData.map(el => (
-        <div style={{ cursor: "pointer" }} onClick={()=>selectAirport(el.AirportCode,el.AirportName)} className='mt-2 d-flex justify-content-between align-items-center airporthover'>
-          <div>{el.AirportName}, {el.AirportCode}</div><div className='selAirText' style={{ fontWeight: "700", fontSize: "16px" }}>Select Airport <i className="fa-solid fa-angle-right"></i></div></div>))}
+            <div key={el.AirportCode+el.AirportName} style={{ cursor: "pointer" }} onClick={() => selectAirport(el.AirportCode, el.AirportName)} className='mt-2 d-flex justify-content-between align-items-center airporthover'>
+              <div>{el.AirportName}, {el.AirportCode}</div><div className='selAirText' style={{ fontWeight: "700", fontSize: "16px" }}>Select Airport <i className="fa-solid fa-angle-right"></i></div></div>))}
 
+
+    </div>
+  </>);
+
+  const fourth = () => (
+    <>
+
+      <div className='text-center mt-5 fw-bolder' style={{ fontSize: "18px" }}>What's the duration of your holiday?</div>
+      <div className='container d-flex justify-content-center align-items-center flex-center '>
+        {daysRange.map(el => (<div className=' d-flex flex-column m-2 justify-content-center align-items-center' style={{ width: "1000px", height: "250px" }}>
+          <div className={`d-flex w-100 h-100 flex-column  justify-content-center align-items-between daysRangeCard ${el.selected ? "selected" : ""}`} onClick={() => selectDaysRange(el.range)}>
+            <div className='d-flex justify-content-center'>
+              <img style={{ borderRadius: "50%", width: "128px", height: "128px" }} src={el.imgSrc} />
+            </div>
+            <div className="w-100 text-center mt-4">
+              {el.range} Days
+            </div>
+          </div>
+        </div>))}
 
       </div>
-    </>);
 
+    </>
+  )
 
-  const handleClick = (activeStep)=>{
-    if(activeStep==1){
-      document.querySelector(".p2").classList.remove("completed");
-      document.querySelector(".p3").classList.remove("completed");
+  const fifth = () => (
+    <>
+
+      <div className='text-center mt-5 fw-bolder' style={{ fontSize: "18px" }}>Who is travelling with you?</div>
+      <div className='container d-flex justify-content-center align-items-center flex-center '>
+        {paxTypes.map(el => (<div className=' d-flex flex-column m-2 justify-content-center align-items-center' style={{ width: "1000px", height: "250px" }}>
+          <div className={`d-flex w-100 h-100 flex-column  justify-content-center align-items-between daysRangeCard ${el.selected ? "selected" : ""}`} onClick={() => selectDaysRange(el.range)}>
+            
+            <div className='d-flex justify-content-center'>
+              <img width={128} height={128} style={{ borderRadius: "50%", width: "128px", height: "128px" }} src={el.imgSrc} />
+            </div>
+            <div className="w-100 text-center mt-4">
+              {el.type} Days
+            </div>
+          </div>
+        </div>))}
+
+      </div>
+
+    </>
+  )
+
+  const handleClick = (activeStep) => {
+    switch (activeStep) {
+      case 1:
+        setStep(activeStep)
+        document.querySelector(".p1").classList.add("completed");
+        document.querySelector(".p2").classList.remove("completed");
+        document.querySelector(".p3").classList.remove("completed");
+        document.querySelector(".p4").classList.remove("completed");
+        document.querySelector(".p5").classList.remove("completed");
+        return
+      case 2:
+        setStep(activeStep - 1)
+        document.querySelector(".p1").classList.add("completed");
+        document.querySelector(".p2").classList.remove("completed");
+        document.querySelector(".p3").classList.remove("completed");
+        document.querySelector(".p4").classList.remove("completed");
+        document.querySelector(".p5").classList.remove("completed");
+        return
+      case 3:
+        setStep(activeStep)
+        document.querySelector(".p1").classList.add("completed");
+        document.querySelector(".p2").classList.add("completed");
+        document.querySelector(".p3").classList.add("completed");
+        document.querySelector(".p4").classList.remove("completed");
+        document.querySelector(".p5").classList.remove("completed");
+        return
+      case 4:
+        setStep(activeStep)
+        document.querySelector(".p1").classList.add("completed");
+        document.querySelector(".p2").classList.add("completed");
+        document.querySelector(".p3").classList.add("completed");
+        document.querySelector(".p4").classList.add("completed");
+        document.querySelector(".p5").classList.remove("completed");
+        return
+      case 5:
+        setStep(activeStep)
+        document.querySelector(".p1").classList.add("completed");
+        document.querySelector(".p2").classList.add("completed");
+        document.querySelector(".p3").classList.add("completed");
+        document.querySelector(".p4").classList.add("completed");
+        document.querySelector(".p5").classList.add("completed");
+        return
 
     }
-    else{
-      document.querySelector(".p3").classList.remove("completed");
-    }
-    document.querySelector(".p2").classList.remove("completed");
-    document.querySelector(".p3").classList.remove("completed"); 
-    setStep(activeStep); 
   }
 
 
-  const renderForm = ()=>{
-    switch (step){
+  const handleDropDownCount = useCallback((e)=>{
+    console.log(e.target.classList.contains("selected"))
+    if(e.target.classList.contains("selected")){
+      e.target.classList.remove("selected")
+    }
+    else{
+      e.target.classList.add("selected")
+    }
+  },[])
+
+  const renderForm = () => {
+    switch (step) {
       case 1:
         console.log("First")
         return first();
@@ -384,30 +422,47 @@ function MultiStepForm() {
         return second();
       case 3:
         return third();
+      case 4:
+        return fourth();
+      case 5:
+        return fifth();
 
     }
   }
 
-  const setPla = useCallback(()=>{
-    
+  const setPla = useCallback(() => {
+
   },)
 
   useEffect(() => {
-    
-    setSelected([{ ...selected[0], "place":place}])
+
+    setSelected([{ ...selected[0], "place": params.place }])
 
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [place]);
+  }, []);
 
 
 
   return (
-    <div className='container formsection m-0 ms-auto me-auto d-flex flex-column ' style={{ height: "90vh",paddingTop:"140px"}}>
-
+    <div className='container formsection m-0 ms-auto me-auto d-flex flex-column ' style={{ height: "90vh", paddingTop: "50px" }}>
+      {modal&&(
+         <div className='w-100 h-100 position-fixed d-flex justify-content-center align-items-center modal top-0' style={{left:0,display:"block",backgroundColor:"rgb(0,0,0,0.75)"}}>
+            <OutsideAlerter setModal={setModal}>
+              <div className='bg-white p-4 rounded-4' style={{width:"400px",height:"500px"}}>
+                  <div>
+                    How to configure your rooms?
+                  </div>
+                  <div>
+                    {roon}
+                  </div>
+              </div>
+            </OutsideAlerter>
+         </div>
+      )}
       <div>
         Now planning your holiday to
       </div>
@@ -415,20 +470,25 @@ function MultiStepForm() {
         <div className='selectedoptions'>
           <div className='d-flex'>
 
-            {selected[0]["place"]!=undefined ? <div className='p-2 d-flex justify-content-between align-content-center align-items-center me-1 sbtn rounded-3 border' onClick={()=>naviagte("/")} style={{ columnGap: "8px" }}>
+            {selected[0]["place"] != undefined ? <div className='p-2 d-flex justify-content-between align-content-center align-items-center me-1 sbtn rounded-3 border' onClick={() => router.push("/")} style={{ columnGap: "8px" }}>
               {selected[0]["place"]} <span><i className="fa-regular fa-circle-xmark" style={{ cursor: 'pointer', fontSize: "12px" }}></i></span>
             </div> : <></>}
 
             {
-                selected[0].Month?(<div className='p-2 d-flex justify-content-between align-content-center me-1 sbtn rounded-3 border' style={{ columnGap: "8px" }} onClick={() => {handleClick(1)}}>
+              selected[0].Month ? (<div className='p-2 d-flex justify-content-between align-content-center me-1 sbtn rounded-3 border' style={{ columnGap: "8px" }} onClick={() => { handleClick(2) }}>
                 {selected[0]["Month"]} <span className='day'>{selected[0].date}</span>
-              </div>):(<></>)
-                
+              </div>) : (<></>)
+
             }
             {
-                selected[0]["Acode"]?(<div className='p-2 d-flex justify-content-between align-content-center me-1 sbtn rounded-3 border' style={{ columnGap: "8px" }} onClick={() => {handleClick(1)}}>
+              selected[0]["Acode"] ? (<div className='p-2 d-flex justify-content-between align-content-center me-1 sbtn rounded-3 border' style={{ columnGap: "8px" }} onClick={() => { handleClick(3) }}>
                 {selected[0]["Acode"]}
-              </div>):(<></>)
+              </div>) : (<></>)
+            }
+            {
+              selected[0]["daysRange"] ? (<div className='p-2 d-flex justify-content-between align-content-center me-1 sbtn rounded-3 border' style={{ columnGap: "8px" }} onClick={() => { handleClick(4) }}>
+                {selected[0]["daysRange"]} Days
+              </div>) : (<></>)
             }
           </div>
 
@@ -490,9 +550,9 @@ function MultiStepForm() {
 
       <div>
 
-      {place?renderForm():"Loading"}
-        
-        
+        {"place" ? renderForm() : "Loading"}
+
+
         {/* {!ismSelected && !isDateSelected && !airportSelected ? (<><div className='text-center mt-5 fw-bolder' style={{ fontSize: "18px" }}>
           Which month are you traveling?
         </div>

@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react'
-import Logo from '../../../public/assets/logo-2.png'
-import Image from 'next/image'
+
+
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { jwtDecrypt, jwtVerify } from 'jose'
@@ -155,7 +155,7 @@ const Navbar =  () => {
     <div className='container-fluid bg-black main-menu-nav'>
             <div className='container d-flex justify-content-between align-items-center p-4'>
                 <Link href="/" className='logo'>
-                    <Image src={Logo} alt="" />
+                    <img src={"/assets/logo-2.png"} alt="" />
                 </Link>
                 <div className='mainmenu'>
                     
@@ -189,7 +189,7 @@ const Navbar =  () => {
                         
                     </ul>
                 </div>
-                <div className='d-flex align-items-center' style={{zIndex:510}}>
+                <div className=' menuicons align-items-center' style={{zIndex:510}}>
                 {!isOpen?<i className="fa-solid menuicon fa-bars" onClick={()=>handleMenu()}></i>:<i className="fa-solid menuicon fa-x" onClick={()=>handleMenu()}></i>}
                 </div>
             </div>

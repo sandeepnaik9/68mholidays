@@ -11,9 +11,11 @@ export async function POST(request) {
     const { phoneNo, Otp } = await request.json();
     
     const q_res = await query({ query: `SELECT * FROM User WHERE mobile_number=${parseInt(phoneNo)};`, values: [] });
+    console.log(Otp)    
+    const matchOtp = await bcrypt.compare(Otp.join(""), q_res[0]["otp"].toString())
+    console.log(matchOtp)
     
-    const matchOtp = await bcrypt.compare(Otp.join("").toString(), q_res[0]["otp"])
-    console.log(Otp.join("").toString())
+    
     
     if (matchOtp) {
         delete q_res[0].otp

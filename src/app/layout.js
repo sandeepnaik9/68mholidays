@@ -2,8 +2,6 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Navbar from './comonents/Navbar'
-import { Provider } from 'react-redux';
-import { store } from '../store/stores';
 import 'react-toastify/dist/ReactToastify.css';
 import Providers from '../store/storeProvide';
 import Head from 'next/head';

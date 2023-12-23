@@ -47,17 +47,18 @@ export async function POST (request){
     const response = NextResponse;
     
     // console.log(tl.sendSMS("918885450415",'this is test message','Sender',function(err,data){console.log(err,data,"TEXTLOCAL")}),"TEXTLOCALS")
-    sendSMS("MzI3NTM1NGI0ODcwNDI2Nzc5NTc0OTQxNDE2MzQ3Nzc=","918885450415","smhlds","This is sample message kindly ignore")
+
     const {phoneNo,exisitingUser,username} = await request.json();
-    const otp = crypto.randomInt(100000, 999999);
-    
+    // const otp = crypto.randomInt(100000, 999999);
+    const otp = 123456
+    console.log(otp)
     const q_res = await query({query:`SELECT * FROM User Where mobile_number=${phoneNo};`,values:[]});
     const hashedOtp = await bcrypt.hash(otp.toString(),10)
-    
+    console.log(otp.toString())
     if(q_res.length&&exisitingUser){
         console.log(otp)
         await query({query:`UPDATE User SET otp="${hashedOtp}" where mobile_number=${phoneNo}`,values:[]})
-        await axios("https://api.textlocal.in/send/?",{method:"POST"})
+        // await axios("https://api.textlocal.in/send/?",{method:"POST"})
         // To Do Send OTP Message API Integration
         return response.json({"Status":"Success","Message":"Sent","OTP":otp})
     }

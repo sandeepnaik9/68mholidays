@@ -1,7 +1,7 @@
 
 "use client"
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import Image from 'next/image'
+
 import { useAppDispatch, useAppSelector } from '../../../store/stores'
 import { setBannerImageS, setDestinationS, setIsEditing, setNofDays, setPackageName, setPricingS, setStatusS, setTourIncludesS, } from '../../../store/slices/packageSlice'
 
@@ -650,16 +650,16 @@ const Package = ({ params }) => {
                                     </div>
                                     <div className='d-flex column-gap-3 align-items-center'>
                                         <div>
-                                            <Image width={20} alt='whatsapp' height={20} src={"https://www.veenaworld.com/whatsapp.eeae0bc43d64cfc9.svg"} />
+                                            <img width={20} alt='whatsapp' height={20} src={"https://www.veenaworld.com/whatsapp.eeae0bc43d64cfc9.svg"} />
                                         </div>
                                         <div>
-                                            <Image width={20} alt='print' height={20} src={"https://www.veenaworld.com/print.d4177d1291fc6484.svg"} />
+                                            <img width={20} alt='print' height={20} src={"https://www.veenaworld.com/print.d4177d1291fc6484.svg"} />
                                         </div>
                                         <div>
-                                            <Image width={20} alt='print' height={20} src={"https://www.veenaworld.com/print.d4177d1291fc6484.svg"} />
+                                            <img width={20} alt='print' height={20} src={"https://www.veenaworld.com/print.d4177d1291fc6484.svg"} />
                                         </div>
                                         <div>
-                                            <Image width={20} alt='print' height={20} src={"https://www.veenaworld.com/print.d4177d1291fc6484.svg"} />
+                                            <img width={20} alt='print' height={20} src={"https://www.veenaworld.com/print.d4177d1291fc6484.svg"} />
                                         </div>
                                         <a href="#itinerary">
                                             View itinerary

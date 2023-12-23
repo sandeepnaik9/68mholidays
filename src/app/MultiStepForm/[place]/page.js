@@ -23,7 +23,7 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import Image from 'next/image';
+;
 import OutsideAlerter from '../../comonents/submenu';
 function MultiStepForm({ params }) {
 
@@ -321,7 +321,7 @@ function MultiStepForm({ params }) {
         {daysRange.map(el => (<div className=' d-flex flex-column m-2 justify-content-center align-items-center' style={{ width: "1000px", height: "250px" }}>
           <div className={`d-flex w-100 h-100 flex-column  justify-content-center align-items-between daysRangeCard ${el.selected ? "selected" : ""}`} onClick={() => selectDaysRange(el.range)}>
             <div className='d-flex justify-content-center'>
-              <Image width={128} height={128} style={{ borderRadius: "50%", width: "128px", height: "128px" }} src={el.imgSrc} />
+              <img style={{ borderRadius: "50%", width: "128px", height: "128px" }} src={el.imgSrc} />
             </div>
             <div className="w-100 text-center mt-4">
               {el.range} Days
@@ -343,7 +343,7 @@ function MultiStepForm({ params }) {
           <div className={`d-flex w-100 h-100 flex-column  justify-content-center align-items-between daysRangeCard ${el.selected ? "selected" : ""}`} onClick={() => selectDaysRange(el.range)}>
             
             <div className='d-flex justify-content-center'>
-              <Image width={128} height={128} style={{ borderRadius: "50%", width: "128px", height: "128px" }} src={el.imgSrc} />
+              <img width={128} height={128} style={{ borderRadius: "50%", width: "128px", height: "128px" }} src={el.imgSrc} />
             </div>
             <div className="w-100 text-center mt-4">
               {el.type} Days

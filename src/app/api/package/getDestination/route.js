@@ -2,6 +2,9 @@
 import { query } from "../../../../lib/db";
 import { NextResponse } from "next/server";
 
+
+export async function POST(req) {}
+
 export async function GET(request){
     const res = await request.nextUrl.searchParams.get("country");
 
@@ -10,3 +13,5 @@ export async function GET(request){
 
     return NextResponse.json({"Status":"Success","data":result})
 }
+
+export const dynamic = "force-static";
