@@ -222,8 +222,7 @@ const Package = ({ params }) => {
             setTitle(res.data[0]?.package_name || "Enter Title")
             setFeaturedImage(res?.data[0]?.BannerImage || "/assets/banner.jpeg")
             setDestinations(JSON.parse(res?.data[0]?.destinations) || [])
-            const updatedTourIncludes = tourIncludes?.map(item => {
-                console.log(res?.data[0]?.TourIncludes,"TourIncludes",typeof res?.data[0]?.TourIncludes) 
+            const updatedTourIncludes = tourIncludes?.map(item => { 
                 const matchingItem = JSON.parse(res?.data[0]?.TourIncludes)?.find(otherItem => otherItem.label === item.label);
                 if (matchingItem) {
                     return { ...item, provided: matchingItem.provided };
@@ -259,7 +258,7 @@ const Package = ({ params }) => {
             });
             console.log(updatedTourIncludes)
             setTourIncludes(updatedTourIncludes || []);
-            setTitle(packageName || "Edit Title")
+            setTitle(packageName || "")
             setFeaturedImage(bannerImage || "/assets/banner.jpeg")
             setDays(daysS || 0)
             setDestinations(destinationS || [])
@@ -446,27 +445,31 @@ const Package = ({ params }) => {
     }
 
     const handleSave = async () => {
-        console.log("UPDATE")
-        if (image == "/assets/banner.jpeg") {
-            console.log("Condition: image == '/assets/banner.jpeg'");
-        } else if (title.toLowerCase() == "edit title") {
-            console.log("Condition: title.toLowerCase() == 'edit title'");
-        } else if (destinations.length <= 0) {
-            console.log("Condition: destinations.length <= 0");
-        } else if (itinerary.length <= 0) {
-            console.log("Condition: itinerary.length <= 0");
-        } else {
-            alert("Kindly make sure all the changes are made before adding");
-            return null;
-        }
-        const data = textV.replace(/\n/g, '<br>')
-        await fetch("/api/package/updatePackage", { method: "POST", body: JSON.stringify({ "code": params.pn.split("#")[0], "packageName": title, "bannerImage": image, "destinations": destinations, "tourIncludes": tourIncludes.map((el) => { return { "label": el.label, "provided": el.provided } }), "nDays": days, "destinations": destinations, "pricingTable": pricing, "itinerary": itinerary }) })
 
+        // if (image == "/assets/banner.jpeg"&&title.toLowerCase()!=""&&destinations.length != 0&&itinerary.length != 0) {
+        //     alert("Kindly upload image");
+        // } else if (image != "/assets/banner.jpeg"&&title.toLowerCase() == ""&&destinations.length != 0&&itinerary.length != 0) {
+        //     alert("Condition: title.toLowerCase() == 'edit title'");
+        // } else if (image != "/assets/banner.jpeg"&&title.toLowerCase() != ""&&destinations.length == 0&&itinerary.length != 0) {
+        //     alert("Condition: destinations.length <= 0");
+        // } else if (image != "/assets/banner.jpeg"&&title.toLowerCase() != ""&&destinations.length != 0&&itinerary.length == 0) {
+        //     alert("Condition: itinerary.length <= 0");
+        // } else
+         if(image == "/assets/banner.jpeg"||title.toLowerCase() == ""||destinations.length == 0||itinerary.length == 0){
+                alert("Make sure all the fields are filled")
+            }  
+        else {
+            const data = textV.replace(/\n/g, '<br>')
+        await fetch("/api/package/updatePackage", { method: "POST", body: JSON.stringify({ "code": params.pn.split("#")[0], "packageName": title, "bannerImage": image, "destinations": destinations, "tourIncludes": tourIncludes.map((el) => { return { "label": el.label, "provided": el.provided } }), "nDays": days, "destinations": destinations, "pricingTable": pricing, "itinerary": itinerary }) })
         setindIte(-1)
 
         dispatch(setIsEditing(!isEditingS))
         setIsEditings(!isEditing)
-        router.refresh()
+        router.refresh()  
+        } 
+        
+
+        
     }
 
 
@@ -553,7 +556,7 @@ const Package = ({ params }) => {
 
     const handlePublish = async () => {
         console.log("PUBLISH")
-        if (image == "/assets/banner.jpeg" || title.toLowerCase() == "edit title" || destinations.length || itinerary.length) {
+        if (image == "/assets/banner.jpeg" || title.toLowerCase() == "" || destinations.length || itinerary.length) {
             alert("Kindly make sure all the changes are made before publishing")
         }
         else{
@@ -613,7 +616,7 @@ const Package = ({ params }) => {
                         <div className="row w-100">
 
                             <div className="col-8 d-flex flex-column justify-content-center">
-                                {isEditing ? (<input className='fw-semibold aEdit h3' onChange={(e) => { dispatch(setPackageName(e.target.value)); setTitle(e.target.value) }} defaultValue={title} style={{ outline: 'none', border: "none", background: "none" }} />) : <h1 className='fw-semibold '>{title}</h1>}
+                                {isEditing ? (<input className='fw-semibold aEdit h3' onChange={(e) => { dispatch(setPackageName(e.target.value)); setTitle(e.target.value) }} placeholder='Edit Title' defaultValue={title} style={{ outline: 'none', border: "none", background: "none" }} />) : <h1 className='fw-semibold '>{title}</h1>}
 
                                 <div className='d-flex align-items-center column-gap-3' style={{ fontSize: "14px", fontWeight: "400" }}>
                                     <div className='d-flex align-items-center'>

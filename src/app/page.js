@@ -586,7 +586,7 @@ const Home = () => {
             </section> */}
             <section className='my-5'>
                 <div className='container'>
-                    <div className='row'>
+                    <div className='row p-2'>
                         <div className='col-xs-12 p-4 col-lg-4 rounded-3   mt-2' style={{backgroundColor:"red"}}>
                                 <div className=' fw-bolder fs-5' style={{color:"#FFD800"}}>
                                     Hey 
@@ -600,7 +600,7 @@ const Home = () => {
                                     </div>
                                 </div>
                         </div>
-                        <div className='col-xs-12 col-lg-8 mt-2  d-flex flex-md-column justify-content-center'>
+                        <div className='col-xs-12 overflow-scroll col-lg-8 mt-2  d-flex flex-md-column justify-content-md-center'>
                            
                         <div className='d-flex cardH column-gap-2'>
                                 <div className='cardTop position-relative rounded-2' style={{backgroundColor:"red",overflow:"hidden"}}>
@@ -703,7 +703,7 @@ const Home = () => {
                 <div className='text-center text-white mb-3' style={{fontWeight:"300"}}>
                     What are we waiting for? Chalo Bag Bharo Nikal Pado!
                 </div>
-                <div className='px-5 mx-5 position-relative'>
+                <div className='px-md-5 mx-md-5 px-2 mx-2 position-relative'>
                     <img src="/assets/as-left.png" alt="" style={{position:"absolute",top:-60,left:-10}}/>
                     <img src="/assets/as-left.png" alt="" style={{position:"absolute",rotate:"180deg",bottom:-40,right:-10}}/>
                     <Carousel breakPoints={breakPoints} autoPlaySpeed={1}>
@@ -723,7 +723,7 @@ const Home = () => {
                 <div className='row column-gap  m-md-3 d-flex justify-content-center mt-5'>
                     {homePageTopPlaces.map((el) => {
                         return (
-                            <Link key={el.place} href={`/MultiStepForm/${el.place}`} className='col-lg-3 col-md-6 '>
+                            <Link key={el.place} href={`/MultiStepForm/${el.place}`} className='col-lg-3 mt-4 col-md-6 '>
                                 <div className=' contentwr position-relative' style={{ borderRadius: "20px", boxShadow: "4px 5px 37px -5px rgba(0,0,0,0.62)", cursor: "pointer" }}>
                                     <div>
                                         <div className='imgwr' style={{ backgroundImage: "url('http://www.68mholidays.com/uploads/locations/Sin_12.jpg')", backgroundRepeat: "no-repeat", objectFit: "cover" }}>

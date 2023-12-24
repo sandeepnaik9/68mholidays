@@ -6,8 +6,9 @@ import Link from 'next/link'
 import { useEffect } from 'react'
 import { jwtDecrypt, jwtVerify } from 'jose'
 import { usePathname, useRouter } from 'next/navigation'
-import { setAuth } from '../../store/slices/authSlice'
+import { setAuth, setMobileNumber, setRole, setusername } from '../../store/slices/authSlice'
 import { useAppDispatch,useAppSelector } from '../../store/stores'
+import { setIsEditing } from '../../store/slices/packageSlice'
 
 const Navbar =  () => {
 
@@ -124,6 +125,11 @@ const Navbar =  () => {
     const logoutFunction = async()=>{
         dispatch(setAuth(false))
         localStorage.removeItem("outrightcode")
+        dispatch(setAuth(""))
+        dispatch(setusername(""))
+        dispatch(setMobileNumber(""))
+        dispatch(setRole(""))
+        dispatch(setIsEditing(false))
         const res = await fetch("/api/auth/Logout",{method:"POST"})
         const {redirect} =  res.json();
         router.push("/")

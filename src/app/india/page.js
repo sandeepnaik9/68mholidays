@@ -13,30 +13,30 @@ const Pakcages = () => {
     const dispatch = useAppDispatch()
     const roleS = useAppSelector((state) => state.auth.role)
     const [role, setRole] = useState()
-    const [prf,setPrf]= useState()
-    const [tdf,setTdf]= useState()
-    const [modal,setModal] = useState(false)
-    const [packagName,setPackageName] = useState()
-    const [packageId,setPackageId] = useState()
-    const [adultCount,setAdultCount] = useState(0)
-    const [childCount,setChildCount] = useState(0)
-    const [infantCount,setInfantCount] = useState(0)
-    const [pricingtTable,setPricingTable] = useState()
-    const [loading,setLoading] = useState(true)
-    const [togglePRF,setTogglePRF] = useState(false)
-    const [toggleTDF,setToggleTDF] = useState(false)
-    const [type,setType] = useState()
+    const [prf, setPrf] = useState()
+    const [tdf, setTdf] = useState()
+    const [modal, setModal] = useState(false)
+    const [packagName, setPackageName] = useState()
+    const [packageId, setPackageId] = useState()
+    const [adultCount, setAdultCount] = useState(0)
+    const [childCount, setChildCount] = useState(0)
+    const [infantCount, setInfantCount] = useState(0)
+    const [pricingtTable, setPricingTable] = useState()
+    const [loading, setLoading] = useState(true)
+    const [togglePRF, setTogglePRF] = useState(false)
+    const [toggleTDF, setToggleTDF] = useState(false)
+    const [type, setType] = useState()
     const [toggleGuest, setToggleGuest] = useState(false)
 
     useEffect(() => {
         setRole(roleS)
     }, [roleS])
 
-    
-    const [minDays,setMinDays] = useState()
-    const [maxDays,setMaxDays] = useState()
 
-    const handleQuickQuote = (id,name)=>{
+    const [minDays, setMinDays] = useState()
+    const [maxDays, setMaxDays] = useState()
+
+    const handleQuickQuote = (id, name) => {
         setPackageId(id)
         setPackageName(name)
         console.log(name)
@@ -44,12 +44,12 @@ const Pakcages = () => {
         setModal(true)
     }
 
-    const Filter = async ()=>{
+    const Filter = async () => {
         const packages = (await fetch("/api/package/getPackages?user=all", { method: "GET" })).json()
-        
+
     }
 
-    const formatter = new Intl.NumberFormat('en-IN', {style:"currency",currency:"INR",maximumSignificantDigits: 3 })
+    const formatter = new Intl.NumberFormat('en-IN', { style: "currency", currency: "INR", maximumSignificantDigits: 3 })
     const [tourIncludes, setTourIncludes] = useState(
         [
             {
@@ -93,737 +93,644 @@ const Pakcages = () => {
             const res = await getPackages()
             setPackages(res)
             setLoading(false)
-            
+
         }
         getPacka()
     }, [])
     return (
         <>
-        <div >
-            {console.log(role, "ROLE")}
-            {(role === process.env.NEXT_PUBLIC_ADMIN || role === process.env.NEXT_PUBLIC_SUPER_ADMIN) && (<div className='d-flex'>
-                <div className='rounded-pill p-2 mt-2' onClick={() => addPackage()} style={{ cursor: "pointer", position: "relative", border: "1px solid grey", fontSize: "12px", fontWeight: "600", zIndex: "2", left: "10px" }}>
-                    Add Package
-                </div>
-            </div>)}
-
-            <div className='container mt-4 p-0 position-relative rounded-3 mx-auto bg-white'>
-
-                <div className='d-flex'>
-                    <div className='col-5 p-3 pt-5 position-relative'>
-                        <h5 style={{ fontWeight: "700" }}>Indian Tour Packages</h5>
-                        <div className={`seoContent position-relative showpc ${show && "show"}`}>
-                            <div className='position-relative'>
-                                <p className='topSectionDesc'>
-                                    The ancient spark of the spiritual land, with ethnic evolutionary life, completely different from anywhere on the globe, is the land where your soul awaits to transcend!
-                                </p>
-                                <p className='topSectionDesc'>India is the land of vibrant colours, life & culture. The diversity of the country is portrayed in every human, land and also its cuisine. It is aptly said that, everything we really wanted was always there right in front of our eyes and we failed to see it. That is exactly the case for most travelers in India. We at, Veena World, handcraft our India travel packages with most remarkable locations that lie in every corner of India. And if you are looking for tips on where to start, explore our India tour packages for best options.</p>
-                                <p className='topSectionDesc'>Traverse through the country and know the land’s true and raw nature; be surprised with the inherent, divine beauty of the realm. With the perfect match for your choices among the holiday packages in India, breathe the beauty of untapped incredible India! India’s lavish natural beauties are dramatically the ones which carved its history. A country with ample of UNESCO world heritage sites, eloquent coastlines & beaches, royal palaces, ancient caves and temples, glaring deserts, the land of Himalayas and the list goes on. For a country so huge and with so much to offer we have passion in abundance and unrivalled knowledge to present you the perfect Indian vacation.</p>
-
-
-
-                            </div>
-                            <div className='textOpacity'></div>
-                        </div>
-
-                        <div style={{ cursor: "pointer" }} onClick={() => setShow(!show)} className='mt-3 text-blue-600 text-decoration-underline'>
-                            Read more
-                        </div>
-                    </div>
-
-                    <div className='col-7 p-0 position-relative topScetionImage'>
-                        <div className="whiteOverlay" />
-                        <div className='h-100 p-0 d-flex justify-content-center align-items-center' style={{ zIndex: 2, position: "relative" }}>
-                            <div className={`mx-auto tableContent ${show && "show"}`} style={{ width: "80%", paddingLeft: "1em" }}>
-                                <div className='mb-2' style={{ fontWeight: 500, fontSize: "12px" }}>
-                                    India Travel Packages
-                                </div>
-                                <div className='rounded-2 overflow-hidden' style={{ border: "1px solid gray" }}>
-                                    <table className='w-100' style={{ fontSize: "12px" }}>
-                                        <tbody>
-                                            <tr className='text-white bg-blue-800' >
-                                                <th className='pacTH w-50 paddingd'>
-                                                    India Packages
-                                                </th>
-                                                <th className='pacTH w-25 paddingd'>
-                                                    Day/Night
-                                                </th>
-                                                <th className='w-25 pacTH paddingd'>
-                                                    Price
-                                                </th>
-                                            </tr>
-                                            <tr className='bg-white' >
-                                                <td className='border-right-1 border-bottom-1 w-50 paddingd'>
-                                                    India Packages
-                                                </td>
-                                                <td className='border-right-1 border-bottom-1 w-25 paddingd'>
-                                                    Day/Night
-                                                </td>
-                                                <td className='w-25 border-bottom-1 paddingd'>
-                                                    Price
-                                                </td>
-                                            </tr>
-                                            <tr className='bg-white' >
-                                                <td className='border-right-1 border-bottom-1 w-50 paddingd'>
-                                                    India Packages
-                                                </td>
-                                                <td className='border-right-1 border-bottom-1 w-25 paddingd'>
-                                                    Day/Night
-                                                </td>
-                                                <td className='w-25 border-bottom-1 paddingd'>
-                                                    Price
-                                                </td>
-                                            </tr>
-                                            <tr className='bg-white' >
-                                                <td className='border-right-1 w-50 paddingd'>
-                                                    India Packages
-                                                </td>
-                                                <td className='border-right-1 w-25 paddingd'>
-                                                    Day/Night
-                                                </td>
-                                                <td className='w-25 paddingd'>
-                                                    Price
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className='container'>
-                <div className='row'>
-                    <div className='col-12'>
-                        <div className='d-flex align-items-center justify-content-between'>
-                            <div>
-                                <div>
-                                    234 India Holiday Packages
-                                </div>
-                                <div>
-                                    Showing 1-10 packages from 234 packages
-                                </div>
+            <div className='d-flex'>
+                {console.log(role, "ROLE")}
+                {(role === process.env.NEXT_PUBLIC_ADMIN || role === process.env.NEXT_PUBLIC_SUPER_ADMIN) && (<div className='d-flex'>
+                    <div className='p-2 bg-black text-white' style={{minWidth:"170px"}}>
+                        <div className='rounded-2  p-2 mt-2' onClick={() => addPackage()} style={{ cursor: "pointer", position: "relative", border: "1px solid grey", fontSize: "12px", fontWeight: "600", zIndex: "2" }}>
+                            <div className='d-flex'>
+                            <div className='me-3'>
+                            <i class="fa-solid fa-plus"></i>
                             </div>
                             <div>
-                                <div className='d-flex ps-2 align-items-center bg-white rounded-2' style={{ width: "200px", height: "30px", border: "1px solid black", cursor: "pointer" }}>
-                                    Sort by Deals
+                                Package
+                            </div>
+                            </div>
+                        </div>
+                        <div className='rounded-2  p-2 mt-2' onClick={() => addPackage()} style={{ cursor: "pointer", position: "relative", border: "1px solid grey", fontSize: "12px", fontWeight: "600", zIndex: "2" }}>
+                            <div className='d-flex'>
+                            <div className='me-3'>
+                            <i class="fa-solid fa-plus"></i>
+                            </div>
+                            <div>
+                                User
+                            </div>
+                            </div>
+                        </div>
+                        <div className='rounded-2 p-2 mt-2' onClick={() => addPackage()} style={{ cursor: "pointer", position: "relative", border: "1px solid grey", fontSize: "12px", fontWeight: "600", zIndex: "2" }}>
+                            Check User Enquiries
+                        </div>
+                    </div>
+                </div>)}
+                <div className='mx-auto'>
+                    <div className='container mt-4 p-0 position-relative rounded-3 mx-auto bg-white'>
+
+                        <div className='d-flex'>
+
+                            <div className='h-100 bg-black' style={{ width: "200px" }}>
+                            </div>
+                            <div className='col-5 p-3 pt-5 position-relative'>
+                                <h5 style={{ fontWeight: "700" }}>Indian Tour Packages</h5>
+                                <div className={`seoContent position-relative showpc ${show && "show"}`}>
+                                    <div className='position-relative'>
+                                        <p className='topSectionDesc'>
+                                            The ancient spark of the spiritual land, with ethnic evolutionary life, completely different from anywhere on the globe, is the land where your soul awaits to transcend!
+                                        </p>
+                                        <p className='topSectionDesc'>India is the land of vibrant colours, life & culture. The diversity of the country is portrayed in every human, land and also its cuisine. It is aptly said that, everything we really wanted was always there right in front of our eyes and we failed to see it. That is exactly the case for most travelers in India. We at, Veena World, handcraft our India travel packages with most remarkable locations that lie in every corner of India. And if you are looking for tips on where to start, explore our India tour packages for best options.</p>
+                                        <p className='topSectionDesc'>Traverse through the country and know the land’s true and raw nature; be surprised with the inherent, divine beauty of the realm. With the perfect match for your choices among the holiday packages in India, breathe the beauty of untapped incredible India! India’s lavish natural beauties are dramatically the ones which carved its history. A country with ample of UNESCO world heritage sites, eloquent coastlines & beaches, royal palaces, ancient caves and temples, glaring deserts, the land of Himalayas and the list goes on. For a country so huge and with so much to offer we have passion in abundance and unrivalled knowledge to present you the perfect Indian vacation.</p>
+
+
+
+                                    </div>
+                                    <div className='textOpacity'></div>
+                                </div>
+
+                                <div style={{ cursor: "pointer" }} onClick={() => setShow(!show)} className='mt-3 text-blue-600 text-decoration-underline'>
+                                    Read more
+                                </div>
+                            </div>
+
+                            <div className='col-7 p-0 position-relative topScetionImage'>
+                                <div className="whiteOverlay" />
+                                <div className='h-100 p-0 d-flex justify-content-center align-items-center' style={{ zIndex: 2, position: "relative" }}>
+                                    <div className={`mx-auto tableContent ${show && "show"}`} style={{ width: "80%", paddingLeft: "1em" }}>
+                                        <div className='mb-2' style={{ fontWeight: 500, fontSize: "12px" }}>
+                                            India Travel Packages
+                                        </div>
+                                        <div className='rounded-2 overflow-hidden' style={{ border: "1px solid gray" }}>
+                                            <table className='w-100' style={{ fontSize: "12px" }}>
+                                                <tbody>
+                                                    <tr className='text-white bg-blue-800' >
+                                                        <th className='pacTH w-50 paddingd'>
+                                                            India Packages
+                                                        </th>
+                                                        <th className='pacTH w-25 paddingd'>
+                                                            Day/Night
+                                                        </th>
+                                                        <th className='w-25 pacTH paddingd'>
+                                                            Price
+                                                        </th>
+                                                    </tr>
+                                                    <tr className='bg-white' >
+                                                        <td className='border-right-1 border-bottom-1 w-50 paddingd'>
+                                                            India Packages
+                                                        </td>
+                                                        <td className='border-right-1 border-bottom-1 w-25 paddingd'>
+                                                            Day/Night
+                                                        </td>
+                                                        <td className='w-25 border-bottom-1 paddingd'>
+                                                            Price
+                                                        </td>
+                                                    </tr>
+                                                    <tr className='bg-white' >
+                                                        <td className='border-right-1 border-bottom-1 w-50 paddingd'>
+                                                            India Packages
+                                                        </td>
+                                                        <td className='border-right-1 border-bottom-1 w-25 paddingd'>
+                                                            Day/Night
+                                                        </td>
+                                                        <td className='w-25 border-bottom-1 paddingd'>
+                                                            Price
+                                                        </td>
+                                                    </tr>
+                                                    <tr className='bg-white' >
+                                                        <td className='border-right-1 w-50 paddingd'>
+                                                            India Packages
+                                                        </td>
+                                                        <td className='border-right-1 w-25 paddingd'>
+                                                            Day/Night
+                                                        </td>
+                                                        <td className='w-25 paddingd'>
+                                                            Price
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className='d-flex justify-content-between mt-2'>
-                    <div className='searchFilterouter  ps-md-0'>
-                        <div className='d-flex flex-column justify-content-center  p-3' style={{ fontSize: "14px" }}>
-                            <div className='d-flex  justify-content-between'>
-                                <div style={{ fontWeight: "600" }}>
-                                    Filter Your Tour
-                                </div>
-                                <div onClick={()=>{setPrf();setTdf()}} style={{ color: "darkblue",cursor:"pointer" }}>
-                                    Clear All
+                    <div className='container'>
+                        <div className='row'>
+                            <div className='col-12'>
+                                <div className='d-flex align-items-center justify-content-between'>
+                                    <div>
+                                        <div>
+                                            234 India Holiday Packages
+                                        </div>
+                                        <div>
+                                            Showing 1-10 packages from 234 packages
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className='d-flex ps-2 align-items-center bg-white rounded-2' style={{ width: "200px", height: "30px", border: "1px solid black", cursor: "pointer" }}>
+                                            Sort by Deals
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div className='mt-2 d-flex flex-wrap column-gap-1 row-gap-2 text-gray-500' style={{fontSize:"12px"}}>
-                                {prf&&(<div style={{cursor:"pointer"}} className='filterPill border p-1 px-2 rounded-pill'>
-                                    {prf?.label}
+                        </div>
+                        <div className='d-flex justify-content-between mt-2'>
+                            <div className='searchFilterouter  ps-md-0'>
+                                <div className='d-flex flex-column justify-content-center  p-3' style={{ fontSize: "14px" }}>
+                                    <div className='d-flex  justify-content-between'>
+                                        <div style={{ fontWeight: "600" }}>
+                                            Filter Your Tour
+                                        </div>
+                                        <div onClick={() => { setPrf(); setTdf() }} style={{ color: "darkblue", cursor: "pointer" }}>
+                                            Clear All
+                                        </div>
+                                    </div>
+                                    <div className='mt-2 d-flex flex-wrap column-gap-1 row-gap-2 text-gray-500' style={{ fontSize: "12px" }}>
+                                        {prf && (<div style={{ cursor: "pointer" }} className='filterPill border p-1 px-2 rounded-pill'>
+                                            {prf?.label}
 
-                                </div>)}
-                                {tdf&&(<div style={{cursor:"pointer"}} className='filterPill border p-1 px-2 rounded-pill'>
-                                    {tdf?.label}
-                                </div>)}
-                                {/* {<div style={{cursor:"pointer"}} className='filterPill border p-1 px-2 rounded-pill'>
+                                        </div>)}
+                                        {tdf && (<div style={{ cursor: "pointer" }} className='filterPill border p-1 px-2 rounded-pill'>
+                                            {tdf?.label}
+                                        </div>)}
+                                        {/* {<div style={{cursor:"pointer"}} className='filterPill border p-1 px-2 rounded-pill'>
                                     20 Dec 2023 - 28 Dec 2023
                                 </div>} */}
+                                    </div>
+                                </div>
+                                <hr className='p-0 m-0' />
+                                <div className='p-3' style={{ fontSize: "14px" }}>
+                                    <div onClick={() => setTogglePRF(!togglePRF)} className='d-flex justify-content-between' style={{ cursor: "pointer" }}>
+                                        <div style={{ fontWeight: "600" }}>
+                                            Price Range
+                                        </div>
+                                        <div>
+                                            <i className="fa-solid fa-angle-down"></i>
+                                        </div>
+                                    </div>
+                                    <div className={` filterDrop ${togglePRF && "active"}`} >
+                                        <div className='d-flex justify-content-center column-gap-1'>
+                                            <div style={{ cursor: "pointer" }} onClick={() => setPrf({ "label": "₹0 - ₹60,000", "min": "0", "max": "60000" })} className={`filterBtn  justify-content-center d-flex align-items-center rounded-2 ${prf?.label === "₹0 - ₹60,000" && "active"}`}>
+                                                ₹0 - ₹60,000
+                                            </div>
+                                            <div style={{ cursor: "pointer" }} onClick={() => setPrf({ "label": "₹60,000 - ₹1.2L", "min": "60,000", "max": "120000" })} className={`filterBtn  justify-content-center d-flex align-items-center rounded-2 ${prf?.label === "₹60,000 - ₹1.2L" && "active"}`}>
+                                                ₹60,000 - ₹ 1.2L
+                                            </div>
+                                        </div>
+                                        <div className='d-flex mt-2 column-gap-1 justify-content-center'>
+                                            <div style={{ cursor: "pointer" }} onClick={() => setPrf({ "label": "₹1.2L - ₹1.8L", "min": "120000", "max": "180000" })} className={`filterBtn  justify-content-center d-flex align-items-center rounded-2 ${prf?.label == "₹1.2L - ₹1.8L" && "active"}`}>
+                                                ₹1.2L - ₹1.8L
+                                            </div>
+                                            <div style={{ cursor: "pointer" }} onClick={() => setPrf({ "label": "₹1.8L & Above", "min": "180000", "max": "Infinite" })} className={`filterBtn  justify-content-center d-flex align-items-center rounded-2 ${prf == "₹1.8L & Above" && "active"}`}>
+                                                ₹1.8L & above
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <hr className='p-0 m-0' />
+                                <div className='p-3' style={{ fontSize: "14px" }}>
+                                    <div onClick={() => setToggleTDF(!toggleTDF)} className='d-flex justify-content-between' style={{ cursor: "pointer" }}>
+                                        <div style={{ fontWeight: "600" }}>
+                                            Tour Duration
+                                        </div>
+                                        <div>
+                                            <i className="fa-solid fa-angle-down"></i>
+                                        </div>
+                                    </div>
+                                    <div className={` filterDrop ${toggleTDF && "active"}`} >
+                                        <div className='d-flex justify-content-center column-gap-1'>
+                                            <div style={{ cursor: "pointer" }} onClick={() => setTdf({ "label": "3 - 15 Days", "min": "3", "max": "15" })} className={`filterBtn  justify-content-center d-flex align-items-center rounded-2 ${tdf?.label === "3 - 15 Days" && "active"}`}>
+                                                3 - 15 Days
+                                            </div>
+                                            <div style={{ cursor: "pointer" }} onClick={() => setTdf({ "label": "15 - 27 Days", "min": "15", "max": "27" })} className={`filterBtn  justify-content-center d-flex align-items-center rounded-2 ${tdf?.label === "15 - 27 Days" && "active"}`}>
+                                                15 - 27 Days
+                                            </div>
+                                        </div>
+                                        <div className='d-flex mt-2 column-gap-1 justify-content-center'>
+                                            <div style={{ cursor: "pointer" }} onClick={() => setTdf({ "label": "27 - 39 Days", "min": "27", "max": "39" })} className={`filterBtn  justify-content-center d-flex align-items-center rounded-2 ${tdf?.label == "27 - 39 Days" && "active"}`}>
+                                                27 - 39 Days
+                                            </div>
+                                            <div style={{ cursor: "pointer" }} onClick={() => setTdf({ "label": "39 - 50 Days", "min": "39", "max": "50" })} className={`filterBtn  justify-content-center d-flex align-items-center rounded-2 ${prf == "39 - 50 Days" && "active"}`}>
+                                                39 - 50 Days
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <hr className='p-0 m-0' />
                             </div>
-                        </div>
-                        <hr className='p-0 m-0' />
-                        <div className='p-3' style={{ fontSize: "14px" }}>
-                            <div onClick={()=>setTogglePRF(!togglePRF)} className='d-flex justify-content-between' style={{ cursor: "pointer" }}>
-                                <div style={{ fontWeight: "600" }}>
-                                    Price Range
-                                </div>
-                                <div>
-                                    <i className="fa-solid fa-angle-down"></i>
-                                </div>
-                            </div>
-                            <div className={` filterDrop ${togglePRF&&"active"}`} >
-                                <div className='d-flex justify-content-center column-gap-1'>
-                                    <div style={{cursor:"pointer"}} onClick={()=>setPrf({"label":"₹0 - ₹60,000","min":"0","max":"60000"})} className={`filterBtn  justify-content-center d-flex align-items-center rounded-2 ${prf?.label==="₹0 - ₹60,000"&&"active"}`}>
-                                        ₹0 - ₹60,000
-                                    </div>
-                                    <div style={{cursor:"pointer"}} onClick={()=>setPrf({"label":"₹60,000 - ₹1.2L","min":"60,000","max":"120000"})} className={`filterBtn  justify-content-center d-flex align-items-center rounded-2 ${prf?.label==="₹60,000 - ₹1.2L"&&"active"}`}>
-                                        ₹60,000 - ₹ 1.2L
-                                    </div>
-                                </div>
-                                <div className='d-flex mt-2 column-gap-1 justify-content-center'>
-                                    <div style={{cursor:"pointer"}} onClick={()=>setPrf({"label":"₹1.2L - ₹1.8L","min":"120000","max":"180000"})} className={`filterBtn  justify-content-center d-flex align-items-center rounded-2 ${prf?.label=="₹1.2L - ₹1.8L"&&"active"}`}>
-                                        ₹1.2L - ₹1.8L
-                                    </div>
-                                    <div style={{cursor:"pointer"}} onClick={()=>setPrf({"label":"₹1.8L & Above","min":"180000","max":"Infinite"})} className={`filterBtn  justify-content-center d-flex align-items-center rounded-2 ${prf=="₹1.8L & Above"&&"active"}`}>
-                                        ₹1.8L & above
-                                    </div>
-                                </div>
+                            <div className='searchListOuter d-flex flex-column row-gap-4 ps-md-0'>
 
-                            </div>
-                        </div>
-                        <hr className='p-0 m-0' />
-                        <div className='p-3' style={{ fontSize: "14px" }}>
-                            <div onClick={()=>setToggleTDF(!toggleTDF)} className='d-flex justify-content-between' style={{ cursor: "pointer" }}>
-                                <div style={{ fontWeight: "600" }}>
-                                    Tour Duration
-                                </div>
-                                <div>
-                                    <i className="fa-solid fa-angle-down"></i>
-                                </div>
-                            </div>
-                            <div className={` filterDrop ${toggleTDF&&"active"}`} >
-                                <div className='d-flex justify-content-center column-gap-1'>
-                                    <div style={{cursor:"pointer"}} onClick={()=>setTdf({"label":"3 - 15 Days","min":"3","max":"15"})} className={`filterBtn  justify-content-center d-flex align-items-center rounded-2 ${tdf?.label==="3 - 15 Days"&&"active"}`}>
-                                        3 - 15 Days
-                                    </div>
-                                    <div style={{cursor:"pointer"}} onClick={()=>setTdf({"label":"15 - 27 Days","min":"15","max":"27"})} className={`filterBtn  justify-content-center d-flex align-items-center rounded-2 ${tdf?.label==="15 - 27 Days"&&"active"}`}>
-                                    15 - 27 Days
-                                    </div>
-                                </div>
-                                <div className='d-flex mt-2 column-gap-1 justify-content-center'>
-                                    <div style={{cursor:"pointer"}} onClick={()=>setTdf({"label":"27 - 39 Days","min":"27","max":"39"})} className={`filterBtn  justify-content-center d-flex align-items-center rounded-2 ${tdf?.label=="27 - 39 Days"&&"active"}`}>
-                                    27 - 39 Days
-                                    </div>
-                                    <div style={{cursor:"pointer"}} onClick={()=>setTdf({"label":"39 - 50 Days","min":"39","max":"50"})} className={`filterBtn  justify-content-center d-flex align-items-center rounded-2 ${prf=="39 - 50 Days"&&"active"}`}>
-                                    39 - 50 Days
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <hr className='p-0 m-0' />
-                    </div>
-                    <div className='searchListOuter d-flex flex-column row-gap-4 ps-md-0'>
-                        
-                        {loading?(
-                             <>
-                             <div  className='searchCard bg-white rounded-3' style={{ width: "100%", boxShadow: "0 0 10px #00000012" }}>
-                                 <div className='searchCardHolder'>
-                                     <div className='primaryInfo'>
-                                         <div className='imageHolder position-relative ps-1'>
-                                             <div className='imgwrpr'>
-                                                 <Skeleton className='w-100 h-100'/>
-                                             </div>
-                                             
-                                         </div>
-                                         <div className='contentHolder position-relative d-flex  justify-content-between pb-3 mt-2'>
-                                             <div className='leftContentHolder d-flex flex-column h-100 justify-content-between'>
-                                                 <div className='d-flex flex-column column-gap-2'>
-                                                     <div className='h5'>
-                                                         <Skeleton className='w-100' style={{ textDecoration: "none", color: "black" }} /> 
-                                                            
-
-                                                     </div>
-                                                     <div className='d-flex column-gap-4'>
-                                                         
-                                                             <div >
-                                                                 <div className={`rounded-circle  `} style={{ width: "40px", height: "40px" }}>
-                                                                     <Skeleton  className='w-100 rounded-circle h-100'/>
-                                                                     
-                                                                 </div>
-
-                                                             </div>
-                                                     </div>
-                                                 </div>
-                                                 <div style={{ fontSize: "12px" }}>
-                                                     <div className=' '>
-                                                         <div className='  align-items-center'>
-                                                             <div>
-                                                                 <Skeleton />
-                                                             </div>
-                                                             <div>
-                                                                 <Skeleton />
-                                                             </div>
-                                                         </div>
-                                                         <div className=' '>
-                                                             <Skeleton />
-                                                         </div>
-                                                         <div>
-                                                             <Skeleton />
-                                                         </div>
-                                                     </div>
-                                                     
-                                                     <div className='d-flex column-gap-3'>
-                                                         <div className='d-flex align-items-center'>
-                                                             <div className='me-2' style={{ width: "20px", height: "20px" }}>
-                                                                 <Skeleton />
-                                                             </div>
-                                                             <Skeleton />
-                                                         </div>
-                                                         <div>
-                                                             <Skeleton />
-                                                         </div>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                             
-                                             <div className='rightContentHolder'>
-                                                 <div className='text-end reightContent'>
-                                                     <h4 className='superDeal'>
-                                                         <Skeleton />
-                                                     </h4>
-                                                     <div className=' justify-content-end column-gap-2' style={{ fontSize: "12px" }}>
-                                                         <div style={{ color: "#9FA1A8" }}>
-                                                            <Skeleton />
-                                                         </div>
-                                                         {/* <div style={{color:"red",fontWeight:"600"}}>
-                                             Last 1 Seat
-                                         </div> */}
-                                                     </div>
-                                                     <div>
-                                                         <div style={{ fontSize: "12px", color: "GrayText" }}>
-                                                             <Skeleton />
-                                                         </div>
-                                                         <h4 style={{ fontWeight: "700", fontSize: "20px" }}>
-                                                              <Skeleton />
-                                                         </h4>
-                                                     </div>
-                                                     <div style={{ fontWeight: "300", fontSize: "10px" }}>
-                                                         <Skeleton />
-                                                     </div>
-                                                     <div className='  w-100'>
-                                                         <div className='w-100 h-100  row-gap-2 justify-content-center align-items-center flex-column'>
-                                                             <Skeleton  style={{ color: "black", textDecoration: "none" }} className='w-100 viewDetails d-flex justify-content-center align-items-center p-3 rounded-3 border h-100' />
-                                                             <div className=' w-100 justify-content-center align-items-center column-gap-3 '>
-                                                                 <Skeleton  style={{ cursor: "pointer" }} className=' d-flex justify-content-center align-items-center w-100' />
-
-                                                                 
-                                                                 <Skeleton style={{ cursor: "pointer" }} className=' d-flex justify-content-center align-items-center w-100' />
-                                                                     
-                                                                 
-                                                             </div>
-                                                         </div>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
-                             <div  className='searchCard bg-white rounded-3' style={{ width: "100%", boxShadow: "0 0 10px #00000012" }}>
-                                 <div className='searchCardHolder'>
-                                     <div className='primaryInfo'>
-                                         <div className='imageHolder position-relative ps-1'>
-                                             <div className='imgwrpr'>
-                                                 <Skeleton className='w-100 h-100'/>
-                                             </div>
-                                             
-                                         </div>
-                                         <div className='contentHolder position-relative d-flex  justify-content-between pb-3 mt-2'>
-                                             <div className='leftContentHolder d-flex flex-column h-100 justify-content-between'>
-                                                 <div className='d-flex flex-column column-gap-2'>
-                                                     <div className='h5'>
-                                                         <Skeleton className='w-100' style={{ textDecoration: "none", color: "black" }} /> 
-                                                            
-
-                                                     </div>
-                                                     <div className='d-flex column-gap-4'>
-                                                         
-                                                             <div >
-                                                                 <div className={`rounded-circle  `} style={{ width: "40px", height: "40px" }}>
-                                                                     <Skeleton  className='w-100 rounded-circle h-100'/>
-                                                                     
-                                                                 </div>
-
-                                                             </div>
-                                                     </div>
-                                                 </div>
-                                                 <div style={{ fontSize: "12px" }}>
-                                                     <div className=' '>
-                                                         <div className='  align-items-center'>
-                                                             <div>
-                                                                 <Skeleton />
-                                                             </div>
-                                                             <div>
-                                                                 <Skeleton />
-                                                             </div>
-                                                         </div>
-                                                         <div className=' '>
-                                                             <Skeleton />
-                                                         </div>
-                                                         <div>
-                                                             <Skeleton />
-                                                         </div>
-                                                     </div>
-                                                     
-                                                     <div className='d-flex column-gap-3'>
-                                                         <div className='d-flex align-items-center'>
-                                                             <div className='me-2' style={{ width: "20px", height: "20px" }}>
-                                                                 <Skeleton />
-                                                             </div>
-                                                             <Skeleton />
-                                                         </div>
-                                                         <div>
-                                                             <Skeleton />
-                                                         </div>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                             
-                                             <div className='rightContentHolder'>
-                                                 <div className='text-end reightContent'>
-                                                     <h4 className='superDeal'>
-                                                         <Skeleton />
-                                                     </h4>
-                                                     <div className=' justify-content-end column-gap-2' style={{ fontSize: "12px" }}>
-                                                         <div style={{ color: "#9FA1A8" }}>
-                                                            <Skeleton />
-                                                         </div>
-                                                         {/* <div style={{color:"red",fontWeight:"600"}}>
-                                             Last 1 Seat
-                                         </div> */}
-                                                     </div>
-                                                     <div>
-                                                         <div style={{ fontSize: "12px", color: "GrayText" }}>
-                                                             <Skeleton />
-                                                         </div>
-                                                         <h4 style={{ fontWeight: "700", fontSize: "20px" }}>
-                                                              <Skeleton />
-                                                         </h4>
-                                                     </div>
-                                                     <div style={{ fontWeight: "300", fontSize: "10px" }}>
-                                                         <Skeleton />
-                                                     </div>
-                                                     <div className='  w-100'>
-                                                         <div className='w-100 h-100  row-gap-2 justify-content-center align-items-center flex-column'>
-                                                             <Skeleton  style={{ color: "black", textDecoration: "none" }} className='w-100 viewDetails d-flex justify-content-center align-items-center p-3 rounded-3 border h-100' />
-                                                             <div className=' w-100 justify-content-center align-items-center column-gap-3 '>
-                                                                 <Skeleton  style={{ cursor: "pointer" }} className=' d-flex justify-content-center align-items-center w-100' />
-
-                                                                 
-                                                                 <Skeleton style={{ cursor: "pointer" }} className=' d-flex justify-content-center align-items-center w-100' />
-                                                                     
-                                                                 
-                                                             </div>
-                                                         </div>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
-                             <div  className='searchCard bg-white rounded-3' style={{ width: "100%", boxShadow: "0 0 10px #00000012" }}>
-                                 <div className='searchCardHolder'>
-                                     <div className='primaryInfo'>
-                                         <div className='imageHolder position-relative ps-1'>
-                                             <div className='imgwrpr'>
-                                                 <Skeleton className='w-100 h-100'/>
-                                             </div>
-                                             
-                                         </div>
-                                         <div className='contentHolder position-relative d-flex  justify-content-between pb-3 mt-2'>
-                                             <div className='leftContentHolder d-flex flex-column h-100 justify-content-between'>
-                                                 <div className='d-flex flex-column column-gap-2'>
-                                                     <div className='h5'>
-                                                         <Skeleton className='w-100' style={{ textDecoration: "none", color: "black" }} /> 
-                                                            
-
-                                                     </div>
-                                                     <div className='d-flex column-gap-4'>
-                                                         
-                                                             <div >
-                                                                 <div className={`rounded-circle  `} style={{ width: "40px", height: "40px" }}>
-                                                                     <Skeleton  className='w-100 rounded-circle h-100'/>
-                                                                     
-                                                                 </div>
-
-                                                             </div>
-                                                     </div>
-                                                 </div>
-                                                 <div style={{ fontSize: "12px" }}>
-                                                     <div className=' '>
-                                                         <div className='  align-items-center'>
-                                                             <div>
-                                                                 <Skeleton />
-                                                             </div>
-                                                             <div>
-                                                                 <Skeleton />
-                                                             </div>
-                                                         </div>
-                                                         <div className=' '>
-                                                             <Skeleton />
-                                                         </div>
-                                                         <div>
-                                                             <Skeleton />
-                                                         </div>
-                                                     </div>
-                                                     
-                                                     <div className='d-flex column-gap-3'>
-                                                         <div className='d-flex align-items-center'>
-                                                             <div className='me-2' style={{ width: "20px", height: "20px" }}>
-                                                                 <Skeleton />
-                                                             </div>
-                                                             <Skeleton />
-                                                         </div>
-                                                         <div>
-                                                             <Skeleton />
-                                                         </div>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                             
-                                             <div className='rightContentHolder'>
-                                                 <div className='text-end reightContent'>
-                                                     <h4 className='superDeal'>
-                                                         <Skeleton />
-                                                     </h4>
-                                                     <div className=' justify-content-end column-gap-2' style={{ fontSize: "12px" }}>
-                                                         <div style={{ color: "#9FA1A8" }}>
-                                                            <Skeleton />
-                                                         </div>
-                                                         {/* <div style={{color:"red",fontWeight:"600"}}>
-                                             Last 1 Seat
-                                         </div> */}
-                                                     </div>
-                                                     <div>
-                                                         <div style={{ fontSize: "12px", color: "GrayText" }}>
-                                                             <Skeleton />
-                                                         </div>
-                                                         <h4 style={{ fontWeight: "700", fontSize: "20px" }}>
-                                                              <Skeleton />
-                                                         </h4>
-                                                     </div>
-                                                     <div style={{ fontWeight: "300", fontSize: "10px" }}>
-                                                         <Skeleton />
-                                                     </div>
-                                                     <div className='  w-100'>
-                                                         <div className='w-100 h-100  row-gap-2 justify-content-center align-items-center flex-column'>
-                                                             <Skeleton  style={{ color: "black", textDecoration: "none" }} className='w-100 viewDetails d-flex justify-content-center align-items-center p-3 rounded-3 border h-100' />
-                                                             <div className=' w-100 justify-content-center align-items-center column-gap-3 '>
-                                                                 <Skeleton  style={{ cursor: "pointer" }} className=' d-flex justify-content-center align-items-center w-100' />
-
-                                                                 
-                                                                 <Skeleton style={{ cursor: "pointer" }} className=' d-flex justify-content-center align-items-center w-100' />
-                                                                     
-                                                                 
-                                                             </div>
-                                                         </div>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
-                             <div  className='searchCard bg-white rounded-3' style={{ width: "100%", boxShadow: "0 0 10px #00000012" }}>
-                                 <div className='searchCardHolder'>
-                                     <div className='primaryInfo'>
-                                         <div className='imageHolder position-relative ps-1'>
-                                             <div className='imgwrpr'>
-                                                 <Skeleton className='w-100 h-100'/>
-                                             </div>
-                                             
-                                         </div>
-                                         <div className='contentHolder position-relative d-flex  justify-content-between pb-3 mt-2'>
-                                             <div className='leftContentHolder d-flex flex-column h-100 justify-content-between'>
-                                                 <div className='d-flex flex-column column-gap-2'>
-                                                     <div className='h5'>
-                                                         <Skeleton className='w-100' style={{ textDecoration: "none", color: "black" }} /> 
-                                                            
-
-                                                     </div>
-                                                     <div className='d-flex column-gap-4'>
-                                                         
-                                                             <div >
-                                                                 <div className={`rounded-circle  `} style={{ width: "40px", height: "40px" }}>
-                                                                     <Skeleton  className='w-100 rounded-circle h-100'/>
-                                                                     
-                                                                 </div>
-
-                                                             </div>
-                                                     </div>
-                                                 </div>
-                                                 <div style={{ fontSize: "12px" }}>
-                                                     <div className=' '>
-                                                         <div className='  align-items-center'>
-                                                             <div>
-                                                                 <Skeleton />
-                                                             </div>
-                                                             <div>
-                                                                 <Skeleton />
-                                                             </div>
-                                                         </div>
-                                                         <div className=' '>
-                                                             <Skeleton />
-                                                         </div>
-                                                         <div>
-                                                             <Skeleton />
-                                                         </div>
-                                                     </div>
-                                                     
-                                                     <div className='d-flex column-gap-3'>
-                                                         <div className='d-flex align-items-center'>
-                                                             <div className='me-2' style={{ width: "20px", height: "20px" }}>
-                                                                 <Skeleton />
-                                                             </div>
-                                                             <Skeleton />
-                                                         </div>
-                                                         <div>
-                                                             <Skeleton />
-                                                         </div>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                             
-                                             <div className='rightContentHolder'>
-                                                 <div className='text-end reightContent'>
-                                                     <h4 className='superDeal'>
-                                                         <Skeleton />
-                                                     </h4>
-                                                     <div className=' justify-content-end column-gap-2' style={{ fontSize: "12px" }}>
-                                                         <div style={{ color: "#9FA1A8" }}>
-                                                            <Skeleton />
-                                                         </div>
-                                                         {/* <div style={{color:"red",fontWeight:"600"}}>
-                                             Last 1 Seat
-                                         </div> */}
-                                                     </div>
-                                                     <div>
-                                                         <div style={{ fontSize: "12px", color: "GrayText" }}>
-                                                             <Skeleton />
-                                                         </div>
-                                                         <h4 style={{ fontWeight: "700", fontSize: "20px" }}>
-                                                              <Skeleton />
-                                                         </h4>
-                                                     </div>
-                                                     <div style={{ fontWeight: "300", fontSize: "10px" }}>
-                                                         <Skeleton />
-                                                     </div>
-                                                     <div className='  w-100'>
-                                                         <div className='w-100 h-100  row-gap-2 justify-content-center align-items-center flex-column'>
-                                                             <Skeleton  style={{ color: "black", textDecoration: "none" }} className='w-100 viewDetails d-flex justify-content-center align-items-center p-3 rounded-3 border h-100' />
-                                                             <div className=' w-100 justify-content-center align-items-center column-gap-3 '>
-                                                                 <Skeleton  style={{ cursor: "pointer" }} className=' d-flex justify-content-center align-items-center w-100' />
-
-                                                                 
-                                                                 <Skeleton style={{ cursor: "pointer" }} className=' d-flex justify-content-center align-items-center w-100' />
-                                                                     
-                                                                 
-                                                             </div>
-                                                         </div>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
-
-                         </>
-                     ):packages.map(
-                            (el) => {
-                                return (
+                                {loading ? (
                                     <>
-                                        <div key={el.package_id} className='searchCard bg-white rounded-3' style={{ width: "100%", boxShadow: "0 0 10px #00000012" }}>
+                                        <div className='searchCard bg-white rounded-3' style={{ width: "100%", boxShadow: "0 0 10px #00000012" }}>
                                             <div className='searchCardHolder'>
                                                 <div className='primaryInfo'>
                                                     <div className='imageHolder position-relative ps-1'>
                                                         <div className='imgwrpr'>
-                                                            <img src={el.BannerImage} alt={el.package_name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                                                            <Skeleton className='w-100 h-100' />
                                                         </div>
-                                                        <a onClick={() => dispatch(setIsEditing(false))} href={`/package/${el.package_id}`}></a>
-                                                        <button onClick={() => { new Notification("68M Holidays", { body: "This is test notification" }) }} className='d-flex align-items-center column-gap-2 position-absolute m-2 p-1 text-blue-600 rounded-3' style={{ bottom: 10, background: "white", fontSize: "12px" }}>
-                                                            <div className='rounded-circle d-flex justify-content-center align-items-center border border-blue-600' style={{ width: "12px", height: "12px", fontSize: "12px" }}>+</div> <div>compare</div>
-                                                        </button>
+
                                                     </div>
                                                     <div className='contentHolder position-relative d-flex  justify-content-between pb-3 mt-2'>
                                                         <div className='leftContentHolder d-flex flex-column h-100 justify-content-between'>
                                                             <div className='d-flex flex-column column-gap-2'>
                                                                 <div className='h5'>
-                                                                    <a style={{ textDecoration: "none", color: "black" }} href={`/package/${el.package_id}`}>
-                                                                        {el.package_name}
-                                                                    </a>
+                                                                    <Skeleton className='w-100' style={{ textDecoration: "none", color: "black" }} />
+
 
                                                                 </div>
                                                                 <div className='d-flex column-gap-4'>
-                                                                    {JSON.parse(el?.TourIncludes)?.map(e => (
-                                                                        e.provided &&
-                                                                        <div key={el.label}>
-                                                                            <div className={`rounded-circle d-flex justify-content-center align-items-center ${!e.provided && "provided"}`} style={{ background: "linear-gradient(180deg,#A6A6A6 0%,rgba(166,166,166,0) 100%)", width: "40px", height: "40px" }}>
-                                                                                {console.log(e.label)}
-                                                                                {tourIncludes.filter(f => f?.label == e?.label)[0]?.svg}
-                                                                            </div>
 
-                                                                        </div>))}
+                                                                    <div >
+                                                                        <div className={`rounded-circle  `} style={{ width: "40px", height: "40px" }}>
+                                                                            <Skeleton className='w-100 rounded-circle h-100' />
+
+                                                                        </div>
+
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div style={{ fontSize: "12px" }}>
-                                                                <div className='d-flex column-gap-2'>
-                                                                    <div className='d-flex column-gap-2 align-items-center border-right-1 pe-2'>
+                                                                <div className=' '>
+                                                                    <div className='  align-items-center'>
                                                                         <div>
-                                                                            <svg _ngcontent-veenaworld-c86="" width="12" height="15" viewBox="0 0 12 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path _ngcontent-veenaworld-c86="" d="M1.85682 8.31455L1.53691 8.55469L1.85682 8.31456L6.37499 14.3337L10.8932 8.31456C11.4015 7.63734 11.6 6.66099 11.6 5.6543C11.6 2.75047 9.25872 0.4 6.37499 0.4C3.49127 0.4 1.14999 2.75047 1.15 5.6543C1.15 6.09432 1.21014 6.6101 1.3326 7.09683C1.45623 7.58824 1.63596 8.02033 1.85682 8.31455ZM3.60787 5.65429C3.60787 4.1214 4.84498 2.87484 6.37499 2.87484C7.90501 2.87484 9.14212 4.1214 9.14212 5.6543C9.14212 7.1872 7.90501 8.43375 6.37499 8.43375C4.84498 8.43375 3.60787 7.1872 3.60787 5.65429Z" fill="white" stroke="#595959" strokeWidth="0.8"></path></svg>
+                                                                            <Skeleton />
                                                                         </div>
                                                                         <div>
-                                                                            Travel <span style={{ fontWeight: "600" }}>6</span> Days
+                                                                            <Skeleton />
                                                                         </div>
                                                                     </div>
-                                                                    <div className='border-right-1 pe-3'>
-                                                                        <span style={{ fontWeight: "600" }}>1</span> Country
+                                                                    <div className=' '>
+                                                                        <Skeleton />
                                                                     </div>
                                                                     <div>
-                                                                        <span style={{ fontWeight: "600" }}>5</span> Cities
+                                                                        <Skeleton />
                                                                     </div>
                                                                 </div>
-                                                                <hr />
+
                                                                 <div className='d-flex column-gap-3'>
                                                                     <div className='d-flex align-items-center'>
                                                                         <div className='me-2' style={{ width: "20px", height: "20px" }}>
-                                                                            <img alt="depart icon" style={{ width: "100%", height: "100%", objectFit: "containe" }} src={"/assets/departures.png"} />
+                                                                            <Skeleton />
                                                                         </div>
-                                                                        <span className='me-2' style={{ fontWeight: "600" }}>2</span> Departure Cities
+                                                                        <Skeleton />
                                                                     </div>
                                                                     <div>
-                                                                        <span style={{ fontWeight: "600" }}>23</span> Departure Dates
+                                                                        <Skeleton />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        {(role == process.env.NEXT_PUBLIC_ADMIN || role == process.env.NEXT_PUBLIC_SUPER_ADMIN) && (<div className={`position-absolute rounded-pill border p-1 ${el.Status === "PUBLISHED" && 'bg-green-600 text-white'} ${el.Status === "pending" && 'bg-red-600 text-white'}`} style={{ right: 10, top: -15, fontSize: "12px", fontWeight: "500" }}>
-                                                            {el.Status}
-                                                        </div>)}
+
                                                         <div className='rightContentHolder'>
                                                             <div className='text-end reightContent'>
                                                                 <h4 className='superDeal'>
-                                                                    SUPER DEAL PRICE
+                                                                    <Skeleton />
                                                                 </h4>
-                                                                <div className='d-flex justify-content-end column-gap-2' style={{ fontSize: "12px" }}>
+                                                                <div className=' justify-content-end column-gap-2' style={{ fontSize: "12px" }}>
                                                                     <div style={{ color: "#9FA1A8" }}>
-                                                                        (17 Jan 2024)
+                                                                        <Skeleton />
                                                                     </div>
                                                                     {/* <div style={{color:"red",fontWeight:"600"}}>
-                                                        Last 1 Seat
-                                                    </div> */}
+                                             Last 1 Seat
+                                         </div> */}
                                                                 </div>
                                                                 <div>
                                                                     <div style={{ fontSize: "12px", color: "GrayText" }}>
-                                                                        Starts From
+                                                                        <Skeleton />
                                                                     </div>
                                                                     <h4 style={{ fontWeight: "700", fontSize: "20px" }}>
-                                                                         {formatter.format(JSON.parse(el?.pricingTable)?.find(d => d.roomType.toLowerCase() == "twin sharing")?.price)}
+                                                                        <Skeleton />
                                                                     </h4>
                                                                 </div>
                                                                 <div style={{ fontWeight: "300", fontSize: "10px" }}>
-                                                                    per person on twin sharing
+                                                                    <Skeleton />
                                                                 </div>
-                                                                <div className='button  w-100'>
-                                                                    <div className='w-100 h-100 d-flex row-gap-2 justify-content-center align-items-center flex-column'>
-                                                                        <a href={`/package/${el.package_id}`} style={{ color: "black", textDecoration: "none" }} className='w-100 viewDetails d-flex justify-content-center align-items-center p-3 rounded-3 border h-100'>
-                                                                            View Details
-                                                                        </a>
-                                                                        <div className='d-flex w-100 justify-content-center align-items-center column-gap-3 '>
-                                                                            <div onClick={()=>handleQuickQuote(el.package_id,el.package_name,el.pricingTable)} style={{ cursor: "pointer" }} className='buttonQ d-flex justify-content-center align-items-center w-100'>
-                                                                                Quick Quote
-                                                                            </div>
-                                                                            <div style={{ cursor: "pointer" }} className='buttonQ d-flex justify-content-center align-items-center w-100'>
-                                                                                Enquire Now
-                                                                            </div>
+                                                                <div className='  w-100'>
+                                                                    <div className='w-100 h-100  row-gap-2 justify-content-center align-items-center flex-column'>
+                                                                        <Skeleton style={{ color: "black", textDecoration: "none" }} className='w-100 viewDetails d-flex justify-content-center align-items-center p-3 rounded-3 border h-100' />
+                                                                        <div className=' w-100 justify-content-center align-items-center column-gap-3 '>
+                                                                            <Skeleton style={{ cursor: "pointer" }} className=' d-flex justify-content-center align-items-center w-100' />
+
+
+                                                                            <Skeleton style={{ cursor: "pointer" }} className=' d-flex justify-content-center align-items-center w-100' />
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className='searchCard bg-white rounded-3' style={{ width: "100%", boxShadow: "0 0 10px #00000012" }}>
+                                            <div className='searchCardHolder'>
+                                                <div className='primaryInfo'>
+                                                    <div className='imageHolder position-relative ps-1'>
+                                                        <div className='imgwrpr'>
+                                                            <Skeleton className='w-100 h-100' />
+                                                        </div>
+
+                                                    </div>
+                                                    <div className='contentHolder position-relative d-flex  justify-content-between pb-3 mt-2'>
+                                                        <div className='leftContentHolder d-flex flex-column h-100 justify-content-between'>
+                                                            <div className='d-flex flex-column column-gap-2'>
+                                                                <div className='h5'>
+                                                                    <Skeleton className='w-100' style={{ textDecoration: "none", color: "black" }} />
+
+
+                                                                </div>
+                                                                <div className='d-flex column-gap-4'>
+
+                                                                    <div >
+                                                                        <div className={`rounded-circle  `} style={{ width: "40px", height: "40px" }}>
+                                                                            <Skeleton className='w-100 rounded-circle h-100' />
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div style={{ fontSize: "12px" }}>
+                                                                <div className=' '>
+                                                                    <div className='  align-items-center'>
+                                                                        <div>
+                                                                            <Skeleton />
+                                                                        </div>
+                                                                        <div>
+                                                                            <Skeleton />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className=' '>
+                                                                        <Skeleton />
+                                                                    </div>
+                                                                    <div>
+                                                                        <Skeleton />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div className='d-flex column-gap-3'>
+                                                                    <div className='d-flex align-items-center'>
+                                                                        <div className='me-2' style={{ width: "20px", height: "20px" }}>
+                                                                            <Skeleton />
+                                                                        </div>
+                                                                        <Skeleton />
+                                                                    </div>
+                                                                    <div>
+                                                                        <Skeleton />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className='rightContentHolder'>
+                                                            <div className='text-end reightContent'>
+                                                                <h4 className='superDeal'>
+                                                                    <Skeleton />
+                                                                </h4>
+                                                                <div className=' justify-content-end column-gap-2' style={{ fontSize: "12px" }}>
+                                                                    <div style={{ color: "#9FA1A8" }}>
+                                                                        <Skeleton />
+                                                                    </div>
+                                                                    {/* <div style={{color:"red",fontWeight:"600"}}>
+                                             Last 1 Seat
+                                         </div> */}
+                                                                </div>
+                                                                <div>
+                                                                    <div style={{ fontSize: "12px", color: "GrayText" }}>
+                                                                        <Skeleton />
+                                                                    </div>
+                                                                    <h4 style={{ fontWeight: "700", fontSize: "20px" }}>
+                                                                        <Skeleton />
+                                                                    </h4>
+                                                                </div>
+                                                                <div style={{ fontWeight: "300", fontSize: "10px" }}>
+                                                                    <Skeleton />
+                                                                </div>
+                                                                <div className='  w-100'>
+                                                                    <div className='w-100 h-100  row-gap-2 justify-content-center align-items-center flex-column'>
+                                                                        <Skeleton style={{ color: "black", textDecoration: "none" }} className='w-100 viewDetails d-flex justify-content-center align-items-center p-3 rounded-3 border h-100' />
+                                                                        <div className=' w-100 justify-content-center align-items-center column-gap-3 '>
+                                                                            <Skeleton style={{ cursor: "pointer" }} className=' d-flex justify-content-center align-items-center w-100' />
+
+
+                                                                            <Skeleton style={{ cursor: "pointer" }} className=' d-flex justify-content-center align-items-center w-100' />
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className='searchCard bg-white rounded-3' style={{ width: "100%", boxShadow: "0 0 10px #00000012" }}>
+                                            <div className='searchCardHolder'>
+                                                <div className='primaryInfo'>
+                                                    <div className='imageHolder position-relative ps-1'>
+                                                        <div className='imgwrpr'>
+                                                            <Skeleton className='w-100 h-100' />
+                                                        </div>
+
+                                                    </div>
+                                                    <div className='contentHolder position-relative d-flex  justify-content-between pb-3 mt-2'>
+                                                        <div className='leftContentHolder d-flex flex-column h-100 justify-content-between'>
+                                                            <div className='d-flex flex-column column-gap-2'>
+                                                                <div className='h5'>
+                                                                    <Skeleton className='w-100' style={{ textDecoration: "none", color: "black" }} />
+
+
+                                                                </div>
+                                                                <div className='d-flex column-gap-4'>
+
+                                                                    <div >
+                                                                        <div className={`rounded-circle  `} style={{ width: "40px", height: "40px" }}>
+                                                                            <Skeleton className='w-100 rounded-circle h-100' />
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div style={{ fontSize: "12px" }}>
+                                                                <div className=' '>
+                                                                    <div className='  align-items-center'>
+                                                                        <div>
+                                                                            <Skeleton />
+                                                                        </div>
+                                                                        <div>
+                                                                            <Skeleton />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className=' '>
+                                                                        <Skeleton />
+                                                                    </div>
+                                                                    <div>
+                                                                        <Skeleton />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div className='d-flex column-gap-3'>
+                                                                    <div className='d-flex align-items-center'>
+                                                                        <div className='me-2' style={{ width: "20px", height: "20px" }}>
+                                                                            <Skeleton />
+                                                                        </div>
+                                                                        <Skeleton />
+                                                                    </div>
+                                                                    <div>
+                                                                        <Skeleton />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className='rightContentHolder'>
+                                                            <div className='text-end reightContent'>
+                                                                <h4 className='superDeal'>
+                                                                    <Skeleton />
+                                                                </h4>
+                                                                <div className=' justify-content-end column-gap-2' style={{ fontSize: "12px" }}>
+                                                                    <div style={{ color: "#9FA1A8" }}>
+                                                                        <Skeleton />
+                                                                    </div>
+                                                                    {/* <div style={{color:"red",fontWeight:"600"}}>
+                                             Last 1 Seat
+                                         </div> */}
+                                                                </div>
+                                                                <div>
+                                                                    <div style={{ fontSize: "12px", color: "GrayText" }}>
+                                                                        <Skeleton />
+                                                                    </div>
+                                                                    <h4 style={{ fontWeight: "700", fontSize: "20px" }}>
+                                                                        <Skeleton />
+                                                                    </h4>
+                                                                </div>
+                                                                <div style={{ fontWeight: "300", fontSize: "10px" }}>
+                                                                    <Skeleton />
+                                                                </div>
+                                                                <div className='  w-100'>
+                                                                    <div className='w-100 h-100  row-gap-2 justify-content-center align-items-center flex-column'>
+                                                                        <Skeleton style={{ color: "black", textDecoration: "none" }} className='w-100 viewDetails d-flex justify-content-center align-items-center p-3 rounded-3 border h-100' />
+                                                                        <div className=' w-100 justify-content-center align-items-center column-gap-3 '>
+                                                                            <Skeleton style={{ cursor: "pointer" }} className=' d-flex justify-content-center align-items-center w-100' />
+
+
+                                                                            <Skeleton style={{ cursor: "pointer" }} className=' d-flex justify-content-center align-items-center w-100' />
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className='searchCard bg-white rounded-3' style={{ width: "100%", boxShadow: "0 0 10px #00000012" }}>
+                                            <div className='searchCardHolder'>
+                                                <div className='primaryInfo'>
+                                                    <div className='imageHolder position-relative ps-1'>
+                                                        <div className='imgwrpr'>
+                                                            <Skeleton className='w-100 h-100' />
+                                                        </div>
+
+                                                    </div>
+                                                    <div className='contentHolder position-relative d-flex  justify-content-between pb-3 mt-2'>
+                                                        <div className='leftContentHolder d-flex flex-column h-100 justify-content-between'>
+                                                            <div className='d-flex flex-column column-gap-2'>
+                                                                <div className='h5'>
+                                                                    <Skeleton className='w-100' style={{ textDecoration: "none", color: "black" }} />
+
+
+                                                                </div>
+                                                                <div className='d-flex column-gap-4'>
+
+                                                                    <div >
+                                                                        <div className={`rounded-circle  `} style={{ width: "40px", height: "40px" }}>
+                                                                            <Skeleton className='w-100 rounded-circle h-100' />
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div style={{ fontSize: "12px" }}>
+                                                                <div className=' '>
+                                                                    <div className='  align-items-center'>
+                                                                        <div>
+                                                                            <Skeleton />
+                                                                        </div>
+                                                                        <div>
+                                                                            <Skeleton />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className=' '>
+                                                                        <Skeleton />
+                                                                    </div>
+                                                                    <div>
+                                                                        <Skeleton />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div className='d-flex column-gap-3'>
+                                                                    <div className='d-flex align-items-center'>
+                                                                        <div className='me-2' style={{ width: "20px", height: "20px" }}>
+                                                                            <Skeleton />
+                                                                        </div>
+                                                                        <Skeleton />
+                                                                    </div>
+                                                                    <div>
+                                                                        <Skeleton />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className='rightContentHolder'>
+                                                            <div className='text-end reightContent'>
+                                                                <h4 className='superDeal'>
+                                                                    <Skeleton />
+                                                                </h4>
+                                                                <div className=' justify-content-end column-gap-2' style={{ fontSize: "12px" }}>
+                                                                    <div style={{ color: "#9FA1A8" }}>
+                                                                        <Skeleton />
+                                                                    </div>
+                                                                    {/* <div style={{color:"red",fontWeight:"600"}}>
+                                             Last 1 Seat
+                                         </div> */}
+                                                                </div>
+                                                                <div>
+                                                                    <div style={{ fontSize: "12px", color: "GrayText" }}>
+                                                                        <Skeleton />
+                                                                    </div>
+                                                                    <h4 style={{ fontWeight: "700", fontSize: "20px" }}>
+                                                                        <Skeleton />
+                                                                    </h4>
+                                                                </div>
+                                                                <div style={{ fontWeight: "300", fontSize: "10px" }}>
+                                                                    <Skeleton />
+                                                                </div>
+                                                                <div className='  w-100'>
+                                                                    <div className='w-100 h-100  row-gap-2 justify-content-center align-items-center flex-column'>
+                                                                        <Skeleton style={{ color: "black", textDecoration: "none" }} className='w-100 viewDetails d-flex justify-content-center align-items-center p-3 rounded-3 border h-100' />
+                                                                        <div className=' w-100 justify-content-center align-items-center column-gap-3 '>
+                                                                            <Skeleton style={{ cursor: "pointer" }} className=' d-flex justify-content-center align-items-center w-100' />
+
+
+                                                                            <Skeleton style={{ cursor: "pointer" }} className=' d-flex justify-content-center align-items-center w-100' />
+
+
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -835,127 +742,245 @@ const Pakcages = () => {
                                         </div>
 
                                     </>
-                                )
-                            }
-                        )}
+                                ) : packages.map(
+                                    (el) => {
+                                        return (
+                                            <>
+                                                <div key={el.package_id} className='searchCard bg-white rounded-3' style={{ width: "100%", boxShadow: "0 0 10px #00000012" }}>
+                                                    <div className='searchCardHolder'>
+                                                        <div className='primaryInfo'>
+                                                            <div className='imageHolder position-relative ps-1'>
+                                                                <div className='imgwrpr'>
+                                                                    <img src={el.BannerImage} alt={el.package_name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                                                                </div>
+                                                                <a onClick={() => dispatch(setIsEditing(false))} href={`/package/${el.package_id}`}></a>
+                                                                <button onClick={() => { new Notification("68M Holidays", { body: "This is test notification" }) }} className='d-flex align-items-center column-gap-2 position-absolute m-2 p-1 text-blue-600 rounded-3' style={{ bottom: 10, background: "white", fontSize: "12px" }}>
+                                                                    <div className='rounded-circle d-flex justify-content-center align-items-center border border-blue-600' style={{ width: "12px", height: "12px", fontSize: "12px" }}>+</div> <div>compare</div>
+                                                                </button>
+                                                            </div>
+                                                            <div className='contentHolder position-relative d-flex  justify-content-between pb-3 mt-2'>
+                                                                <div className='leftContentHolder d-flex flex-column h-100 justify-content-between'>
+                                                                    <div className='d-flex flex-column column-gap-2'>
+                                                                        <div className='h5'>
+                                                                            <a style={{ textDecoration: "none", color: "black" }} href={`/package/${el.package_id}`}>
+                                                                                {el.package_name}
+                                                                            </a>
+
+                                                                        </div>
+                                                                        <div className='d-flex column-gap-4'>
+                                                                            {JSON.parse(el?.TourIncludes)?.map(e => (
+                                                                                e.provided &&
+                                                                                <div key={el.label}>
+                                                                                    <div className={`rounded-circle d-flex justify-content-center align-items-center ${!e.provided && "provided"}`} style={{ background: "linear-gradient(180deg,#A6A6A6 0%,rgba(166,166,166,0) 100%)", width: "40px", height: "40px" }}>
+                                                                                        {console.log(e.label)}
+                                                                                        {tourIncludes.filter(f => f?.label == e?.label)[0]?.svg}
+                                                                                    </div>
+
+                                                                                </div>))}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div style={{ fontSize: "12px" }}>
+                                                                        <div className='d-flex column-gap-2'>
+                                                                            <div className='d-flex column-gap-2 align-items-center border-right-1 pe-2'>
+                                                                                <div>
+                                                                                    <svg _ngcontent-veenaworld-c86="" width="12" height="15" viewBox="0 0 12 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path _ngcontent-veenaworld-c86="" d="M1.85682 8.31455L1.53691 8.55469L1.85682 8.31456L6.37499 14.3337L10.8932 8.31456C11.4015 7.63734 11.6 6.66099 11.6 5.6543C11.6 2.75047 9.25872 0.4 6.37499 0.4C3.49127 0.4 1.14999 2.75047 1.15 5.6543C1.15 6.09432 1.21014 6.6101 1.3326 7.09683C1.45623 7.58824 1.63596 8.02033 1.85682 8.31455ZM3.60787 5.65429C3.60787 4.1214 4.84498 2.87484 6.37499 2.87484C7.90501 2.87484 9.14212 4.1214 9.14212 5.6543C9.14212 7.1872 7.90501 8.43375 6.37499 8.43375C4.84498 8.43375 3.60787 7.1872 3.60787 5.65429Z" fill="white" stroke="#595959" strokeWidth="0.8"></path></svg>
+                                                                                </div>
+                                                                                <div>
+                                                                                    Travel <span style={{ fontWeight: "600" }}>6</span> Days
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='border-right-1 pe-3'>
+                                                                                <span style={{ fontWeight: "600" }}>1</span> Country
+                                                                            </div>
+                                                                            <div>
+                                                                                <span style={{ fontWeight: "600" }}>5</span> Cities
+                                                                            </div>
+                                                                        </div>
+                                                                        <hr />
+                                                                        <div className='d-flex column-gap-3'>
+                                                                            <div className='d-flex align-items-center'>
+                                                                                <div className='me-2' style={{ width: "20px", height: "20px" }}>
+                                                                                    <img alt="depart icon" style={{ width: "100%", height: "100%", objectFit: "containe" }} src={"/assets/departures.png"} />
+                                                                                </div>
+                                                                                <span className='me-2' style={{ fontWeight: "600" }}>2</span> Departure Cities
+                                                                            </div>
+                                                                            <div>
+                                                                                <span style={{ fontWeight: "600" }}>23</span> Departure Dates
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                {(role == process.env.NEXT_PUBLIC_ADMIN || role == process.env.NEXT_PUBLIC_SUPER_ADMIN) && (<div className={`position-absolute rounded-pill border p-1 ${el.Status === "PUBLISHED" && 'bg-green-600 text-white'} ${el.Status === "pending" && 'bg-red-600 text-white'}`} style={{ right: 10, top: -15, fontSize: "12px", fontWeight: "500" }}>
+                                                                    {el.Status}
+                                                                </div>)}
+                                                                <div className='rightContentHolder'>
+                                                                    <div className='text-end reightContent'>
+                                                                        <h4 className='superDeal'>
+                                                                            SUPER DEAL PRICE
+                                                                        </h4>
+                                                                        <div className='d-flex justify-content-end column-gap-2' style={{ fontSize: "12px" }}>
+                                                                            <div style={{ color: "#9FA1A8" }}>
+                                                                                (17 Jan 2024)
+                                                                            </div>
+                                                                            {/* <div style={{color:"red",fontWeight:"600"}}>
+                                                        Last 1 Seat
+                                                    </div> */}
+                                                                        </div>
+                                                                        <div>
+                                                                            <div style={{ fontSize: "12px", color: "GrayText" }}>
+                                                                                Starts From
+                                                                            </div>
+                                                                            <h4 style={{ fontWeight: "700", fontSize: "20px" }}>
+                                                                                {formatter.format(JSON.parse(el?.pricingTable)?.find(d => d.roomType.toLowerCase() == "twin sharing")?.price)}
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div style={{ fontWeight: "300", fontSize: "10px" }}>
+                                                                            per person on twin sharing
+                                                                        </div>
+                                                                        <div className='button  w-100'>
+                                                                            <div className='w-100 h-100 d-flex row-gap-2 justify-content-center align-items-center flex-column'>
+                                                                                <a href={`/package/${el.package_id}`} style={{ color: "black", textDecoration: "none" }} className='w-100 viewDetails d-flex justify-content-center align-items-center p-3 rounded-3 border h-100'>
+                                                                                    View Details
+                                                                                </a>
+                                                                                <div className='d-flex w-100 justify-content-center align-items-center column-gap-3 '>
+                                                                                    <div onClick={() => handleQuickQuote(el.package_id, el.package_name, el.pricingTable)} style={{ cursor: "pointer" }} className='buttonQ d-flex justify-content-center align-items-center w-100'>
+                                                                                        Quick Quote
+                                                                                    </div>
+                                                                                    <div style={{ cursor: "pointer" }} className='buttonQ d-flex justify-content-center align-items-center w-100'>
+                                                                                        Enquire Now
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </>
+                                        )
+                                    }
+                                )}
 
 
+
+                            </div>
+                        </div>
 
                     </div>
+
                 </div>
+                {modal && (<div className='d-flex justify-content-center align-items-center' style={{ position: "fixed", top: 0, backgroundColor: "rgba(0,0,0,0.45)", width: "100%", height: "100%", display: "block", zIndex: 4 }} >
 
-            </div>
-            
-        </div>
-        {modal&&(<div className='d-flex justify-content-center align-items-center' style={{position:"fixed",top:0,backgroundColor:"rgba(0,0,0,0.45)",width:"100%",height:"100%",display:"block",zIndex:4}} >
-            
-            <OutsideAlerter setModal={setModal}> 
+                    <OutsideAlerter setModal={setModal}>
 
-                <div className='rounded-3 d-flex flex-column justify-content-between  shadow-3' style={{width:"500px",height:"600px",background:"white"}}>
-                    {type==="qQuote"&&(<div className='d-flex h-100 flex-column justify-content-between align-content-between align-items-between'>
-                    <div className='w-100  p-5 text-black'>
-                            <div>
-                            <h5>
-                            {packagName}
-                            </h5>
-                            </div>
-                            <div>
-                                <div onClick={()=>setToggleGuest(!toggleGuest)} className='d-flex justify-content-between align-items-center' style={{fontSize:"14px",minHeight:"65px",cursor:"pointer"}}>
+                        <div className='rounded-3 d-flex flex-column justify-content-between  shadow-3' style={{ width: "500px", height: "600px", background: "white" }}>
+                            {type === "qQuote" && (<div className='d-flex h-100 flex-column justify-content-between align-content-between align-items-between'>
+                                <div className='w-100  p-5 text-black'>
                                     <div>
-                                        Guest & Rooms <span className='ms-3' style={{fontWeight:'300',fontSize:"12px"}}>Maximum 6 guests at a time</span>
+                                        <h5>
+                                            {packagName}
+                                        </h5>
                                     </div>
                                     <div>
-                                        <div>
-                                        <i className="fa-solid fa-angle-down"></i>
+                                        <div onClick={() => setToggleGuest(!toggleGuest)} className='d-flex justify-content-between align-items-center' style={{ fontSize: "14px", minHeight: "65px", cursor: "pointer" }}>
+                                            <div>
+                                                Guest & Rooms <span className='ms-3' style={{ fontWeight: '300', fontSize: "12px" }}>Maximum 6 guests at a time</span>
+                                            </div>
+                                            <div>
+                                                <div>
+                                                    <i className="fa-solid fa-angle-down"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className={`tguest ${toggleGuest && "active"}`}>
+                                            <div className={`d-flex justify-content-between align-items-center `}>
+                                                <div className='d-flex column-gap-1 align-items-center' style={{ fontSize: "14px" }}>
+                                                    <div className='m-3'>
+                                                        <img src="https://www.veenaworld.com/adult.cb95040dd8241eca.svg" alt="" srcset="" />
+                                                    </div>
+                                                    <div>
+                                                        <div style={{ fontWeight: "500" }}>
+                                                            Adults
+                                                        </div>
+                                                        <div style={{ fontWeight: "300" }}>
+                                                            Above 12 yrs
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className='d-flex align-items-center column-gap-3'>
+                                                    <div style={{ width: "30px", height: "30px", cursor: "pointer" }} className='rounded-circle bg-gray-300 d-flex justify-content-center align-items-center' onClick={() => { (adultCount > 0 && (adultCount + childCount + infantCount) > 0) && setAdultCount(adultCount - 1) }}>
+                                                        <i className="fa-solid fa-minus"></i>
+                                                    </div>
+                                                    <div>
+                                                        {adultCount}
+                                                    </div>
+                                                    <div style={{ width: "30px", height: "30px", cursor: "pointer" }} className='rounded-circle bg-gray-300 d-flex justify-content-center align-items-center' onClick={() => { (adultCount < 6 && (adultCount + childCount + infantCount) != 6) ? setAdultCount(adultCount + 1) : "" }}>
+                                                        <i className="fa-solid fa-plus"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className='d-flex justify-content-between align-items-center'>
+                                                <div className='d-flex column-gap-1 align-items-center' style={{ fontSize: "14px" }}>
+                                                    <div className='m-3'>
+                                                        <img src="https://www.veenaworld.com/child.09afa0be97abb6e4.svg" alt="" srcset="" />
+                                                    </div>
+                                                    <div>
+                                                        <div style={{ fontWeight: "500" }}>
+                                                            Child
+                                                        </div>
+                                                        <div style={{ fontWeight: "300" }}>
+                                                            Age 2 - 11 yrs
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className='d-flex align-items-center column-gap-3'>
+                                                    <div style={{ width: "30px", height: "30px", cursor: "pointer" }} className='rounded-circle bg-gray-300 d-flex justify-content-center align-items-center' onClick={() => { (childCount > 0 && (adultCount + childCount + infantCount) > 0) && setChildCount(childCount - 1) }}>
+                                                        <i className="fa-solid fa-minus"></i>
+                                                    </div>
+                                                    <div>
+                                                        {childCount}
+                                                    </div>
+                                                    <div style={{ width: "30px", height: "30px", cursor: "pointer" }} className='rounded-circle bg-gray-300 d-flex justify-content-center align-items-center' onClick={() => { (childCount < 6 && (adultCount + childCount + infantCount) != 6) && setChildCount(childCount + 1) }}>
+                                                        <i className="fa-solid fa-plus"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className='d-flex justify-content-between align-items-center'>
+                                                <div className='d-flex column-gap-1 align-items-center' style={{ fontSize: "14px" }}>
+                                                    <div className='m-3'>
+                                                        <img src="https://www.veenaworld.com/infant.bd53355e2ae9cdf0.svg" alt="" srcset="" />
+                                                    </div>
+                                                    <div>
+                                                        <div style={{ fontWeight: "500" }}>
+                                                            Infant
+                                                        </div>
+                                                        <div style={{ fontWeight: "300" }}>
+                                                            Ages  0 - 1 yr
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className='d-flex align-items-center column-gap-3'>
+                                                    <div style={{ width: "30px", height: "30px", cursor: "pointer" }} className='rounded-circle bg-gray-300 d-flex justify-content-center align-items-center' onClick={() => { (infantCount > 0 && (adultCount + childCount + infantCount) > 0) && setInfantCount(infantCount - 1) }}>
+                                                        <i className="fa-solid fa-minus"></i>
+                                                    </div>
+                                                    <div>
+                                                        {infantCount}
+                                                    </div>
+                                                    <div style={{ width: "30px", height: "30px", cursor: "pointer" }} className='rounded-circle bg-gray-300 d-flex justify-content-center align-items-center' onClick={() => { (infantCount < 6 && (adultCount + childCount + infantCount) != 6) && setInfantCount(infantCount + 1) }}>
+                                                        <i className="fa-solid fa-plus"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
-                                <div className={`tguest ${toggleGuest&&"active"}`}>
-                                <div className={`d-flex justify-content-between align-items-center `}>
-                                    <div className='d-flex column-gap-1 align-items-center' style={{fontSize:"14px"}}>
-                                        <div className='m-3'>
-                                            <img src="https://www.veenaworld.com/adult.cb95040dd8241eca.svg" alt="" srcset="" />
-                                        </div>
-                                        <div>
-                                            <div style={{fontWeight:"500"}}>
-                                            Adults    
-                                            </div>
-                                            <div style={{fontWeight:"300"}}>
-                                                Above 12 yrs
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='d-flex align-items-center column-gap-3'>
-                                        <div style={{width:"30px",height:"30px",cursor:"pointer"}} className='rounded-circle bg-gray-300 d-flex justify-content-center align-items-center' onClick={()=>{(adultCount>0&&(adultCount+childCount+infantCount)>0)&&setAdultCount(adultCount-1)}}>
-                                        <i className="fa-solid fa-minus"></i>
-                                        </div>
-                                        <div>
-                                            {adultCount}
-                                        </div>
-                                        <div style={{width:"30px",height:"30px", cursor:"pointer"}} className='rounded-circle bg-gray-300 d-flex justify-content-center align-items-center' onClick={()=>{(adultCount<6&&(adultCount+childCount+infantCount)!=6)?setAdultCount(adultCount+1):""}}>
-                                        <i className="fa-solid fa-plus"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='d-flex justify-content-between align-items-center'>
-                                    <div className='d-flex column-gap-1 align-items-center' style={{fontSize:"14px"}}>
-                                        <div className='m-3'>
-                                            <img src="https://www.veenaworld.com/child.09afa0be97abb6e4.svg" alt="" srcset="" />
-                                        </div>
-                                        <div>
-                                            <div style={{fontWeight:"500"}}>
-                                            Child    
-                                            </div>
-                                            <div style={{fontWeight:"300"}}>
-                                                Age 2 - 11 yrs
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='d-flex align-items-center column-gap-3'>
-                                        <div style={{width:"30px",height:"30px", cursor:"pointer"}} className='rounded-circle bg-gray-300 d-flex justify-content-center align-items-center' onClick={()=>{(childCount>0&&(adultCount+childCount+infantCount)>0)&&setChildCount(childCount-1)}}>
-                                        <i className="fa-solid fa-minus"></i>
-                                        </div>
-                                        <div>
-                                            {childCount}
-                                        </div>
-                                        <div style={{width:"30px",height:"30px", cursor:"pointer"}} className='rounded-circle bg-gray-300 d-flex justify-content-center align-items-center' onClick={()=>{(childCount<6&&(adultCount+childCount+infantCount)!=6)&&setChildCount(childCount+1)}}>
-                                        <i className="fa-solid fa-plus"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='d-flex justify-content-between align-items-center'>
-                                    <div className='d-flex column-gap-1 align-items-center' style={{fontSize:"14px"}}>
-                                        <div className='m-3'>
-                                            <img src="https://www.veenaworld.com/infant.bd53355e2ae9cdf0.svg" alt="" srcset="" />
-                                        </div>
-                                        <div>
-                                            <div style={{fontWeight:"500"}}>
-                                            Infant    
-                                            </div>
-                                            <div style={{fontWeight:"300"}}>
-                                              Ages  0 - 1 yr
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='d-flex align-items-center column-gap-3'>
-                                        <div style={{width:"30px",height:"30px", cursor:"pointer"}} className='rounded-circle bg-gray-300 d-flex justify-content-center align-items-center' onClick={()=>{(infantCount>0&&(adultCount+childCount+infantCount)>0)&&setInfantCount(infantCount-1)}}>
-                                        <i className="fa-solid fa-minus"></i>
-                                        </div>
-                                        <div>
-                                            {infantCount}
-                                        </div>
-                                        <div style={{width:"30px",height:"30px", cursor:"pointer"}} className='rounded-circle bg-gray-300 d-flex justify-content-center align-items-center' onClick={()=>{(infantCount<6&&(adultCount+childCount+infantCount)!=6)&&setInfantCount(infantCount+1)}}>
-                                        <i className="fa-solid fa-plus"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                            
-                    </div>
-                    <div className='p-4 border-top-1'>
+                                <div className='p-4 border-top-1'>
                                     <div className='d-flex justify-content-between align-items-center'>
-                                        <div className='d-flex align-items-center column-gap-2' style={{fontSize:"14px",fontWeight:"400"}}>
+                                        <div className='d-flex align-items-center column-gap-2' style={{ fontSize: "14px", fontWeight: "400" }}>
                                             <div>
                                                 <img src="https://www.veenaworld.com/user.12697309d11c5a2a.svg" alt="" />
                                             </div>
@@ -969,13 +994,14 @@ const Pakcages = () => {
                                             </div>
                                         </div>
                                     </div>
-                            </div>
+                                </div>
                             </div>)}
-                    {type==="qEnquiry"&&(<div></div>)}
-                </div>
-            </OutsideAlerter>
-            
-        </div>)}
+                            {type === "qEnquiry" && (<div></div>)}
+                        </div>
+                    </OutsideAlerter>
+
+                </div>)}
+            </div>
         </>
     )
 }
