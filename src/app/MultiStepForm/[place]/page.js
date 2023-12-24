@@ -448,7 +448,7 @@ function MultiStepForm({ params }) {
 
 
   return (
-    <div className='container formsection m-0 ms-auto me-auto d-flex flex-column ' style={{ height: "90vh", paddingTop: "50px" }}>
+    <div className='container formsection d-flex flex-column ' style={{ height: "90vh", paddingTop: "50px" }}>
       {modal&&(
          <div className='w-100 h-100 position-fixed d-flex justify-content-center align-items-center modal top-0' style={{left:0,display:"block",backgroundColor:"rgb(0,0,0,0.75)"}}>
             <OutsideAlerter setModal={setModal}>

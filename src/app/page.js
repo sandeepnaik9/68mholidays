@@ -600,9 +600,9 @@ const Home = () => {
                                     </div>
                                 </div>
                         </div>
-                        <div className='col-xs-12 col-lg-8 mt-2  d-flex flex-column justify-content-center'>
+                        <div className='col-xs-12 col-lg-8 mt-2  d-flex flex-md-column justify-content-center'>
                            
-                        <div className='d-flex  cardH  column-gap-2' >
+                        <div className='d-flex cardH column-gap-2'>
                                 <div className='cardTop position-relative rounded-2' style={{backgroundColor:"red",overflow:"hidden"}}>
                                     <div className='cardT position-relative d-flex justify-content-center' style={{zIndex:99}}>
                                         Jammu and Kashmir
@@ -617,28 +617,78 @@ const Home = () => {
                                     </div>
                                     </div>
                                 </div>
-                                <div className='cardTop rounded-2' style={{background:"red"}}>
-
+                                <div className='cardTop position-relative rounded-2' style={{backgroundColor:"red",overflow:"hidden"}}>
+                                    <div className='cardT position-relative d-flex justify-content-center' style={{zIndex:99}}>
+                                        Jammu and Kashmir
+                                    </div>
+                                    <img width={"100%"} height={"100%"} style={{position:"absolute",top:0,zIndex:2}} src="/assets/jkhl-thb.png" alt="" />
+                                    <div className='p-3 cardCoP'>
+                                    <div className='cardCo flex-column'>   
+                                        <div className='text-nowrap'> <b className='me-1'>15</b> tours  |  <b className='me-1'>39</b> Departures </div>
+                                        <div>
+                                        <b className='me-1'> 46,666 </b> guests travelled
+                                        </div>
+                                    </div>
+                                    </div>
                                 </div>
-                                <div className='cardTop rounded-2' style={{background:"red"}}>
-
+                                <div className='cardTop position-relative rounded-2' style={{backgroundColor:"red",overflow:"hidden"}}>
+                                    <div className='cardT position-relative d-flex justify-content-center' style={{zIndex:99}}>
+                                        Jammu and Kashmir
+                                    </div>
+                                    <img width={"100%"} height={"100%"} style={{position:"absolute",top:0,zIndex:2}} src="/assets/jkhl-thb.png" alt="" />
+                                    <div className='p-3 cardCoP'>
+                                    <div className='cardCo flex-column'>   
+                                        <div className='text-nowrap'> <b className='me-1'>15</b> tours  |  <b className='me-1'>39</b> Departures </div>
+                                        <div>
+                                        <b className='me-1'> 46,666 </b> guests travelled
+                                        </div>
+                                    </div>
+                                    </div>
                                 </div>
-                                <div className='cardTop rounded-2' style={{background:"red"}}>
-
-                                </div>
+                               
                             </div>  
                             <div className='d-flex cardH  column-gap-2' >
-                                <div className='cardTop rounded-2' style={{backgroundColor:"red"}}>
-
+                            <div className='cardTop position-relative rounded-2' style={{backgroundColor:"red",overflow:"hidden"}}>
+                                    <div className='cardT position-relative d-flex justify-content-center' style={{zIndex:99}}>
+                                        Jammu and Kashmir
+                                    </div>
+                                    <img width={"100%"} height={"100%"} style={{position:"absolute",top:0,zIndex:2}} src="/assets/jkhl-thb.png" alt="" />
+                                    <div className='p-3 cardCoP'>
+                                    <div className='cardCo flex-column'>   
+                                        <div className='text-nowrap'> <b className='me-1'>15</b> tours  |  <b className='me-1'>39</b> Departures </div>
+                                        <div>
+                                        <b className='me-1'> 46,666 </b> guests travelled
+                                        </div>
+                                    </div>
+                                    </div>
                                 </div>
-                                <div className='cardTop rounded-2' style={{background:"red"}}>
-
+                                <div className='cardTop position-relative rounded-2' style={{backgroundColor:"red",overflow:"hidden"}}>
+                                    <div className='cardT position-relative d-flex justify-content-center' style={{zIndex:99}}>
+                                        Jammu and Kashmir
+                                    </div>
+                                    <img width={"100%"} height={"100%"} style={{position:"absolute",top:0,zIndex:2}} src="/assets/jkhl-thb.png" alt="" />
+                                    <div className='p-3 cardCoP'>
+                                    <div className='cardCo flex-column'>   
+                                        <div className='text-nowrap'> <b className='me-1'>15</b> tours  |  <b className='me-1'>39</b> Departures </div>
+                                        <div>
+                                        <b className='me-1'> 46,666 </b> guests travelled
+                                        </div>
+                                    </div>
+                                    </div>
                                 </div>
-                                <div className='cardTop rounded-2' style={{background:"red"}}>
-
-                                </div>
-                                <div className='cardTop rounded-2' style={{background:"red"}}>
-
+                                <div className='cardTop position-relative rounded-2' style={{backgroundColor:"red",overflow:"hidden"}}>
+                                    <div className='cardT position-relative d-flex justify-content-center' style={{zIndex:99}}>
+                                        Jammu and Kashmir
+                                    </div>
+                                    <img width={"100%"} height={"100%"} style={{position:"absolute",top:0,zIndex:2}} src="/assets/jkhl-thb.png" alt="" />
+                                    <div className='p-3 cardCoP'>
+                                    <div className='cardCo flex-column'>   
+                                        <div className='text-nowrap'> <b className='me-1'>15</b> tours  |  <b className='me-1'>39</b> Departures </div>
+                                        <div>
+                                        <b className='me-1'> 46,666 </b> guests travelled
+                                        </div>
+                                    </div>
+                                    </div>
                                 </div>
                             </div>
                             
