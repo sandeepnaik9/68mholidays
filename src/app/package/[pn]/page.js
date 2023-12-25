@@ -47,6 +47,7 @@ const Package = ({ params }) => {
     const [sub, setSub] = useState(false);
     const [modal, setModal] = useState(false)
 
+    const [labelModal,setLabelModal] = useState()
 
 
     const descriptionRef = useRef()
@@ -222,7 +223,7 @@ const Package = ({ params }) => {
             setTitle(res.data[0]?.package_name || "Enter Title")
             setFeaturedImage(res?.data[0]?.BannerImage || "/assets/banner.jpeg")
             setDestinations(JSON.parse(res?.data[0]?.destinations) || [])
-            const updatedTourIncludes = tourIncludes?.map(item => { 
+            const updatedTourIncludes = tourIncludes?.map(item => {
                 const matchingItem = JSON.parse(res?.data[0]?.TourIncludes)?.find(otherItem => otherItem.label === item.label);
                 if (matchingItem) {
                     return { ...item, provided: matchingItem.provided };
@@ -455,21 +456,21 @@ const Package = ({ params }) => {
         // } else if (image != "/assets/banner.jpeg"&&title.toLowerCase() != ""&&destinations.length != 0&&itinerary.length == 0) {
         //     alert("Condition: itinerary.length <= 0");
         // } else
-         if(image == "/assets/banner.jpeg"||title.toLowerCase() == ""||destinations.length == 0||itinerary.length == 0){
-                alert("Make sure all the fields are filled")
-            }  
+        if (image == "/assets/banner.jpeg" || title.toLowerCase() == "" || destinations.length == 0 || itinerary.length == 0) {
+            alert("Make sure all the fields are filled")
+        }
         else {
             const data = textV.replace(/\n/g, '<br>')
-        await fetch("/api/package/updatePackage", { method: "POST", body: JSON.stringify({ "code": params.pn.split("#")[0], "packageName": title, "bannerImage": image, "destinations": destinations, "tourIncludes": tourIncludes.map((el) => { return { "label": el.label, "provided": el.provided } }), "nDays": days, "destinations": destinations, "pricingTable": pricing, "itinerary": itinerary }) })
-        setindIte(-1)
+            await fetch("/api/package/updatePackage", { method: "POST", body: JSON.stringify({ "code": params.pn.split("#")[0], "packageName": title, "bannerImage": image, "destinations": destinations, "tourIncludes": tourIncludes.map((el) => { return { "label": el.label, "provided": el.provided } }), "nDays": days, "destinations": destinations, "pricingTable": pricing, "itinerary": itinerary }) })
+            setindIte(-1)
 
-        dispatch(setIsEditing(!isEditingS))
-        setIsEditings(!isEditing)
-        router.refresh()  
-        } 
-        
+            dispatch(setIsEditing(!isEditingS))
+            setIsEditings(!isEditing)
+            router.refresh()
+        }
 
-        
+
+
     }
 
 
@@ -559,10 +560,10 @@ const Package = ({ params }) => {
         if (image == "/assets/banner.jpeg" || title.toLowerCase() == "" || destinations.length || itinerary.length) {
             alert("Kindly make sure all the changes are made before publishing")
         }
-        else{
+        else {
             await fetch(`/api/package/publishPackage`, { body: JSON.stringify({ "code": params.pn, "status": "PUBLISHED" }), method: "POST", headers: { 'Content-Type': 'application/json' } })
         }
-        
+
     }
     const handleDelete = async () => {
         await fetch(`/api/package/deletePackage`, { body: JSON.stringify({ "code": params.pn }), method: "POST", headers: { 'Content-Type': 'application/json' } })
@@ -615,7 +616,7 @@ const Package = ({ params }) => {
                     <div className='container'>
                         <div className="row w-100">
 
-                            <div className="col-8 d-flex flex-column justify-content-center">
+                            <div className="col-8 col-md-12  d-flex flex-column justify-content-center">
                                 {isEditing ? (<input className='fw-semibold aEdit h3' onChange={(e) => { dispatch(setPackageName(e.target.value)); setTitle(e.target.value) }} placeholder='Edit Title' defaultValue={title} style={{ outline: 'none', border: "none", background: "none" }} />) : <h1 className='fw-semibold '>{title}</h1>}
 
                                 <div className='d-flex align-items-center column-gap-3' style={{ fontSize: "14px", fontWeight: "400" }}>
@@ -635,7 +636,7 @@ const Package = ({ params }) => {
                                         </div>))}
                                         <div className='position-relative d-flex'>
                                             {destinations?.length > 3 && <span style={{ color: "blue", textDecoration: "underline", cursor: "pointer" }} onClick={() => setSub(!sub)}>+{destinations.length - 3}</span>}
-                                            {isEditing && <div className='ms-3' onClick={() => { setTypeModal("destinations"); setModal(!modal) }} style={{ cursor: "pointer" }}><i className="fa-solid fa-pen"></i></div>}
+                                            {isEditing && <div className='ms-3' onClick={() => { setTypeModal("destinations");setLabelModal("Add destinations"); setModal(!modal) }} style={{ cursor: "pointer" }}><i className="fa-solid fa-pen"></i></div>}
                                             {sub && <OutsideAlerter sub={sub} setSub={setSub}>
                                                 <div className='position-absolute ps-3 pt-3 pe-3 sub text-black bg-white rounded-2' style={{
                                                     top: "110%",
@@ -671,7 +672,7 @@ const Package = ({ params }) => {
                                 </div>
 
                             </div>
-                            <div className="col-4 row d-flex position-absolute justify-content-end" style={{ right: 30 }}>
+                            <div className="col-4 d-none row d-lg-flex position-absolute justify-content-end" style={{ right: 30 }}>
                                 <div className='col-7'>
                                     <div className='d-flex justify-content-end align-items-center' style={{ fontWeight: "500", fontSize: "12px", color: "green" }}>
                                         SUPER DEAL PRICE
@@ -787,12 +788,99 @@ const Package = ({ params }) => {
 
                         </div>
                         <div className='row'>
-                            <div className='col-8 p-0'>
+                            <div className='col-lg-8 col-sm-12 p-0'>
                                 <div onClick={() => isEditing && imgRef.current.click()} className={`w-100 d-flex ${isEditing && "isEditing"}`} style={{ height: "380px", borderRadius: "10px" }}>
                                     <input onChange={(e) => { uploadFile(e) }} ref={imgRef} accept="image/*" type="file" style={{ display: "none" }} />
                                     <img style={{ borderRadius: "10px", objectFit: "cover" }} width={"100%"} height={"100%"} src={image} />
                                 </div>
 
+                            </div>
+                        </div>
+
+                        <div className='d-lg-none d--block d-lg-none'>
+                            <div className='mt-5' style={{ backgroundColor: "rgb(245, 245, 245)", padding: "22px", borderRadius: "10px" }}>
+                                <div className='mb-3' style={{ fontSize: "14px" }}>
+                                    How many reasons to choose 68M Holidays? Endless!
+                                </div>
+                                <hr className='my-2' />
+                                <div className='row mt-2'>
+                                    <div className='col-5 d-flex flex-column row-gap-3'>
+                                        <div>
+                                            <div className='h5 m-0 p-0'>
+                                                6,78,347
+                                            </div>
+                                            <div style={{ fontSize: "12px" }}>
+                                                Happy guests
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className='m-0 p-0 h5'>
+                                                35+
+                                            </div>
+                                            <div style={{ fontSize: "12px" }}>
+                                                Years of experience
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div className='col-7 d-flex flex-column row-gap-3'>
+                                        <div>
+                                            <div className='h5 m-0 p-0'>
+                                                49,729
+                                            </div>
+                                            <div style={{ fontSize: "12px" }}>
+                                                Number of success stories
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className='m-0 p-0 h5'>
+                                                500+
+                                            </div>
+                                            <div style={{ fontSize: "12px" }}>
+                                                Team members working to ensure you have the best holiday
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='p-2'>
+                                <div>
+                                    Tour includes
+                                </div>
+                                <div className='d-flex column-gap-4'>
+                                    {isEditing ? tourIncludes.map((el, i) => (
+                                        <div key={el.label} onClick={() => { handleTourInclude(el.label) }} >
+                                            <div key={el.label + "-" + i} className={`rounded-circle d-flex justify-content-center align-items-center ${!el.provided && "provided"}`} style={{ background: "linear-gradient(180deg,#A6A6A6 0%,rgba(166,166,166,0) 100%)", width: "40px", height: "40px", cursor: "pointer" }}>
+                                                {el.svg}
+                                            </div>
+
+                                        </div>
+                                    )) : tourIncludes.map(el => (
+                                        el.provided &&
+                                        <div key={el.label}>
+                                            <div className={`rounded-circle d-flex justify-content-center align-items-center ${!el.provided && "provided"}`} style={{ background: "linear-gradient(180deg,#A6A6A6 0%,rgba(166,166,166,0) 100%)", width: "40px", height: "40px" }}>
+                                                {el.svg}
+                                            </div>
+
+                                        </div>))}
+
+                                </div>
+                                <div>
+                                    <div className='d-flex justify-content-between mt-3' style={{ fontSize: "14px" }}>
+                                        <div className='fw-semibold'>
+                                            Key Highlights
+                                        </div>
+                                        <div onClick={() => { setTypeModal("keyhighlights"); setModal(true) }} style={{ fontSize: "12px", cursor: "pointer", color: "blue", textDecoration: "underline" }}>
+                                            View All
+                                        </div>
+                                    </div>
+                                    <div className='keyHighlights' style={{ overflow: "hidden", maxHeight: "100px", overflowY: 'hidden' }}>
+                                        <ul className='list-unstyled'>
+                                            {keyHighlights.map(el => <li className='listItem'>{el}</li>)}
+                                        </ul>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         {/* Select Departur Date& Select Guests and Rooms */}
@@ -807,7 +895,7 @@ const Package = ({ params }) => {
                     </div>
                     <div className='bg-white py-5'>
                         <div className='container'>
-                            <div className='row col-8'>
+                            <div className='row col-lg-8 col-sm-12'>
                                 <div className='itinerary' id="itinerary">
                                     <div>
                                         <h4>
@@ -1032,11 +1120,23 @@ const Package = ({ params }) => {
             {modal && (
                 <div className='w-100 h-100 position-fixed d-flex justify-content-center align-items-center modal top-0' style={{ left: 0, display: "block", backgroundColor: "rgb(0,0,0,0.55)" }}>
                     <OutsideAlerter setModal={setModal}>
-                        <div className={`rounded-4 bg-white p-3 modalA ${modal && "show"}`} style={{ minWidth: "500px", maxWidthwidth: "80vw", maxHeight: "900px", boxShadow: "-1px 9px 50px 14px rgba(0,0,0,0.2)" }}>
+                        <div className={`rounded-4 bg-white  modalA ${modal && "show"}`} style={{ minWidth: "500px", maxWidthwidth: "80vw", maxHeight: "900px", boxShadow: "-1px 9px 50px 14px rgba(0,0,0,0.2)" }}>
+                            <div style={{fontWeight:"300"}} className='d-flex justify-content-between px-3 py-2'>
+                               <div>
+                                {labelModal}
+                               </div>
+                               <div style={{cursor:"pointer"}} onClick={()=>{setModal(false)}}>
+                                x
+                            </div> 
+                            </div>
+                            <hr className='p-0 m-0'/>
+                            <div className='p-2'>
+
+                            
                             {typemodal === "destinations" && <AddDestination inputValue={inputValue} plcaeInputValue={placeinputValue} setPlaceInputValue={setPlaceInputValue} selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry} setAddC={setAddC} setPlaces={setPlaces} places={places} setInputValue={setInputValue} destinations={destinations} groupBy={groupBy} nights={nights} setNights={setNights} handleCountry={handleCountry} removeCountry={removeCountry} handlePlace={handlePlace} removePlace={removePlace} />}
                             {typemodal === "pricetable" && <AddPricingData roomType={roomType} setRoomType={setRoomType} isEditing={isEditing} numberValidation={numberValidation} price={price} setPrice={setPrice} pricing={pricing} setPricing={setPricing} />}
                             {typemodal === "keyhighlights" && <KeyHighLights keyHighlights={keyHighlights} setKeyHighlights={setKeyHighlights} isEditing={isEditing} keyHighlight={keyHighlight} setKeyHighlight={setKeyHighlight} />}
-
+                            </div>
                         </div>
                     </OutsideAlerter>
                 </div>
