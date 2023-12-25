@@ -169,7 +169,7 @@ const Navbar =  () => {
                         {navbardata.map(el=>
                         (
                         <li key={el.main} className={el.sub?"position-relative navhover":"navhover"} onClick={(e)=>handleSubmenu(e)}>
-                            {el.path?(<>{<Link href={el.path} onClick={()=>{el.main==="Login"&&isAuthenticated&&logoutFunction()}} className={el.main=="Login"?"btn text-white":""}>{el.main==="Login"&&isAuthenticated?"Logout":el.main}</Link>}</>):(<><div className='d-flex h-100 align-items-center column-gap-2'>{el.main} {el.sub.length?<span><i className="fa-solid fa-angle-down rotate" style={{color:"white",fontWeight:"600"}}></i></span>:""}</div></>)}
+                            {el.path?(<>{<Link href={el.path} onClick={()=>{el.main==="Login"&&isAuthenticated&&logoutFunction();handleMenu()}} className={el.main=="Login"?"btn text-white":""}>{el.main==="Login"&&isAuthenticated?"Logout":el.main}</Link>}</>):(<><div className='d-flex h-100 align-items-center column-gap-2'>{el.main} {el.sub.length?<span><i className="fa-solid fa-angle-down rotate" style={{color:"white",fontWeight:"600"}}></i></span>:""}</div></>)}
                             
                             
                             {el.sub.length?
@@ -179,7 +179,7 @@ const Navbar =  () => {
                                         {
                                             el.sub.map((els,i)=>(
                                                <li key={els.name+i}>
-                                                <Link href="#">
+                                                <Link href="#" onClick={()=>handleMenu()}>
                                                 {els.name}
                                                 </Link>
                                                </li>

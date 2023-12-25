@@ -142,8 +142,8 @@ useEffect(()=>{
 
   return (
     <>
-      <div className='d-flex flex-column justify-content-center align-items-center  h-100'>
-          <div className='d-flex flex-column row-gap-3 col-3 justify-content-center cardLogin align-items-center'>
+      <div className='d-flex flex-column p-3 justify-content-center align-items-center  h-100'>
+          <div className='d-flex w-auto px-5 flex-column row-gap-3 col-3 justify-content-center cardLogin align-items-center'>
             {!otpSent&&(<div id="recaptcha-container"></div>)}
                 <div>
                     Enter your mobile number to keep track of your fav pakages

@@ -693,10 +693,10 @@ const Package = ({ params }) => {
                                         Dates & Prices
                                     </div>
                                     <div className='d-flex w-100 justify-content-center align-items-center'>
-                                        <div className='w-100 d-flex justify-content-center align-items-center' onClick={() => { setTypeModal("pricetable"); setModal(!modal) }} style={{ height: "25px!important", width: "150px!important", fontWeight: "400", margin: "10px 0 10px 0", backgroundColor: "rgb(202, 206, 220)", appearance: "button", borderRadius: "5px", fontFamily: "Muli, sans-serif", fontSize: "10px", cursor: "pointer" }}>
+                                        <div className='w-100 d-flex justify-content-center align-items-center' onClick={() => {   setLabelModal("Add Price");setTypeModal("pricetable");setModal(!modal) }} style={{ height: "25px!important", width: "150px!important", fontWeight: "400", margin: "10px 0 10px 0", backgroundColor: "rgb(202, 206, 220)", appearance: "button", borderRadius: "5px", fontFamily: "Muli, sans-serif", fontSize: "10px", cursor: "pointer" }}>
                                             View Pricing Table
                                         </div>
-                                        {isEditing && <div className='ms-3' onClick={() => { setTypeModal("pricetable"); setModal(!modal) }} style={{ cursor: "pointer", fontSize: '12px' }}><i className="fa-solid fa-pen"></i></div>}
+                                        {isEditing && <div className='ms-3' onClick={() => { setTypeModal("pricetable"); setLabelModal("Add Price");setModal(!modal) }} style={{ cursor: "pointer", fontSize: '12px' }}><i className="fa-solid fa-pen"></i></div>}
                                     </div>
 
                                 </div>
@@ -882,8 +882,44 @@ const Package = ({ params }) => {
                                     </div>
                                 </div>
                             </div>
+                            <div className='col-12 position-fixed bottom-0 bg-blue-600 w-100 left-0 z-5 text-white d-flex'>
+                                    <div className='w-100'>
+
+                                    
+                                    <div className='d-flex justify-content-end align-items-center' style={{ fontWeight: "500", fontSize: "12px", color: "green" }}>
+                                        SUPER DEAL PRICE
+                                    </div>
+                                    <div className='d-flex justify-content-end align-items-center'>
+                                        <span className='h-100 me-2' style={{ fontWeight: "400", fontSize: "12px" }}>Starts From</span><h4 className='h4 d-flex p-0 m-0 h-100 justify-content-end align-items-center'>₹ {pricing.filter(el => el.roomType === "Twin Sharing")[0]?.price}</h4>
+                                    </div>
+                                    <div className='d-flex justify-content-end' style={{ fontWeight: "300", fontSize: "9px" }}>
+                                        per person on twin sharing
+                                    </div>
+                                    {/* <div className='d-flex justify-content-end'>
+                                        
+                                        from ₹2,615/month
+                                    </div> */}
+                                    </div>
+                                    <div className=''>
+                                      <div className='d-flex col-5 w-100  flex-column justify-content-center align-items-center'>
+                                    <div className=' text-black d-flex justify-content-center align-items-center' style={{ height: "45px", backgroundColor: "rgb(255, 216, 0)", appearance: "button", borderRadius: "5px", fontFamily: "Muli, sans-serif", fontSize: "14px", cursor: "pointer",width:"200px" }}>
+                                        Dates & Prices
+                                    </div>
+                                    <div className='d-flex w-100 justify-content-center align-items-center'>
+                                        <div className='w-100 text-black d-flex justify-content-center align-items-center' onClick={() => { setTypeModal("pricetable"); setModal(!modal) }} style={{ height: "25px!important", width: "150px!important", fontWeight: "400", margin: "10px 0 10px 0", backgroundColor: "rgb(202, 206, 220)", appearance: "button", borderRadius: "5px", fontFamily: "Muli, sans-serif", fontSize: "10px", cursor: "pointer" }}>
+                                            View Pricing Table
+                                        </div>
+                                        {isEditing && <div className='ms-3' onClick={() => { setTypeModal("pricetable"); setModal(!modal) }} style={{ cursor: "pointer", fontSize: '12px' }}><i className="fa-solid fa-pen"></i></div>}
+                                    </div>
+                                    </div>
+
+                                </div>
+                                </div>
+                                
+                              
                         </div>
                         {/* Select Departur Date& Select Guests and Rooms */}
+                        
                         <div>
                             <div className='row'>
                                 <div className='mt-5 col-8'>

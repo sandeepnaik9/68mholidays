@@ -307,7 +307,7 @@ body {
 
 
 
-@media only screen and (max-width: 667px) {
+@media only screen and (max-width: 1367px) {
   .headerc {
     height: 65vh !important
   }
@@ -334,7 +334,7 @@ body {
     align-items: start;
     right: 0;
     top: 0;
-    padding-top: 50px;
+    padding-top: 100px;
     width: 300px;
     right: -300px;
     z-index: 500;
