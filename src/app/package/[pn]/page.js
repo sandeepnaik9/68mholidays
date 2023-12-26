@@ -929,7 +929,7 @@ const Package = ({ params }) => {
                             {/* TODO ROOMS AND DEPARTUR DATE */}
                         </div>
                     </div>
-                    <div className='bg-white py-5'>
+                    <div className='bg-white secondC'>
                         <div className='container'>
                             <div className='row col-lg-8 col-sm-12'>
                                 <div className='itinerary' id="itinerary">
@@ -1156,7 +1156,7 @@ const Package = ({ params }) => {
             {modal && (
                 <div className='w-100 h-100 position-fixed d-flex justify-content-center align-items-center modal top-0' style={{ left: 0, display: "block", backgroundColor: "rgb(0,0,0,0.55)" }}>
                     <OutsideAlerter setModal={setModal}>
-                        <div className={`rounded-4 bg-white  modalA ${modal && "show"}`} style={{ minWidth: "500px", maxWidthwidth: "80vw", maxHeight: "900px", boxShadow: "-1px 9px 50px 14px rgba(0,0,0,0.2)" }}>
+                        <div className={`rounded-4 bg-white  modalA ${modal && "show"}`} style={{  boxShadow: "-1px 9px 50px 14px rgba(0,0,0,0.2)" }}>
                             <div style={{fontWeight:"300"}} className='d-flex justify-content-between px-3 py-2'>
                                <div>
                                 {labelModal}
