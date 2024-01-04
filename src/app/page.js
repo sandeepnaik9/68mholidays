@@ -712,7 +712,7 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              <div className='col-6 d'>
+              <div className='col-6'>
                 <div className='d-flex'>
                   <div>
                     <div className='fancy'>
