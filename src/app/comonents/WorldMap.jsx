@@ -7,7 +7,7 @@ const World = ({handleMouseClick,handleMouseOut,handleMouseOver,pathRefs,svgref}
 
 <svg className='svgworld'  ref={(el) => {
                         svgref.current = el;
-                        const paths = document.getElementsByTagName("path");
+                        const paths = document.querySelector(".svgworld").getElementsByTagName("path");
                         pathRefs.current = paths;
                         for (let i = 0; i < paths.length; i++) {
 

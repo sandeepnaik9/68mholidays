@@ -589,7 +589,7 @@ const Home = () => {
                     <div className='card-img-top'>
                       <img src={el.img} width={"100%"} height={"100%"} style={{objectFit:"cover"}} />
                     </div>
-                    <div className='card-boddy priceCard  container p-5'>
+                    <div className='card-boddy priceCard   p-5'>
                       <h4 className=''>{el.price}/-</h4>
                       <h4 className='packageT'>
                         {el.title}
@@ -621,14 +621,17 @@ const Home = () => {
                 
                
               </Slide>
-              <Fade>
+             
+              
+            </div>
+            <div className='d-flex justify-content-center'>
+            <Fade>
                 <div className='d-flex mt-5'>
                     <div className='rounded-3 d-flex justify-content-center align-items-center' style={{ paddingRight: "38px", paddingLeft: "38px", paddingTop: "17px", paddingBottom: "17px", background: "black", color: "white", cursor: "pointer" }}>
                       Load More
                     </div>
                   </div>
                 </Fade>
-              
             </div>
           </div>
         </section>
@@ -660,7 +663,7 @@ const Home = () => {
                 <img className='floating' src="/assets/choose-us-img-1.png" alt="" />
               </div>
               <Slide className='col-4' direction='right' triggerOnce>
-                <div className=' container'>
+                <div className=''>
                   {[0, 1, 2].map(el => <>
                     <div className='d-flex mt-3  align-items-center column-gap-3' style={{ marginBottom: "20px" }}>
 
@@ -711,7 +714,7 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              <div className='col-6 container'>
+              <div className='col-6'>
                 <div className='d-flex'>
                   <div>
                     <div className='fancy'>
