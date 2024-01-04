@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { cookies } from "next/headers"
 import jwt from "jsonwebtoken"
 import { jwtVerify } from 'jose'
-import verifyJWT from './services/verifyJWT'
+import verifyJWT from './services/verifyJW'
 
 
 // This function can be marked `async` if using `await` inside

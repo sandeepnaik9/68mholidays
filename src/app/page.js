@@ -1,414 +1,277 @@
 "use client"
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import sI from '../../public/assets/route.png'
-import clock from '../../public/assets/clock.png'
-import suv from '../../public/assets/car.png'
-import hotel from '../../public/assets/hotel.png'
-import Tree from '../../public/assets/tree.svg'
-import Right from '../../public/assets/lg-right-i.svg'
-import ICenter from '../../public/assets/lg-center-i.svg'
 import World from './comonents/WorldMap'
-import AliceCarousel from 'react-alice-carousel';
-import Carousel from 'react-elastic-carousel'
-import 'react-alice-carousel/lib/alice-carousel.css';
+import { Fade, Slide, Reveal } from "react-awesome-reveal";
+import { useRouter } from 'next/navigation';
+import OutsideAlerter from './comonents/submenu';
 import Coffee from '../../public/assets/icon-cup-color.svg'
 import CalendarI from '../../public/assets/icon-calendar-color.svg'
-import OutsideAlerter from './comonents/submenu'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import Link from 'next/link'
+import { gsap } from 'gsap/dist/gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import StarRatings from 'react-star-ratings';
+import Link from 'next/link';
+import Select from 'react-select'
 
-import Snowfall from 'react-snowfall'
+gsap.registerPlugin(ScrollTrigger);
 const Home = () => {
-    const router = useRouter()
+  const nameConRef = useRef();
+  const svgref = useRef();
+  const pathRefs = useRef([]);
+  const [Name, setName] = useState();
+  const [subSearch, setSearchSub] = useState(false)
+  const [subCalendar, setCalendar] = useState(false)
+  const router = useRouter()
 
-    const breakPoints = [
-        { width: 1, itemsToShow: 1 },
-        { width: 550, itemsToShow: 1, itemsToScroll: 2 },
-        { width: 768, itemsToShow: 2 },
-        { width: 1200, itemsToShow: 3 }
-      ];
-    // const navigate = useNavigate();
-    const [subSearch,setSearchSub] = useState(false)
-    const [subCalendar,setCalendar] = useState(false)
-    const [loading, setLoadin] = useState(true);
-    const svgref = useRef();
-    const pathRefs = useRef([]);
-    const [Name, setName] = useState();
-    const [typeMO,setMonthROccasion] = useState("Month");
-    const nameConRef = useRef();
+  const [packages,setPackages] = useState([
+    {
+      title:"Asian discovery",
+      price:"₹ 70,000",
+      img:"https://routehaven.boomdevstheme.com/wp-content/uploads/2023/11/img-1-1.jpg"
+    },
+    {
+      title:"Mountain hiking tour",
+      price:"₹ 60,000",
+      img:"https://routehaven.boomdevstheme.com/wp-content/uploads/2023/11/img-19.jpg"
+    },
+    {
+      title:"Adventure maldivs",
+      price:"₹ 90,000",
+      img:"https://routehaven.boomdevstheme.com/wp-content/uploads/2023/11/img-9.jpg"
+    },
+    {
+      title:"Averest Tour",
+      price:"₹ 65,000",
+      img:"https://routehaven.boomdevstheme.com/wp-content/uploads/2023/11/img-2-1.jpg"
+    },
+    {
+      title:"The minimalist sea",
+      price:"₹ 95,000",
+      img:"https://routehaven.boomdevstheme.com/wp-content/uploads/2023/11/img-3-1.jpg"
+    },
+    {
+      title:"Antique europe",
+      price:"₹ 95,000",
+      img:"https://routehaven.boomdevstheme.com/wp-content/uploads/2023/11/img-4-2.jpg"
+    }
+    
 
-    const [year,setYear] = useState("2023")
-
-    const homePageTopPlaces = [
-        {
-            "place": "Dubai",
-            "img": "http://www.68mholidays.com/uploads/locations/Dubai_15.jpg"
-        },
-        {
-            "place": "Singapore",
-            "img": "http://www.68mholidays.com/uploads/locations/Sin_12.jpg"
-        },
-        {
-            "place": "Srilanka",
-            "img": "http://www.68mholidays.com/uploads/locations/38.png"
-        },
-        {
-            "place": "Thailand",
-            "img": "http://www.68mholidays.com/uploads/locations/36.png"
-        }
-
-
-    ]
-
-    const [filterYear,setFilterYear] = useState([])
-
-    const month = [
-        {
-            "Month":"January",
-            "inNumber":"01",
-            "MonthCode":"Jan",
-            "Year":"2023"
-        },
-        {
-            "Month":"Februaury",
-            "inNumber":"02",
-            "MonthCode":"Feb",
-            "Year":"2023"
-        },
-        {
-            "Month":"March",
-            "inNumber":"03",
-            "MonthCode":"Mar",
-            "Year":"2023"
-        },
-        {
-            "Month":"April",
-            "inNumber":"04",
-            "MonthCode":"Apr",
-            "Year":"2023"
-        },
-        {
-            "Month":"May",
-            "inNumber":"05",
-            "MonthCode":"May",
-            "Year":"2023"
-        },
-        {
-            "Month":"June",
-            "inNumber":"67",
-            "MonthCode":"Jun",
-            "Year":"2023"
-        },
-        {
-            "Month":"July",
-            "inNumber":"07",
-            "MonthCode":"Jul",
-            "Year":"2023"
-        },
-        {
-            "Month":"August",
-            "inNumber":"08",
-            "MonthCode":"Aug",
-            "Year":"2023"
-        },
-        {
-            "Month":"September",
-            "inNumber":"09",
-            "MonthCode":"Sep",
-            "Year":"2023"
-        },
-        {
-            "Month":"October",
-            "inNumber":"10",
-            "MonthCode":"Oct",
-            "Year":"2023"
-        },
-        {
-            "Month":"November",
-            "inNumber":"11",
-            "MonthCode":"Nov",
-            "Year":"2023"
-        },
-        {
-            "Month":"December",
-            "inNumber":"12",
-            "MonthCode":"Dec",
-            "Year":"2023"
-        },
-        {
-            "Month":"January",
-            "inNumber":"01",
-            "MonthCode":"Jan",
-            "Year":"2024"
-        },
-        {
-            "Month":"Februaury",
-            "inNumber":"02",
-            "MonthCode":"Feb",
-            "Year":"2024"
-        },
-        {
-            "Month":"March",
-            "inNumber":"03",
-            "MonthCode":"Mar",
-            "Year":"2024"
-        },
-        {
-            "Month":"April",
-            "inNumber":"04",
-            "MonthCode":"Apr",
-            "Year":"2024"
-        },
-        {
-            "Month":"May",
-            "inNumber":"05",
-            "MonthCode":"May",
-            "Year":"2024"
-        },
-        {
-            "Month":"June",
-            "inNumber":"06",
-            "MonthCode":"Jun",
-            "Year":"2024"
-        },
-        {
-            "Month":"July",
-            "inNumber":"07",
-            "MonthCode":"Jul",
-            "Year":"2024"
-        },
-        {
-            "Month":"August",
-            "inNumber":"08",
-            "MonthCode":"Aug",
-            "Year":"2024"
-        },
-        {
-            "Month":"September",
-            "inNumber":"09",
-            "MonthCode":"Sep",
-            "Year":"2024"
-        },
-        {
-            "Month":"October",
-            "inNumber":"10",
-            "MonthCode":"Oct",
-            "Year":"2024"
-        },
-        {
-            "Month":"November",
-            "inNumber":"11",
-            "MonthCode":"Nov",
-            "Year":"2024"
-        },
-        {
-            "Month":"December",
-            "inNumber":"12",
-            "MonthCode":"Dec",
-            "Year":"2024"
-        },
-        
-
-    ]
 
     
 
-    const handleMouseOver = useCallback((i) => {
-        console.log("Sending notification")
-        new Notification("Hello World!",{body:"Hello this is test notification"});
-        if (nameConRef.current) {
+  ])
 
-            nameConRef.current.style.opacity = 1;
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
 
-            if (!pathRefs.current[i].getAttribute("title")) {
-                nameConRef.current.style.opacity = 0
-            }
-            setName(pathRefs.current[i].getAttribute("title"))
-        }
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          arrows: false,
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
 
+  const settingsT = {
+    customPaging: function (i) {
+      return (
+        <a>
+          <img width={"100%"} src={`/assets/user-${i + 1}.png`} />
+        </a>
+      );
+    },
+    dotsClass: "slick-dots slick-thumb",
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    dots: true,
 
-
-
-    }, [pathRefs, nameConRef]
-    )
-
-
-    const [responsive,setResponsive] = useState({
-        0: { items: 1 },
-        568: { items: 2 },
-        1024: { items: 3 },
-    });
-    
-    const [items,setItmes] = useState([
-        <div className="item" data-value="1">1</div>,
-        <div className="item" data-value="2">2</div>,
-        <div className="item" data-value="3">3</div>,
-        <div className="item" data-value="4">4</div>,
-        <div className="item" data-value="5">5</div>,
-    ]);
-
-    // Navigating to Multistep form on clicking svg 
-    const handleMouseClick = useCallback((i) => {
-      console.log(i,"Handle Cloick")
-        if (pathRefs.current[i]) {
-            const name = pathRefs.current[i].getAttribute("title")
-            router.push(`/MultiStepForm/${name}`)
-        }
-    }, [Name])
-
-    
-    const handleMouseOut = useCallback((i) => {
-
-        if (nameConRef.current) {
-            nameConRef.current.style.opacity = "0";
-        }
-    }, [nameConRef])
-
-
-    useEffect(() => {
-        if ("Notification" in window) {
-            console.log("The Notifications API is supported");
-        }
-        Notification.requestPermission().then(permission => {
-            if (permission === "granted") {
-                console.log("The user accepted");
-            }
-        });
-
-       
-        
-        //Used for changing the position of coutry name label 
-        const uns = () => {
-            let x;
-            let y;
-            window.onmousemove = (j) => {
-                x = j.clientX;
-                y = j.clientY;
-                if (nameConRef.current) {
-                    nameConRef.current.style.top = -120 + y + "px";
-                    nameConRef.current.style.left = -80 + x + "px";
-                }
-            }
-        }
-        //
-        // if (svgref.current) {
-        //     const svg = svgref?.current;
-        //     const zoom = (direction) => {
-        //         const { scale, x, y } = getTransformParameters(svg);
-        //         let dScale = 0.1;
-        //         if (direction == "out") dScale *= -1;
-        //         if (scale == 0.1 && direction == "out") dScale = 0;
-        //         svg.style.transform = getTransformString(scale + dScale, x, y);
-        //     };
-
-        //     const getTransformString = (scale, x, y) =>
-        //         "scale(" + scale + ") " + "translateX(" + x + "%) translateY(" + y + "%)";
-
-        //     const getTransformParameters = (element) => {
-        //         const transform = element.style.transform;
-        //         let scale = 1,
-        //             x = 0,
-        //             y = 0;
-        //         if (transform.includes("scale"))
-        //             scale = parseFloat(transform.slice(transform.indexOf("scale") + 6));
-        //         if (transform.includes("translateX"))
-        //             x = parseInt(transform.slice(transform.indexOf("translateX") + 11));
-        //         if (transform.includes("translateY"))
-        //             y = parseInt(transform.slice(transform.indexOf("translateY") + 11));
-        //         return { scale, x, y };
-        //     };
-        //     //   document.getElementById("left-button").onclick = () => pan("left");
-        //     // document.getElementById("right-button").onclick = () => pan("right");
-
-        //     const pan = (direction) => {
-        //         const { scale, x, y } = getTransformParameters(svg);
-        //         let dx = 0,
-        //             dy = 0;
-        //         switch (direction) {
-        //             case "left":
-        //                 dx = -3;
-        //                 break;
-        //             case "right":
-        //                 dx = 3;
-        //                 break;
-        //             case "up":
-        //                 dy = -3;
-        //                 break;
-        //             case "down":
-        //                 dy = 3;
-        //                 break;
-        //         }
-        //         svg.style.transform = getTransformString(scale, x + dx, y + dy);
-        //     };
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          arrows: false,
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
 
 
-        // }
-        //Clearing the event
+  const handleMouseClick = useCallback((i) => {
+    console.log(i, "Handle Cloick")
+    if (pathRefs.current[i]) {
+      const name = pathRefs.current[i].getAttribute("title")
+      router.push(`/MultiStepForm/${name}`)
+    }
+  }, [Name])
 
-        return uns()
-    }, [])
 
-    // ------- Start USED FOR ANIMATING SEARCH BAR AND SVG  -------- //
+  const handleMouseOut = useCallback((i) => {
 
-    const handleScroll = ()=>{
-      
-            const position = window.scrollY;
-            if (position > 6) {
-                if(document.querySelector(".tree")){
-              document.querySelector(".tree").classList.add("scrolled")
-              document.querySelector(".celebration").classList.add("scrolled")
-              document.querySelector(".celebration2").classList.add("scrolled")
-              document.querySelector(".searchbar").classList.add("scrolled")}
-            }
-            else {
-                if(document.querySelector(".tree")){
-                document.querySelector(".tree").classList.remove("scrolled")
-                document.querySelector(".celebration").classList.remove("scrolled")
-                document.querySelector(".celebration2").classList.remove("scrolled")
-                document.querySelector(".searchbar").classList.remove("scrolled")}
-            }
-        
-     
+    if (nameConRef.current) {
+      nameConRef.current.style.opacity = "0";
+    }
+  }, [nameConRef])
+
+  const handleMouseOver = useCallback((i) => {
+    console.log("Sending notification")
+    if (ServiceWorker in navigator) {
+      // navigator.serviceWorker.showNotifiction()
+    }
+    new Notification("Hello World!", { body: "Hello this is test notification" });
+    if (nameConRef.current) {
+
+      nameConRef.current.style.opacity = 1;
+
+      if (!pathRefs.current[i].getAttribute("title")) {
+        nameConRef.current.style.opacity = 0
+      }
+      setName(pathRefs.current[i].getAttribute("title"))
     }
 
-    // ------- End USED FOR ANIMATING SEARCH BAR AND SVG  -------- //
 
-    useEffect(()=>{
 
-        window.addEventListener('scroll', handleScroll, { passive: true });
 
-        return () => {
-          window.removeEventListener('scroll', handleScroll);
-        };
+  }, [pathRefs, nameConRef]
+  )
 
-    },[handleScroll])
 
-    return (
-        <div className='container-fluid p-0'>
-            <div className='position-relative headerc overflow-hidden' style={{ zIndex: 9, justifyContent: 'flex-end', alignItems: 'flex-end' }}>
-                {/* <div className='position-absolute  top-0 d-flex flex-column justify-content-center align-items-center text-white w-100 h-100' style={{zIndex:"9999"}}>  
-                <h1><span className='hassle'>Welcome to</span> 68M Holidays </h1>
-                <div className='searchBtnB d-flex align-items-center mt-3' style={{cursor:"pointer"}}>
-                    <div className='searchBtn d-flex align-items-center p-3 bg-white w-100 h-100'>
-                    <i className="fa-solid fa-magnifying-glass me-3"></i>
-                            <div>Search countries, Cities</div>
-                    </div>
-                </div>
+
+  useEffect(() => {
+    if ("Notification" in window) {
+      console.log("The Notifications API is supported");
+    }
+    Notification.requestPermission().then(permission => {
+      if (permission === "granted") {
+        console.log("The user accepted");
+      }
+    });
+
+
+    //Used for changing the position of coutry name label 
+    const uns = () => {
+      let x;
+      let y;
+      window.onmousemove = (j) => {
+        x = j.clientX;
+        y = j.clientY;
+        if (nameConRef.current) {
+          nameConRef.current.style.top = -120 + y + "px";
+          nameConRef.current.style.left = -80 + x + "px";
+        }
+      }
+    }
+    //
+    // if (svgref.current) {
+    //     const svg = svgref?.current;
+    //     const zoom = (direction) => {
+    //         const { scale, x, y } = getTransformParameters(svg);
+    //         let dScale = 0.1;
+    //         if (direction == "out") dScale *= -1;
+    //         if (scale == 0.1 && direction == "out") dScale = 0;
+    //         svg.style.transform = getTransformString(scale + dScale, x, y);
+    //     };
+
+    //     const getTransformString = (scale, x, y) =>
+    //         "scale(" + scale + ") " + "translateX(" + x + "%) translateY(" + y + "%)";
+
+    //     const getTransformParameters = (element) => {
+    //         const transform = element.style.transform;
+    //         let scale = 1,
+    //             x = 0,
+    //             y = 0;
+    //         if (transform.includes("scale"))
+    //             scale = parseFloat(transform.slice(transform.indexOf("scale") + 6));
+    //         if (transform.includes("translateX"))
+    //             x = parseInt(transform.slice(transform.indexOf("translateX") + 11));
+    //         if (transform.includes("translateY"))
+    //             y = parseInt(transform.slice(transform.indexOf("translateY") + 11));
+    //         return { scale, x, y };
+    //     };
+    //     //   document.getElementById("left-button").onclick = () => pan("left");
+    //     // document.getElementById("right-button").onclick = () => pan("right");
+
+    //     const pan = (direction) => {
+    //         const { scale, x, y } = getTransformParameters(svg);
+    //         let dx = 0,
+    //             dy = 0;
+    //         switch (direction) {
+    //             case "left":
+    //                 dx = -3;
+    //                 break;
+    //             case "right":
+    //                 dx = 3;
+    //                 break;
+    //             case "up":
+    //                 dy = -3;
+    //                 break;
+    //             case "down":
+    //                 dy = 3;
+    //                 break;
+    //         }
+    //         svg.style.transform = getTransformString(scale, x + dx, y + dy);
+    //     };
+
+
+    // }
+    //Clearing the event
+
+    return uns()
+  }, [])
+
+
+  return (
+    <>
+      <Fade triggerOnce>
+        <section className='topSection' style={{ backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundAttachment: "fixed", height: "80vh", backgroundPosition: "center top" }}>
+          <div className='container d-flex flex-column align-items-center position-relative justify-content-center'>
+            <div ref={nameConRef} style={{ position: "absolute", padding: "20px", borderRadius: "20px", boxShadow: "0px 10px 15px -3px rgba(0,0,0,0.1)", zIndex: 99, border: "1px solid rgba(0,0,0,0.1)", margin: "20px", backgroundColor: "white", opacity: 0 }}>
+              {Name}
+            </div>
+            {/* <div className='pd' style={{ position: "absolute", left: 0 }}>
+              Discover
             </div> */}
-            <Tree className="tree" style={{position:"absolute",left:0}}/>
-            <Right className="celebration" style={{position:"absolute",right:"10px"}}/>
-            <ICenter className="celebration2" style={{position:"absolute"}}/>
-            <Snowfall snowflakeCount={200}/>
-            
-                
-                <div className='container d-flex flex-column align-items-center position-relative justify-content-center'>
-                <div ref={nameConRef} style={{ position: "absolute", padding: "20px", borderRadius: "20px", boxShadow: "0px 10px 15px -3px rgba(0,0,0,0.1)", zIndex: 99, border: "1px solid rgba(0,0,0,0.1)", margin: "20px", backgroundColor: "white", opacity: 0 }}>
-                    {Name}
-                </div>
 
-                    <World setName={setName} svgref={svgref} pathRefs={pathRefs} handleMouseClick={handleMouseClick} handleMouseOver={handleMouseOver} handleMouseOut={handleMouseOut} Name={Name}  className="svgworld" style={{ width: "100%", height: "100%", objectFit: "cover" }}  />
-                        <div className='rounded-pill searchbar bg-white justify-content-center  d-flex align-items-center column-gap-3' style={{position:"absolute",border:"5px solid #0081c6",boxShadow:"0px 10px 15px -3px rgba(0,0,0,0.1)"}}>
+            <div style={{ position: "absolute", right: 10, top: 9 }}>
+              <Fade triggerOnce>
+                <Slide triggerOnce direction='left' className='position-relative'  >
+                  <img src="/assets/smajli-landing-img-7.png" alt="" srcset="" />
+                </Slide>
+              </Fade>
+            </div>
+
+
+            <World setName={setName} svgref={svgref} pathRefs={pathRefs} handleMouseClick={handleMouseClick} handleMouseOver={handleMouseOver} handleMouseOut={handleMouseOut} Name={Name} className="svgworld" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            {/* <div className='rounded-pill searchbar bg-white justify-content-center  d-flex align-items-center column-gap-3' style={{position:"absolute",border:"5px solid #0081c6",boxShadow:"0px 10px 15px -3px rgba(0,0,0,0.1)"}}>
                         <div className='position-relative' ><i className="fa-solid fa-location-dot"></i><input typeof='text' className='searchcountrycity' onFocus={()=>{setSearchSub(!subSearch)}} autoFocus={false} autoComplete='false' style={{outline:"none",border:"none"}} placeholder='Where you want to travel'/>
                             {subSearch?
                             <>
@@ -448,7 +311,7 @@ const Home = () => {
                             }
                                
                         </div>
-                         <div className='d-flex column-gap-3 position-relative align-items-center' style={{borderLeft:"1px solid black",paddingLeft:"20px"}}><div onClick={()=>setCalendar(!subCalendar)}><i className="fa-regular fa-calendar"></i> Month</div>
+                          <div className='d-flex column-gap-3 position-relative align-items-center' style={{borderLeft:"1px solid black",paddingLeft:"20px"}}><div onClick={()=>setCalendar(!subCalendar)}><i className="fa-regular fa-calendar"></i> Month</div>
                          {subCalendar?
                             <>
                             <OutsideAlerter setSub={setCalendar} sub={subCalendar}>
@@ -517,246 +380,419 @@ const Home = () => {
                              </>
                             :<></>
                             }
-                         </div>
+                         </div> 
                           <div className='d-flex column-gap-3 align-items-center' style={{borderLeft:"1px solid black",paddingLeft:"20px"}}><span className='p-1 border border-1 d-flex justify-content-center align-items-center border-black rounded-circle' style={{width:"20px",height:"20px"}}>₹</span> Budget</div>
                           
-                        </div>
-                </div>
+                        </div> */}
 
-                {/* <div className='position-absolute homeTop top-0 d-flex justify-content-center align-items-center text-white w-100 h-100'>  
-            </div> */}
+          <div style={{padding:"40px 24px",background:"#fff",boxShadow:"0px 24px 64px 0px rgba(199, 206, 218, 0.25) !important",zIndex:"99",marginTop:"80px"}}>
+            <form action="">
+              <div className='d-flex column-gap-4'>
+                
+                  <Select placeholder={(<div style={{fontSize:"18px"}}><i style={{color:"blue"}} className='fa-solid fa-location-dot'></i> Destination</div>)}/>
+                  <Select placeholder={(<div style={{fontSize:"18px"}}><i style={{color:"blue"}} className='fa-solid fa-bicycle'></i> Activity</div>)}/>
+                  <Select placeholder={(<div style={{fontSize:"18px"}}><i style={{color:"blue"}} className=' fa-regular fa-clock'></i> 0 Days - 7 Days</div>)}/>
+                  <Select placeholder={(<div  style={{fontSize:"18px"}}><i style={{color:"blue"}} className='fa-solid rsCircle fa-indian-rupee-sign'></i> ₹ 30,000 - ₹ 15,00,000</div>)}/>
+              </div>
+            </form>
+          </div>
+          </div>
+          
+        </section>
+        <section className='landingPage2' style={{ height: "90vh", background: "#F9F5F3", paddingTop: 100, paddingBottom: 100 }}>
+
+          <div className='d-flex container'>
+
+            <div>
+              <div className='fancy'>
+                Destination
+              </div>
+
+              <h1 className='headi position-relative'>
+
+                Popular <span className='position-relative' style={{ color: "#f7694d" }}>Destiantions <img src="/assets/three-line-shape.png" alt="" srcset="" style={{ position: "absolute", top: "-20px", right: -40 }} /></span>
+              </h1>
+              <div style={{ marginTop: -20 }}>
+                <img src="/assets/bottom-bar.png" width={"100%"} alt="" />
+              </div>
+            </div>
+          </div>
+          <div className='container famousTP'>
+
+            <Slider {...settings}>
+
+              {
+                [0, 1, 2, 3, 4, 5].map(el => <Slide triggerOnce direction='up' delay={el + 1} cascade={true}>
+                  <div >
+                    <div className='w-100 cardD ms-3 h-100 position-relative'>
+                      <div className="imgwrpr">
+                        <img src="/assets/img-4-2.jpg" alt="" />
+                      </div>
+                      <div className='d-flex justify-content-center'>
+                        <div className='bg-white textContainer d-flex justify-content-between align-items-center position-absolute rounded-4 p-3' style={{ width: "250px" }}>
+                          <div>
+                            Bali
+                          </div>
+                          <div className='bg-purple-400 rounded-3 text-white p-2'>
+                            Read More
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Slide>)
+              }
+
+
+
+            </Slider>
+
+          </div>
+        </section>
+        <section style={{ paddingTop: "100px", paddingBottom: "100px" }}>
+          <div className='container'>
+            <div className='row'>
+
+
+              <div className='col-md-12 col-lg-6'>
+                <Slide triggerOnce>
+                  <div className='d-flex'>
+
+
+                    <div style={{ marginBottom: "20px" }}>
+
+                      <div className='fancy'>
+                        About us
+                      </div>
+                      <h2 className='headi'>
+                        We create journeys for the excited traveler
+                      </h2>
+                      <div style={{ marginTop: -20 }}>
+                        <img src="/assets/bottom-bar.png" width={"100%"} alt="" />
+                      </div>
+
+                    </div>
+                  </div>
+                  <div className='d-flex mt-3 align-items-center column-gap-3' style={{ marginBottom: "20px" }}>
+
+                    <div className='iconCircleS d-flex justify-content-center align-items-center bg-white rounded-circle' >
+                      <img src="/assets/folding-map.png" alt="" />
+                    </div>
+                    <div>
+                      <h4>
+                        Best of Hotel
+                      </h4>
+                      <div>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae itaque amet voluptatem sed maxime animi ex explicabo autem neque, tempora quia odio recusandae! Fuga sapiente officiis ducimus harum qui possimus!
+                      </div>
+                    </div>
+                  </div>
+                  <div className='d-flex mt-6 align-items-center column-gap-3' style={{ marginBottom: "40px" }}>
+                    <div className='iconCircleS d-flex justify-content-center align-items-center bg-white rounded-circle' >
+                      <img src="/assets/ticket.png" alt="" />
+                    </div>
+                    <div>
+                      <h4>
+                        World Class Travel
+                      </h4>
+                      <div>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae itaque amet voluptatem sed maxime animi ex explicabo autem neque, tempora quia odio recusandae! Fuga sapiente officiis ducimus harum qui possimus!
+                      </div>
+                    </div>
+                  </div>
+                  <hr style={{ display: "block", borderTop: "1px solid grey", height: "2px" }} />
+                  <div className='d-flex align-items-center'>
+                    <div>
+                      <div className='ms-4 d-md-none my-3' style={{ fontWeight: "400", fontSize: "20px" }}>
+                        <span style={{ fontWeight: "600" }}>170k+</span> Customers
+                      </div>
+                      <div className='rounded-3 d-flex justify-content-center align-items-center' style={{ paddingRight: "38px", paddingLeft: "38px", paddingTop: "17px", paddingBottom: "17px", background: "black", color: "white", cursor: "pointer" }}>
+                        Learn More
+                      </div>
+                    </div>
+
+                    <div className='d-inline-flex ms-5'>
+                      <div className='image-inner'>
+                        <img src="/assets/r-user-6.jpg" alt="" srcset="" />
+                      </div>
+                      <div className='image-inner'>
+                        <img src="/assets/r-user-6.jpg" alt="" srcset="" />
+                      </div>
+                      <div className='image-inner'>
+                        <img src="/assets/r-user-6.jpg" alt="" srcset="" />
+                      </div>
+                      <div className='image-inner' style={{ fontSize: "24px", color: "white" }}>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      </div>
+
+                    </div>
+                    <div className='ms-4 d-none d-md-block' style={{ fontWeight: "400", fontSize: "20px" }}>
+                      <span style={{ fontWeight: "600" }}>170k+</span> Customers
+                    </div>
+                  </div>
+                </Slide>
+              </div>
+
+              <div className='col-6 d-none d-lg-block position-relative'>
+                <Slide direction='right' triggerOnce>
+                  <div className='position-relative'>
+
+
+
+                    <img className='bg-shape' src="/assets/image-wrapper-bg-1.png" alt="" />
+
+
+
+
+                    <div className='img-wrapper-c style-1'>
+                      <img src="http://www.68mholidays.com/uploads/locations/Sin_12.jpg" width={"100%"} height={"100%"} style={{objectFit:"cover"}} alt="" />
+                    </div>
+
+
+
+
+                    <div className='img-wrapper-c style-2'>
+                      <img src="/assets/img-3.jpg" alt="" srcset="" />
+                    </div>
+                  </div>
+                </Slide>
+
+              </div>
 
             </div>
-            
-            {/* <Image src={Tree} width={300} height={200} /> */}
-            {/* <section className='container-fluid homesecond p-0 m-0'>
-            <div className='d-flex flex-column justify-content-center align-items-center  container' style={{ paddingTop: "150px", marginBottom: "100px" }}>
-                <h3 >
-                    HOW WE DO
-                </h3>
-                <div className='row'>
-                    <div className='col-lg-3 col-md-6 d-flex flex-column'>
-                        <div className='d-flex justify-content-center mb-3'>
-                            <Image src={sI} style={{width:"50px",height:"50px"}} alt="" />
-                        </div>
-                        <div className='text-center'>
-                            <h4>Structured Itinerary</h4>
-                            <p>A well planned itineraries to make your trip memorable by balacing your travel time.</p>
-                        </div>
-                    </div>
-                    <div className='col-lg-3 col-md-6 d-flex flex-column'>
-                        <div className='d-flex justify-content-center mb-3'>
-                            <Image src={clock} style={{width:"50px",height:"50px"}} alt="" />
-                        </div>
-                        <div className='text-center'>
-                            <h4>Round The clock Support</h4>
-                            <p>Dedicated Tour manager support will be provided over the phone inorder to give clear assistance during the trip.</p>
-                        </div>
-                    </div>
-                    <div className='col-lg-3 col-md-6 d-flex flex-column'>
-                        <div className='d-flex justify-content-center mb-3'>
-                            <Image src={suv} style={{width:"50px",height:"50px"}} alt="" />
-                        </div>
-                        <div className='text-center'>
-                            <h4>Dedicated vehicle</h4>
-                            <p>To ensure a safe journey, safe vehicles with trusted drivers accompany you during your entire trip.</p>
-                        </div>
-                    </div>
-                    <div className='col-lg-3 col-md-6 d-flex flex-column'>
-                        {/* <div className='d-flex justify-content-center mb-3'>
-                        <img src={hotel} width={"50px"} height={"50px"} alt="" />
-                        <button id="left-button" >Left</button>
-                        <button id="right-button" >Right</button>
-                        <button id="up-button" >Up</button>
-                        <button id="down-button" >Down</button>
-                        <button id="zoom-in-button" >Zoom In</button>
-                        <button id="zoom-out-button" >Zoom Out</button>
+          </div>
 
-                    </div> 
-                        <div className='d-flex justify-content-center mb-3'>
-                            <Image src={hotel} style={{width:"50px",height:"50px"}} alt="" />
-                        </div>
-                        <div className='text-center'>
-                            <h4>Verified Hotels</h4>
-                            <p>Accommodation in verified hotels with good ambience and hygienic rooms which lifts your holiday spirit.</p>
-                        </div>
-                    </div>
+        </section>
+
+        <section style={{ marginTop: "90px" }}>
+          <div className='container'>
+            <div className='d-flex'>
+              <div>
+                <div className='fancy'>
+                  Popular Packages
                 </div>
+
+                <h1 className='headi position-relative'>
+
+                  Find Popular  Tours
+                </h1>
+                <div style={{ marginTop: -20 }}>
+                  <img src="/assets/bottom-bar.png" width={"100%"} alt="" />
+                </div>
+              </div>
+
             </div>
-            </section> */}
-            <section className='my-5'>
-                <div className='container'>
-                    <div className='row p-2'>
-                        <div className='col-xs-12 p-4 col-lg-4 rounded-3   mt-2' style={{backgroundColor:"red"}}>
-                                <div className=' fw-bolder fs-5' style={{color:"#FFD800"}}>
-                                    Hey 
-                                </div>
-                                <div className='text-white fw-semibold'>
-                                    Hundredsof 68mholidays World guests are celebrating life on tour as we speak, book your honey moon Special Munnar Kumarakom Cochin tour today!
-                                </div>
-                                <div className='d-flex mt-3'>
-                                    <div className='rounded-3 p-3 d-flex justify-content-center align-items-center' style={{height:"30px",background:"#FFD800"}} >
-                                        Book Now
-                                    </div>
-                                </div>
-                        </div>
-                        <div className='col-xs-12 overflow-scroll col-lg-8 mt-2  d-flex flex-md-column justify-content-md-center'>
-                           
-                        <div className='d-flex cardH column-gap-2'>
-                                <div className='cardTop position-relative rounded-2' style={{backgroundColor:"red",overflow:"hidden"}}>
-                                    <div className='cardT position-relative d-flex justify-content-center' style={{zIndex:99}}>
-                                        Jammu and Kashmir
-                                    </div>
-                                    <img width={"100%"} height={"100%"} style={{position:"absolute",top:0,zIndex:2}} src="/assets/jkhl-thb.png" alt="" />
-                                    <div className='p-3 cardCoP'>
-                                    <div className='cardCo flex-column'>   
-                                        <div className='text-nowrap'> <b className='me-1'>15</b> tours  |  <b className='me-1'>39</b> Departures </div>
-                                        <div>
-                                        <b className='me-1'> 46,666 </b> guests travelled
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div className='cardTop position-relative rounded-2' style={{backgroundColor:"red",overflow:"hidden"}}>
-                                    <div className='cardT position-relative d-flex justify-content-center' style={{zIndex:99}}>
-                                        Jammu and Kashmir
-                                    </div>
-                                    <img width={"100%"} height={"100%"} style={{position:"absolute",top:0,zIndex:2}} src="/assets/jkhl-thb.png" alt="" />
-                                    <div className='p-3 cardCoP'>
-                                    <div className='cardCo flex-column'>   
-                                        <div className='text-nowrap'> <b className='me-1'>15</b> tours  |  <b className='me-1'>39</b> Departures </div>
-                                        <div>
-                                        <b className='me-1'> 46,666 </b> guests travelled
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div className='cardTop position-relative rounded-2' style={{backgroundColor:"red",overflow:"hidden"}}>
-                                    <div className='cardT position-relative d-flex justify-content-center' style={{zIndex:99}}>
-                                        Jammu and Kashmir
-                                    </div>
-                                    <img width={"100%"} height={"100%"} style={{position:"absolute",top:0,zIndex:2}} src="/assets/jkhl-thb.png" alt="" />
-                                    <div className='p-3 cardCoP'>
-                                    <div className='cardCo flex-column'>   
-                                        <div className='text-nowrap'> <b className='me-1'>15</b> tours  |  <b className='me-1'>39</b> Departures </div>
-                                        <div>
-                                        <b className='me-1'> 46,666 </b> guests travelled
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                               
-                            </div>  
-                            <div className='d-flex cardH  column-gap-2' >
-                            <div className='cardTop position-relative rounded-2' style={{backgroundColor:"red",overflow:"hidden"}}>
-                                    <div className='cardT position-relative d-flex justify-content-center' style={{zIndex:99}}>
-                                        Jammu and Kashmir
-                                    </div>
-                                    <img width={"100%"} height={"100%"} style={{position:"absolute",top:0,zIndex:2}} src="/assets/jkhl-thb.png" alt="" />
-                                    <div className='p-3 cardCoP'>
-                                    <div className='cardCo flex-column'>   
-                                        <div className='text-nowrap'> <b className='me-1'>15</b> tours  |  <b className='me-1'>39</b> Departures </div>
-                                        <div>
-                                        <b className='me-1'> 46,666 </b> guests travelled
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div className='cardTop position-relative rounded-2' style={{backgroundColor:"red",overflow:"hidden"}}>
-                                    <div className='cardT position-relative d-flex justify-content-center' style={{zIndex:99}}>
-                                        Jammu and Kashmir
-                                    </div>
-                                    <img width={"100%"} height={"100%"} style={{position:"absolute",top:0,zIndex:2}} src="/assets/jkhl-thb.png" alt="" />
-                                    <div className='p-3 cardCoP'>
-                                    <div className='cardCo flex-column'>   
-                                        <div className='text-nowrap'> <b className='me-1'>15</b> tours  |  <b className='me-1'>39</b> Departures </div>
-                                        <div>
-                                        <b className='me-1'> 46,666 </b> guests travelled
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div className='cardTop position-relative rounded-2' style={{backgroundColor:"red",overflow:"hidden"}}>
-                                    <div className='cardT position-relative d-flex justify-content-center' style={{zIndex:99}}>
-                                        Jammu and Kashmir
-                                    </div>
-                                    <img width={"100%"} height={"100%"} style={{position:"absolute",top:0,zIndex:2}} src="/assets/jkhl-thb.png" alt="" />
-                                    <div className='p-3 cardCoP'>
-                                    <div className='cardCo flex-column'>   
-                                        <div className='text-nowrap'> <b className='me-1'>15</b> tours  |  <b className='me-1'>39</b> Departures </div>
-                                        <div>
-                                        <b className='me-1'> 46,666 </b> guests travelled
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        </div>
+            <div className='d-flex flex-wrap  row-gap-3 align-items-center justify-content-center'>
+              <Slide damping={0.2} cascade direction='up' triggerOnce  >
+                {packages.map((el) => <div className=''>
+                  <div className='card rounded-4 overflow-hidden' style={{cursor:"pointer"}}>
+                    <div className='card-img-top'>
+                      <img src={el.img} width={"100%"} height={"100%"} style={{objectFit:"cover"}} />
                     </div>
-                </div>
-            </section>
-            <section className=' mt-5 py-5 flex-column align-items-center justify-content-center ' style={{backgroundColor:"#16283A"}}>
-                <div className='text-white text-center h4'>
-                    68M Holidays World tour reviews
-                </div>
-                <div className='text-center text-white mb-3' style={{fontWeight:"300"}}>
-                    What are we waiting for? Chalo Bag Bharo Nikal Pado!
-                </div>
-                <div className='px-md-5 mx-md-5 px-2 mx-2 position-relative'>
-                    <img src="/assets/as-left.png" alt="" style={{position:"absolute",top:-60,left:-10}}/>
-                    <img src="/assets/as-left.png" alt="" style={{position:"absolute",rotate:"180deg",bottom:-40,right:-10}}/>
-                    <Carousel breakPoints={breakPoints} autoPlaySpeed={1}>
-                        {items.map(item=>item)}
-                    </Carousel>
-                </div>
-                <div className='d-flex justify-content-center align-items-center mt-5'>
-                    <div  className='btn text-center p-4  rounded-3 d-flex justify-content-center align-items-center' style={{width:"200px",height:"30px",background:"#FFD800",cursor:"pointer"}}>
-                        Read more Reviews
+                    <div className='card-boddy priceCard  container p-5'>
+                      <h4 className=''>{el.price}/-</h4>
+                      <h4 className='packageT'>
+                        {el.title}
+                      </h4>
+                      <hr />
+                      <div className='d-flex column-gap-5'>
+                        <div className='d-flex column-gap-3'>
+                          <div>
+                            <i class="fa-solid fa-location-dot"></i>
+                          </div>
+                          <div className='cardText'>
+                            Morocco
+                          </div>
+                        </div>
+                        <div className='d-flex column-gap-3'>
+                          <div>
+                            <i class="fa-solid fa-clock"></i>
+                          </div>
+                          <div className='cardText'>
+                            4 Days
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </section>
-            <div className=' d-flex container flex-column justify-content-center align-items-center my-5'>
-                <h3 className='text-center'>
-                    Top Places to Visit in the World
-                </h3>
-                <div className='row column-gap  m-md-3 d-flex justify-content-center mt-5'>
-                    {homePageTopPlaces.map((el) => {
-                        return (
-                            <Link key={el.place} href={`/MultiStepForm/${el.place}`} className='col-lg-3 mt-4 col-md-6 '>
-                                <div className=' contentwr position-relative' style={{ borderRadius: "20px", boxShadow: "4px 5px 37px -5px rgba(0,0,0,0.62)", cursor: "pointer" }}>
-                                    <div>
-                                        <div className='imgwr' style={{ backgroundImage: "url('http://www.68mholidays.com/uploads/locations/Sin_12.jpg')", backgroundRepeat: "no-repeat", objectFit: "cover" }}>
-                                            <img src={el.img}   style={{ objectFit: "cover", height:"100%",width:"100%" }} alt="" />
-                                        </div>
-                                        <div className='position-absolute flex-column contentimg d-flex justify-content-center align-items-center text-white' style={{ backgroundColor: "rgba(0,0,0,0.34)", backdropFilter: " blur(5px)", borderRadius: "20px" }}>
-                                            <h2 className='text-center titleCard' >
-                                                {el.place}
-                                            </h2>
-                                            <h4 className='contentimg text-center '>
-                                                Fares from Rs. 10000
-                                            </h4>
-                                        </div>
+                )}
 
-                                    </div>
-
-                                </div>
-
-
-
-                            </Link>
-                        )
-                    })}
-
-
-
-
-
-
-                </div>
+                
+               
+              </Slide>
+              <Fade>
+                <div className='d-flex mt-5'>
+                    <div className='rounded-3 d-flex justify-content-center align-items-center' style={{ paddingRight: "38px", paddingLeft: "38px", paddingTop: "17px", paddingBottom: "17px", background: "black", color: "white", cursor: "pointer" }}>
+                      Load More
+                    </div>
+                  </div>
+                </Fade>
+              
             </div>
-        </div>
-    )
+          </div>
+        </section>
+        <section style={{ paddingTop: "100px", paddingBottom: "100px", marginTop: '80px', background: "#F9F8F7" }}>
+          <div className="container">
+            <div className='row'>
+              <Slide className='col-4' triggerOnce>
+                <div >
+                  <div className='fancy'>
+                    Why choose us
+                  </div>
+                  <h3 className='fw-bolder fs-1'>
+                    Get the best <br />travel experience <br /> with 68M Holidays
+                  </h3>
+                  <div style={{ marginTop: "-20px" }}>
+                    <img src="/assets/bottom-bar.png" width={"100%"} alt="" />
+                  </div>
+                  <div className='desc'>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis numquam delectus sapiente minima blanditiis.
+                  </div>
+                  <div className='d-flex mt-5'>
+                    <div className='rounded-3 d-flex justify-content-center align-items-center' style={{ paddingRight: "38px", paddingLeft: "38px", paddingTop: "17px", paddingBottom: "17px", background: "black", color: "white", cursor: "pointer" }}>
+                      Learn More
+                    </div>
+                  </div>
+                </div>
+              </Slide>
+              <div className='col-4 '>
+                <img className='floating' src="/assets/choose-us-img-1.png" alt="" />
+              </div>
+              <Slide className='col-4' direction='right' triggerOnce>
+                <div className=' container'>
+                  {[0, 1, 2].map(el => <>
+                    <div className='d-flex mt-3  align-items-center column-gap-3' style={{ marginBottom: "20px" }}>
+
+                      <div className='iconCircleS d-flex justify-content-center align-items-center bg-white rounded-circle' >
+                        <img src="/assets/folding-map.png" alt="" />
+                      </div>
+                      <div>
+                        <h4>
+                          Tour Guide
+                        </h4>
+                        <div>
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        </div>
+                      </div>
+                    </div>
+                    {el != 2 && <hr style={{ color: "grey" }} />}
+                  </>)}
+                </div>
+              </Slide>
+            </div>
+          </div>
+        </section>
+        <section style={{ paddingTop: "100px", paddingBottom: "100px" }}>
+          <div className='container'>
+            <div className='row'>
+              <div className='col-6'>
+                <div className='position-relative'>
+                  <div className='img-wrpr'>
+                    <div className='content'>
+                    <span><i class="fa-solid fa-location-dot"></i> Colombia</span>
+									
+                    </div>
+                    <img src="/assets/user-1.png" alt="" />
+                  </div>
+                  <div className='img-wrpr' style={{ position: "absolute", bottom: "-50px", right: "0%" }}>
+                  <div className='content style-content-2'>
+                    <span><i class="fa-solid fa-location-dot"></i> Istanbul</span>
+									
+                    </div>
+                    <img src="/assets/user-2.png" alt="" />
+                  </div>
+                  <div className='img-wrpr' style={{ position: "absolute", bottom: "-300", left: 250 }}>
+                  <div className='content '>
+                    <span><i class="fa-solid fa-location-dot"></i> Russia</span>
+									
+                    </div>
+                    <img src="/assets/user-3.png" alt="" />
+                  </div>
+                </div>
+              </div>
+              <div className='col-6 container'>
+                <div className='d-flex'>
+                  <div>
+                    <div className='fancy'>
+                      Testimonial
+                    </div>
+                    <h3 className='fw-bolder fs-1'>
+                      What traveler say
+                    </h3>
+                    <div style={{ marginTop: "-20px" }}>
+                      <img src="/assets/bottom-bar.png" width={"100%"} alt="" />
+                    </div>
+
+                  </div>
+                </div>
+                <div className='testimonials'>
+                  <Slider {...settingsT}>
+                    {[1, 2, 3].map((el) => (<>
+                      <div className='w-100 d-flex flex-column p-3'>
+                        <div style={{fontSize:"18px",fontWeight:"600"}}>
+                          “Their service is absolutely wonderful and cheaper than the direct or any other booking site, You back to us strait away and no issues at all in the other end.”
+                        </div>
+                        <div className='mt-5'>
+                          <StarRatings rating={5} starDimension="20px"
+                            starSpacing="2px" starRatedColor="#FE712A" numberOfStars={5} />
+                        </div>
+                      </div>
+                    </>)
+                    )
+                    }
+                  </Slider>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <footer className='text-white' style={{background:"#041126",marginTop:"100px",paddingTop:"30px",paddingBottom:"100px"}}>
+        <Slide className='' direction='up' triggerOnce>
+          <div className='container'>
+            <div className='row'>
+              <div className='col-4'>
+              
+                <Link href="/" className='logo'>
+                    {/* <img src={"/assets/logo-2.png"} alt="" /> */}
+                    <div className='h5 text-white'>
+                        <div className='d-flex flex-column align-items-center'><img src="logo.png" height={80} width={80} style={{objectFit:"contain"}} alt="" srcset="" /><div className='fs-3'><span style={{fontWeight:"300"}}>68</span><span style={{fontWeight:"700"}}>M</span> Holidays</div></div>
+                    </div>
+                </Link>
+                
+
+              </div>
+              
+              <div className='col-4'>
+                <h4>About 68M Holidays</h4>
+                <div style={{fontWeight:"200",fontSize:"16px",lineHeight:"25px"}}>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nesciunt assumenda voluptas labore dignissimos nihil optio animi iste adipisci iusto. Deserunt quis eos pariatur quod dolor sit ab? Exercitationem, laborum consequatur.
+                </div>
+              </div>
+              <div className='col-4'>
+                <h4>Quick Links</h4>
+                <ul className='footerMenu'>
+                  <li>
+                    <a href="">About</a>
+                  </li>
+                  <li>
+                    <a href="">Tour</a>
+                  </li>
+                  <li>
+                    <a href="">Destinations</a>
+                  </li>
+                  <li>
+                    <a href="">Contact</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          </Slide>
+        </footer>
+      </Fade >
+    </>
+  )
 }
 
 export default Home

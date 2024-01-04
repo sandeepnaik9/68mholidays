@@ -9,6 +9,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { setAuth, setMobileNumber, setRole, setusername } from '../../store/slices/authSlice'
 import { useAppDispatch,useAppSelector } from '../../store/stores'
 import { setIsEditing } from '../../store/slices/packageSlice'
+import { Slide } from 'react-awesome-reveal'
 
 const Navbar =  () => {
 
@@ -18,6 +19,7 @@ const Navbar =  () => {
     const dispatch = useAppDispatch();
     const router = useRouter()
     useEffect(() => {
+        console.log(path)
         if(isAuth){
             setIsuthenticated(true)
         }
@@ -30,89 +32,99 @@ const Navbar =  () => {
             "main":"International Holiday",
             "sub":[
                 {
-                "name":"Bali",
-                "path":""
-            },
-            {
-                "name":"Dubai",
-                "path":""
-            },
-            {
-                "name":"Europe",
-                "path":""
-            },
-            {
-                "name":"Greece",
-                "path":""
-            },
-            {
-                "name":"Australia",
-                "path":""
-            },
-            {
-                "name":"Maldives",
-                "path":""
-            },
-            {
-                "name":"Mauritius",
-                "path":""
-            },
-            {
-                "name":"Sri Lanka Tour Packages",
-                "path":""
-            },
-            {
-                "name":"Thailand",
-                "path":""
-            },
-            {
-                "name":"Thailand",
-                "path":""
-            },
-            {
-                "name":"Thailand",
-                "path":""
-            },
-            {
-                "name":"Thailand",
-                "path":""
-            },
-            {
-                "name":"Thailand",
-                "path":""
-            },
-            {
-                "name":"Thailand",
-                "path":""
-            },
-            {
-                "name":"Thailand",
-                "path":""
-            },
-
-
-        
-        ]
+                    "name": "Bali",
+                    "path": ""
+                },
+                {
+                    "name": "Dubai",
+                    "path": ""
+                },
+                {
+                    "name": "Malaysia",
+                    "path": ""
+                },
+                {
+                    "name": "Maldives",
+                    "path": ""
+                },
+                {
+                    "name": "Mauritius",
+                    "path": ""
+                },
+                {
+                    "name": "Seychelles",
+                    "path": ""
+                },
+                {
+                    "name": "Singapore",
+                    "path": ""
+                },
+                {
+                    "name": "Sri Lanka",
+                    "path": ""
+                },
+                {
+                    "name": "Thailand",
+                    "path": ""
+                }
+            ]
+            
         },
         {
-            "main":"Honeymoon Getaways",
-            "path":"/package/2c169c93-5536-48ee-af95-2d0291e81a53",
+            "main":"Domestic",
             "sub":[
-              
+                {
+                    "name": "Coorg",
+                    "path": ""
+                },
+                {
+                    "name": "Goa",
+                    "path": ""
+                },
+                {
+                    "name": "Golden Triangle",
+                    "path": ""
+                },
+                {
+                    "name": "Himachal",
+                    "path": ""
+                },
+                {
+                    "name": "Hyderabad",
+                    "path": ""
+                },
+                {
+                    "name": "Kashmir",
+                    "path": ""
+                },
+                {
+                    "name": "Kerala",
+                    "path": ""
+                },
+                {
+                    "name": "Kodaikanal",
+                    "path": ""
+                },
+                {
+                    "name": "North East",
+                    "path": ""
+                },
+                {
+                    "name": "Ooty",
+                    "path": ""
+                },
+                {
+                    "name": "Uttarakhand",
+                    "path": ""
+                },
+                {
+                    "name": "Vizag",
+                    "path": ""
+                }
             ]
+            
         },
-        {
-            "main":"Packages by Interest",
-            "sub":[
-                
-            ]
-        },
-        {
-            "main":"Packages by City",
-            "sub":[
-              
-            ]
-        },
+      
         {
             "main":"Login",
             "path":"/login",
@@ -158,22 +170,33 @@ const Navbar =  () => {
     }
 
   return (
-    <div className='container-fluid bg-black main-menu-nav'>
+    <>
+    
+    <div className='container-fluid position-relative main-menu-nav z-5' style={{}}>
             <div className='container d-flex justify-content-between align-items-center p-4'>
+            <Slide className='main-menu-nav ' direction='down' triggerOnce>
                 <Link href="/" className='logo'>
-                    <img src={"/assets/logo-2.png"} alt="" />
+                    {/* <img src={"/assets/logo-2.png"} alt="" /> */}
+                    <div className='h5'>
+                        <div><img src="logo.png" height={50} width={50} style={{objectFit:"contain"}} alt="" srcset="" /><span style={{fontWeight:"300"}}>68</span><span style={{fontWeight:"700"}}>M</span> Holidays</div>
+                    </div>
                 </Link>
+                </Slide>
+                <div>
                 <div className='mainmenu'>
                     
                     <ul className='d-flex align-items-center m-0 navigationmain column-gap-5'>
                         {navbardata.map(el=>
                         (
+                            <>
+                            <Slide className='main-menu-nav ' direction='down' triggerOnce>
                         <li key={el.main} className={el.sub?"position-relative navhover":"navhover"} onClick={(e)=>handleSubmenu(e)}>
-                            {el.path?(<>{<Link href={el.path} onClick={()=>{el.main==="Login"&&isAuthenticated&&logoutFunction();handleMenu()}} className={el.main=="Login"?"btn text-white":""}>{el.main==="Login"&&isAuthenticated?"Logout":el.main}</Link>}</>):(<><div className='d-flex h-100 align-items-center column-gap-2'>{el.main} {el.sub.length?<span><i className="fa-solid fa-angle-down rotate" style={{color:"white",fontWeight:"600"}}></i></span>:""}</div></>)}
+                            {el.path?(<>{<Link href={el.path} onClick={()=>{el.main==="Login"&&isAuthenticated&&logoutFunction();handleMenu()}} className={el.main=="Login"?"text-decoration-none text-black":"text-decoration-none text-black"}>{el.main==="Login"&&isAuthenticated?"Logout":el.main}</Link>}</>):(<><div className='d-flex h-100 align-items-center column-gap-2'>{el.main} {el.sub.length?<span><i className="fa-solid fa-angle-down rotate" style={{color:"black",fontWeight:"600"}}></i></span>:""}</div></>)}
                             
                             
                             {el.sub.length?
                                 (<>
+                                
                                     <div className='submenu'>
                                     <ul className=' w-100' >
                                         {
@@ -191,15 +214,19 @@ const Navbar =  () => {
                                 :   <></>
                             }
                         </li>
+                        </Slide>
+                        </>
                         ))}
-                        
                     </ul>
+                </div>
                 </div>
                 <div className=' menuicons align-items-center' style={{zIndex:510}}>
                 {!isOpen?<i className="fa-solid menuicon fa-bars" onClick={()=>handleMenu()}></i>:<i className="fa-solid menuicon fa-x" onClick={()=>handleMenu()}></i>}
                 </div>
             </div>
     </div>
+    
+    </>
    
   )
 }
