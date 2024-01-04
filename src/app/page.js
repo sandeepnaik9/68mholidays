@@ -145,7 +145,7 @@ const Home = () => {
   const handleMouseOver = useCallback((i) => {
     console.log("Sending notification")
  
-    new Notification("Hello World!", { body: "Hello this is test notification" });
+    
     if (nameConRef.current) {
 
       nameConRef.current.style.opacity = 1;
