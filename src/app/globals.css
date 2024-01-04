@@ -2017,6 +2017,10 @@ animation: MoveLeftRight 2s linear infinite alternate;
 }
 }
 
+.nextjs-toast-errors-parent{
+  display: none!important;
+}
+
 /* .rsCircle{
   position: relative;
 }
