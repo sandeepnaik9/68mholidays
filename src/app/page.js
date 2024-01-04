@@ -144,9 +144,9 @@ const Home = () => {
 
   const handleMouseOver = useCallback((i) => {
     console.log("Sending notification")
-    if (ServiceWorker in navigator) {
-      // navigator.serviceWorker.showNotifiction()
-    }
+    // if (ServiceWorker in navigator) {
+    //   // navigator.serviceWorker.showNotifiction()
+    // }
     new Notification("Hello World!", { body: "Hello this is test notification" });
     if (nameConRef.current) {
 
